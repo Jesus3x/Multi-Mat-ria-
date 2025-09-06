@@ -194,11 +194,11 @@
       videoContainer.innerHTML = "Buscando vídeos...";
 
       try {
-        const res = await fetch('/.netlify/functions/youtube-api', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query: texto })
-        });
+        const res = await fetch('/youtube-api', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ query: texto })
+});
 
         if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
 
