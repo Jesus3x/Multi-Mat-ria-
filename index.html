@@ -134,111 +134,110 @@
 
   </div>
 
-  <script>
-    const GEMINI_API_KEY = ""; // Sua chave Gemini
-    const YOUTUBE_API_KEY = ""; // Sua chave YouTube
+ <script>
+  const homeScreen = document.getElementById('home-screen');
 
-    const homeScreen = document.getElementById('home-screen');
+  // Abrir salas
+  document.querySelectorAll('.room-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const room = btn.dataset.room;
+      homeScreen.classList.add('hidden');
+      document.getElementById(`sala-${room}`).classList.remove('hidden');
+    });
+  });
 
-    // Abrir salas
-    document.querySelectorAll('.room-button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const room = btn.dataset.room;
-        homeScreen.classList.add('hidden');
-        document.getElementById(`sala-${room}`).classList.remove('hidden');
-      });
+  // Voltar para home
+  document.querySelectorAll('.voltar').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#salas > div').forEach(sala => sala.classList.add('hidden'));
+      homeScreen.classList.remove('hidden');
+    });
+  });
+
+  // Para cada sala, adiciona os listeners dos botões "Gerar Plano" e "Ver Vídeos"
+  document.querySelectorAll('#salas > div').forEach(sala => {
+    const input = sala.querySelector('.input');
+    const gerar = sala.querySelector('.gerar');
+    const videosBtn = sala.querySelector('.videos');
+    const plano = sala.querySelector('.plano');
+    const videoContainer = sala.querySelector('.videos-container');
+
+    gerar.addEventListener('click', async () => {
+      const texto = input.value.trim();
+      if (!texto) return alert("Digite uma pergunta.");
+
+      plano.innerHTML = "Gerando plano...";
+      videoContainer.classList.add('hidden');
+
+      try {
+        const res = await fetch('/.netlify/functions/gemini-api', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: `Crie um plano de estudo detalhado e estruturado sobre o tópico: "${texto}". Divida em módulos. Use HTML puro, até 100 palavras.` }] }] })
+        });
+
+        if (!res.ok) throw new Error(`API Gemini retornou código ${res.status}`);
+
+        const data = await res.json();
+        const resposta = data.candidates[0].content.parts[0].text;
+        plano.innerHTML = resposta;
+      } catch (e) {
+        plano.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
+      }
     });
 
-    // Voltar para home
-    document.querySelectorAll('.voltar').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#salas > div').forEach(sala => sala.classList.add('hidden'));
-        homeScreen.classList.remove('hidden');
-      });
-    });
+    videosBtn.addEventListener('click', async () => {
+      const texto = input.value.trim();
+      if (!texto) return alert("Digite uma pergunta.");
 
-    // Lógica para cada sala
-    document.querySelectorAll('#salas > div').forEach(sala => {
-      const input = sala.querySelector('.input');
-      const gerar = sala.querySelector('.gerar');
-      const videosBtn = sala.querySelector('.videos');
-      const plano = sala.querySelector('.plano');
-      const videoContainer = sala.querySelector('.videos-container');
+      videoContainer.classList.remove('hidden');
+      videoContainer.innerHTML = "Buscando vídeos...";
 
-      gerar.addEventListener('click', async () => {
-        const texto = input.value.trim();
-        if (!texto) return alert("Digite uma pergunta.");
+      try {
+        const res = await fetch('/.netlify/functions/youtube-api', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: texto })
+        });
 
-        plano.innerHTML = "Gerando plano...";
-        videoContainer.classList.add('hidden');
+        if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
 
-        try {
-          const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`,
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                contents: [{ parts: [{ text: `Crie um plano de estudo detalhado e estruturado sobre o tópico: "${texto}". Divida em módulos. Use HTML puro, até 100 palavras.` }] }]
-              })
-            }
-          );
+        const data = await res.json();
 
-          if (!res.ok) throw new Error(`API Gemini retornou código ${res.status}`);
+        let htmlVideos = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">';
 
-          const data = await res.json();
-          const resposta = data.candidates[0].content.parts[0].text;
-          plano.innerHTML = resposta;
-        } catch (e) {
-          plano.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
-        }
-      });
-
-      videosBtn.addEventListener('click', async () => {
-        const texto = input.value.trim();
-        if (!texto) return alert("Digite uma pergunta.");
-
-        videoContainer.classList.remove('hidden');
-        videoContainer.innerHTML = "Buscando vídeos...";
-
-        try {
-          const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(texto)}&key=${YOUTUBE_API_KEY}&type=video&maxResults=6`);
-          if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
-
-          const data = await res.json();
-
-          let htmlVideos = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">';
-
-          data.items.forEach(video => {
-            htmlVideos += `
-              <div class="bg-gray-700 rounded-xl p-4">
-                <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg">
-                  <iframe class="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/${video.id.videoId}"
-                    frameborder="0" allowfullscreen></iframe>
-                </div>
-                <h4 class="text-white mt-2 font-bold">${video.snippet.title}</h4>
-                <p class="text-gray-400 text-sm">Canal: ${video.snippet.channelTitle}</p>
+        data.items.forEach(video => {
+          htmlVideos += `
+            <div class="bg-gray-700 rounded-xl p-4">
+              <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg">
+                <iframe class="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/${video.id.videoId}"
+                  frameborder="0" allowfullscreen></iframe>
               </div>
-            `;
-          });
+              <h4 class="text-white mt-2 font-bold">${video.snippet.title}</h4>
+              <p class="text-gray-400 text-sm">Canal: ${video.snippet.channelTitle}</p>
+            </div>
+          `;
+        });
 
-          htmlVideos += '</div>';
-          videoContainer.innerHTML = htmlVideos;
-        } catch (e) {
-          videoContainer.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
-        }
-      });
+        htmlVideos += '</div>';
+        videoContainer.innerHTML = htmlVideos;
+      } catch (e) {
+        videoContainer.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
+      }
     });
-  
+  });
+
+  // Service Worker (opcional)
   if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(reg => console.log('✅ Service Worker registrado', reg))
-          .catch(err => console.error('❌ Erro ao registrar o SW:', err));
-      });
-    }
-  </script>
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker registrado', reg))
+        .catch(err => console.error('❌ Erro ao registrar o SW:', err));
+    });
+  }
+</script>
 
 </body>
-</html>
+  </html>
+  
