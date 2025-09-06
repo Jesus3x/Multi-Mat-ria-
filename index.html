@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escola Inteligente</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="icon-192x192.png" />
+    <link rel="apple-touch-icon" href="icon-192x192.png" />
+    <meta name="theme-color" content="#FFD700" />
+
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- Tela Inicial -->
+  <div id="home-screen" class="flex flex-col items-center justify-center min-h-screen space-y-6 text-center transition-opacity duration-500">
+    <h1 class="text-4xl font-bold">🎓 App de Estudos</h1>
+    <p class="text-gray-300">Escolha uma disciplina para começar:</p>
+    <div class="grid grid-cols-2 gap-4 max-w-md mx-auto px-4 py-2">
+  <button data-room="matematica" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">🧮 Matemática</button>
+  <button data-room="historia" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">📜 História</button>
+  <button data-room="biologia" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">🧬 Biologia</button>
+  <button data-room="programacao" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">💻 Programação</button>
+  <button data-room="fisica" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">🔭 Física</button>
+  <button data-room="quimica" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">⚗️ Química</button>
+  <button data-room="geografia" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">🌍 Geografia</button>
+  <button data-room="literatura" class="room-button bg-yellow-400 text-black px-6 py-3 rounded font-semibold whitespace-nowrap">📚 Literatura</button>
+      
+</div>
+
+  </div>
+
+  <!-- Salas -->
+  <div id="salas">
+
+    <!-- Modelo sala -->
+    <!-- Você pode duplicar este bloco para adicionar mais salas -->
+    <div id="sala-matematica" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">🧮 Sala de Matemática</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-historia" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">📜 Sala de História</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-biologia" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">🧬 Sala de Biologia</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-programacao" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">💻 Sala de Programação</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-fisica" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">🔭 Sala de Física</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-quimica" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">⚗️ Sala de Química</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-geografia" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">🌍 Sala de Geografia</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+    <div id="sala-literatura" class="hidden p-6 max-w-4xl mx-auto">
+      <button class="voltar bg-gray-700 px-4 py-2 rounded mb-4">⬅️ Voltar</button>
+      <h2 class="text-3xl font-bold mb-4">📚 Sala de Literatura</h2>
+      <textarea class="input w-full p-3 rounded bg-gray-700 text-white mb-3" placeholder="Digite sua dúvida..."></textarea>
+      <div class="flex gap-4 mb-4">
+        <button class="gerar bg-yellow-400 text-black px-4 py-2 rounded font-semibold">Gerar Plano</button>
+        <button class="videos bg-red-500 text-white px-4 py-2 rounded font-semibold">Ver Vídeos</button>
+      </div>
+      <div class="plano text-white mb-4"></div>
+      <div class="videos-container hidden"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const GEMINI_API_KEY = ""; // Sua chave Gemini
+    const YOUTUBE_API_KEY = ""; // Sua chave YouTube
+
+    const homeScreen = document.getElementById('home-screen');
+
+    // Abrir salas
+    document.querySelectorAll('.room-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const room = btn.dataset.room;
+        homeScreen.classList.add('hidden');
+        document.getElementById(`sala-${room}`).classList.remove('hidden');
+      });
+    });
+
+    // Voltar para home
+    document.querySelectorAll('.voltar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#salas > div').forEach(sala => sala.classList.add('hidden'));
+        homeScreen.classList.remove('hidden');
+      });
+    });
+
+    // Lógica para cada sala
+    document.querySelectorAll('#salas > div').forEach(sala => {
+      const input = sala.querySelector('.input');
+      const gerar = sala.querySelector('.gerar');
+      const videosBtn = sala.querySelector('.videos');
+      const plano = sala.querySelector('.plano');
+      const videoContainer = sala.querySelector('.videos-container');
+
+      gerar.addEventListener('click', async () => {
+        const texto = input.value.trim();
+        if (!texto) return alert("Digite uma pergunta.");
+
+        plano.innerHTML = "Gerando plano...";
+        videoContainer.classList.add('hidden');
+
+        try {
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: `Crie um plano de estudo detalhado e estruturado sobre o tópico: "${texto}". Divida em módulos. Use HTML puro, até 100 palavras.` }] }]
+              })
+            }
+          );
+
+          if (!res.ok) throw new Error(`API Gemini retornou código ${res.status}`);
+
+          const data = await res.json();
+          const resposta = data.candidates[0].content.parts[0].text;
+          plano.innerHTML = resposta;
+        } catch (e) {
+          plano.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
+        }
+      });
+
+      videosBtn.addEventListener('click', async () => {
+        const texto = input.value.trim();
+        if (!texto) return alert("Digite uma pergunta.");
+
+        videoContainer.classList.remove('hidden');
+        videoContainer.innerHTML = "Buscando vídeos...";
+
+        try {
+          const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(texto)}&key=${YOUTUBE_API_KEY}&type=video&maxResults=6`);
+          if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
+
+          const data = await res.json();
+
+          let htmlVideos = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">';
+
+          data.items.forEach(video => {
+            htmlVideos += `
+              <div class="bg-gray-700 rounded-xl p-4">
+                <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg">
+                  <iframe class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/${video.id.videoId}"
+                    frameborder="0" allowfullscreen></iframe>
+                </div>
+                <h4 class="text-white mt-2 font-bold">${video.snippet.title}</h4>
+                <p class="text-gray-400 text-sm">Canal: ${video.snippet.channelTitle}</p>
+              </div>
+            `;
+          });
+
+          htmlVideos += '</div>';
+          videoContainer.innerHTML = htmlVideos;
+        } catch (e) {
+          videoContainer.innerHTML = `<p class="text-red-400">Erro: ${e.message}</p>`;
+        }
+      });
+    });
+  
+  if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('✅ Service Worker registrado', reg))
+          .catch(err => console.error('❌ Erro ao registrar o SW:', err));
+      });
+    }
+  </script>
+
+</body>
+</html>
