@@ -194,11 +194,15 @@
       videoContainer.innerHTML = "Buscando vídeos...";
 
       try {
-        const res = await fetch('/youtube-api', {
+        fetch('/youtube-api', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ query: texto })
-});
+  body: JSON.stringify({ query: 'React básico' })
+})
+.then(res => res.json())
+.then(console.log)
+.catch(console.error);
+
 
         if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
 
