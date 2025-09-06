@@ -210,7 +210,7 @@ document.querySelectorAll('#salas > div').forEach(sala => {
       });
 
       if (!res.ok) throw new Error(`API YouTube retornou código ${res.status}`);
-
+const resp = await fetch(`/api/youtube-search?q=${encodeURIComponent(termo)}`);
       const data = await res.json();
 
       if (!data.items || data.items.length === 0) {
