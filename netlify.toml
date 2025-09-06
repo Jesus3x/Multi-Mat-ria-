@@ -1,2 +1,12 @@
-[functions]
-  directory = "netlify/functions"
+[[edge_functions]]
+path = "/gemini-api"
+function = "gemini-api"
+
+[[edge_functions]]
+path = "/youtube-api"
+function = "youtube-api"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
