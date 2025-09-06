@@ -1,6 +1,5 @@
-// Configuração para a função de borda
 export default async (request) => {
-  // Configuração de CORS para permitir requisições do seu domínio
+  // CORS pré-vôo
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -12,10 +11,19 @@ export default async (request) => {
     });
   }
 
-  // Define a chave da API do YouTube como uma variável de ambiente no Netlify
+  // Permite apenas POST
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+  }
+
   const YOUTUBE_API_KEY = Deno.env.get("YOUTUBE_API_KEY");
 
-  // Se a chave não estiver configurada, retorne um erro
   if (!YOUTUBE_API_KEY) {
     return new Response(JSON.stringify({ error: "API key for YouTube is not configured." }), {
       status: 500,
@@ -26,13 +34,11 @@ export default async (request) => {
   try {
     const { query } = await request.json();
 
-    // Endereço da API do YouTube
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(query)}&type=video&key=${YOUTUBE_API_KEY}`;
 
     const youtubeResponse = await fetch(apiUrl);
     const youtubeData = await youtubeResponse.json();
 
-    // Retorna a resposta da API do YouTube para o cliente, com cabeçalhos CORS
     return new Response(JSON.stringify(youtubeData), {
       status: youtubeResponse.status,
       headers: {
@@ -52,3 +58,4 @@ export default async (request) => {
 export const config = {
   path: "/youtube-api",
 };
+      
