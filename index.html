@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica3 Digital Pro - Consultas Online</title>
+    <title>Clínica Digital Pro - Consultas Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+     <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="icon-192x192.png" />
+    <link rel="apple-touch-icon" href="icon-192x192.png" />
+    <meta name="theme-color" content="#ffffff" />
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -440,9 +445,22 @@
     </style>
 </head>
 <body class="bg-gray-900 text-white">
-    <!-- Notification Container -->
+     <!-- Notification Container -->
     <div id="notificationContainer"></div>
+  <div class="bg-white text-center px-4 py-12">
+    <h1 class="text-5xl md:text-6xl font-bold text-blue-900 mb-6"
+        style="text-shadow: 
+            0 1px 1px rgba(0, 0, 0, 0.1), 
+            0 2px 4px rgba(0, 0, 0, 0.1);">
+        🏥 Clínica Digital Pro
+    </h1>
 
+    <p class="text-lg md:text-2xl max-w-3xl mx-auto text-teal-700"
+        style="text-shadow: 
+            0 1px 1px rgba(0, 0, 0, 0.05);">
+        Cuidando da sua saúde com tecnologia, segurança e conforto — diretamente do navegador.
+    </p>
+</div>
     <!-- Header -->
     <header class="bg-gradient-to-r from-blue-900 via-teal-800 to-green-800 py-4 px-4 shadow-2xl border-b-4 border-blue-300">
         <div class="max-w-7xl mx-auto">
@@ -458,18 +476,19 @@
                     </div>
                 </div>
                 <nav class="flex flex-wrap items-center space-x-4 md:space-x-6">
-                    <button type="button" onclick="scrollToServices()" class="hover:text-blue-200 transition text-sm md:text-base text-white cursor-pointer">Serviços</button>
-                    <button type="button" onclick="scrollToServices()" class="hover:text-blue-200 transition text-sm md:text-base text-white cursor-pointer">Consultas</button>
-                    <button type="button" onclick="alert('Em breve!')" class="hover:text-blue-200 transition text-sm md:text-base hidden md:inline text-white cursor-pointer">Sobre</button>
-                    <button type="button" onclick="alert('Em breve!')" class="hover:text-blue-200 transition text-sm md:text-base hidden md:inline text-white cursor-pointer">Contato</button>
+                    <a href="#services" class="hover:text-blue-200 transition text-sm md:text-base text-white">Serviços</a>
+                    <a href="#consultation" class="hover:text-blue-200 transition text-sm md:text-base text-white">Consultas</a>
+                    <a href="#about" class="hover:text-blue-200 transition text-sm md:text-base hidden md:inline text-white">Sobre</a>
+                    <a href="#contact" class="hover:text-blue-200 transition text-sm md:text-base hidden md:inline text-white">Contato</a>
                 </nav>
             </div>
             
             <!-- Medical Services Row - Vertical Stack -->
             <div class="flex flex-col gap-2 max-w-4xl mx-auto">
                 <!-- Pharmacy Finder Button -->
-                <button type="button" onclick="togglePharmacyFinder()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-orange-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="togglePharmacyFinder()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-orange-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Farmácia"> se desejar -->
                         <span class="text-3xl">💊</span>
                     </div>
                     <div class="service-content-wide">
@@ -483,8 +502,9 @@
                 </button>
                 
                 <!-- Auto Support Chat Button -->
-                <button type="button" onclick="toggleAutoChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-emerald-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="toggleAutoChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-emerald-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Autoatendimento"> se desejar -->
                         <span class="text-3xl">🤖</span>
                     </div>
                     <div class="service-content-wide">
@@ -498,8 +518,9 @@
                 </button>
                 
                 <!-- Consultation Rooms Button -->
-                <button type="button" onclick="toggleConsultation()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-indigo-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="toggleConsultation()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-indigo-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Consultas"> se desejar -->
                         <span class="text-3xl">🏥</span>
                     </div>
                     <div class="service-content-wide">
@@ -513,8 +534,9 @@
                 </button>
                 
                 <!-- Live Chat Button -->
-                <button type="button" onclick="toggleChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-blue-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="toggleChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-blue-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Chat"> se desejar -->
                         <span class="text-3xl">💬</span>
                     </div>
                     <div class="service-content-wide">
@@ -528,8 +550,9 @@
                 </button>
                 
                 <!-- Nutrition Chat Button -->
-                <button type="button" onclick="toggleNutritionChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-lime-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="toggleNutritionChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-lime-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Nutrição"> se desejar -->
                         <span class="text-3xl">🥗</span>
                     </div>
                     <div class="service-content-wide">
@@ -543,8 +566,9 @@
                 </button>
                 
                 <!-- Psychology Chat Button -->
-                <button type="button" onclick="togglePsychologyChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-pink-400 shadow-lg hover:shadow-xl cursor-pointer">
+                <button onclick="togglePsychologyChat()" class="medical-service-btn-wide bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-pink-400 shadow-lg hover:shadow-xl">
                     <div class="service-icon-left">
+                        <!-- Ícone personalizado: substitua por <img src="URL_DO_ICONE" alt="Psicologia"> se desejar -->
                         <span class="text-3xl">🧠</span>
                     </div>
                     <div class="service-content-wide">
@@ -565,7 +589,7 @@
         <div class="max-w-4xl mx-auto text-center hero-text">
             <h2 class="text-5xl font-bold mb-6">Cuidados Médicos Inteligentes</h2>
             <p class="text-xl mb-8 opacity-90">Consultas online com IA avançada e especialistas qualificados</p>
-            <button type="button" onclick="scrollToServices()" class="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 cursor-pointer">
+            <button onclick="scrollToServices()" class="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105">
                 Explorar Serviços
             </button>
         </div>
@@ -587,10 +611,9 @@
                 </div>
                 
                 <button 
-                    type="button"
                     onclick="analyzeSymptoms()" 
                     id="analyzeBtn"
-                    class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition transform hover:scale-105 cursor-pointer"
+                    class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition transform hover:scale-105"
                 >
                     🔍 Analisar Sintomas
                 </button>
@@ -599,12 +622,8 @@
                     <div class="bg-green-900 bg-opacity-50 rounded-xl p-6">
                         <h4 class="text-xl font-bold mb-4 text-green-300">📋 Análise Preliminar</h4>
                         <p id="diagnosisText" class="text-gray-200 mb-4"></p>
+                        <div id="videoSection" class="mt-6"></div>
                     </div>
-                </div>
-                
-                <!-- Seção de Vídeos Educativos - AQUI É ONDE OS VÍDEOS DEVEM APARECER -->
-                <div id="videoSection" class="mt-6 hidden">
-                    <!-- Os vídeos serão inseridos aqui pelo JavaScript -->
                 </div>
             </div>
         </div>
@@ -628,7 +647,7 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Consulta de Clínica Geral - R$ 89,90 - Em breve!')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Clínica Geral', '89.90')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition">
                         Agendar Consulta
                     </button>
                 </div>
@@ -646,7 +665,7 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Consulta de Cardiologia - R$ 149,90 - Em breve!')" class="w-full bg-gradient-to-r from-red-500 to-pink-600 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-pink-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Cardiologia', '149.90')" class="w-full bg-gradient-to-r from-red-500 to-pink-600 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-pink-700 transition">
                         Agendar Consulta
                     </button>
                 </div>
@@ -664,7 +683,7 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Consulta de Dermatologia - R$ 129,90 - Em breve!')" class="w-full bg-gradient-to-r from-blue-500 to-cyan-600 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Dermatologia', '129.90')" class="w-full bg-gradient-to-r from-blue-500 to-cyan-600 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-700 transition">
                         Agendar Consulta
                     </button>
                 </div>
@@ -682,7 +701,7 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Consulta de Psicologia - R$ 119,90 - Em breve!')" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Psicologia', '119.90')" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition">
                         Agendar Consulta
                     </button>
                 </div>
@@ -700,7 +719,7 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Consulta de Pediatria - R$ 109,90 - Em breve!')" class="w-full bg-gradient-to-r from-yellow-500 to-orange-600 py-3 rounded-xl font-semibold hover:from-yellow-600 hover:to-orange-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Pediatria', '109.90')" class="w-full bg-gradient-to-r from-yellow-500 to-orange-600 py-3 rounded-xl font-semibold hover:from-yellow-600 hover:to-orange-700 transition">
                         Agendar Consulta
                     </button>
                 </div>
@@ -718,13 +737,15 @@
                             ⭐⭐⭐⭐⭐
                         </div>
                     </div>
-                    <button type="button" onclick="alert('Farmácia Online - Em breve!')" class="w-full bg-gradient-to-r from-teal-500 to-green-600 py-3 rounded-xl font-semibold hover:from-teal-600 hover:to-green-700 transition cursor-pointer">
+                    <button onclick="bookConsultation('Farmácia', '0')" class="w-full bg-gradient-to-r from-teal-500 to-green-600 py-3 rounded-xl font-semibold hover:from-teal-600 hover:to-green-700 transition">
                         Ver Medicamentos
                     </button>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 py-12 px-4">
@@ -738,6 +759,8 @@
             </div>
         </div>
     </footer>
+
+
 
     <!-- Auto Support Chat Container (Left) -->
     <div id="autoChatContainer" class="auto-chat-container bg-gray-900 rounded-2xl shadow-2xl border border-gray-600">
@@ -1124,16 +1147,17 @@
         const DEBUG_MODE = true;
         
         // Firebase Configuration - CONFIGURE SEU FIREBASE AQUI
+        
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY_AQUI",
-            authDomain: "seu-projeto.firebaseapp.com",
-            databaseURL: "https://seu-projeto-default-rtdb.firebaseio.com/",
-            projectId: "seu-projeto",
-            storageBucket: "seu-projeto.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
-        };
-
+  apiKey: "AIzaSyDAYD7DhRovj0PYHUSpOq5YE1rQXIiOPkc",
+  authDomain: "chat-trader.firebaseapp.com",
+  databaseURL: "https://chat-trader-default-rtdb.firebaseio.com",
+  projectId: "chat-trader",
+  storageBucket: "chat-trader.firebasestorage.app",
+  messagingSenderId: "722204996123",
+  appId: "1:722204996123:web:6ab7fd6a6b5646c3e0bebe",
+  measurementId: "G-N36TE38K29"
+};
         let database = null;
         let messagesRef = null;
         let isRecording = false;
@@ -1355,493 +1379,6 @@
             });
         }
 
-        // Gemini AI Integration - FUNÇÃO PRINCIPAL PARA ANÁLISE DE SINTOMAS
-        async function analyzeSymptoms() {
-            const symptomsInput = document.getElementById('symptomsInput');
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            const diagnosisResult = document.getElementById('diagnosisResult');
-            const diagnosisText = document.getElementById('diagnosisText');
-            const videoSection = document.getElementById('videoSection');
-            
-            const symptoms = symptomsInput.value.trim();
-            
-            if (!symptoms) {
-                showNotification('Atenção!', 'Por favor, descreva seus sintomas', 'warning');
-                return;
-            }
-            
-            analyzeBtn.disabled = true;
-            analyzeBtn.innerHTML = '🔄 Analisando...';
-            
-            console.log('🚀 Iniciando análise médica...');
-            
-            try {
-                let diagnosis;
-                
-                // Verificar se deve usar fallback
-                if (USE_FALLBACK) {
-                    console.log('🔧 Usando resposta simulada para análise de sintomas');
-                    diagnosis = getSymptomsFallbackResponse(symptoms);
-                } else {
-                    const requestBody = {
-                        symptoms: symptoms,
-                        type: 'symptom_analysis',
-                        prompt: `Você é um assistente médico virtual. Analise os sintomas descritos e forneça uma resposta em português brasileiro com no máximo 200 palavras.
-
-Inclua:
-1. Possíveis causas
-2. Cuidados básicos recomendados  
-3. Quando procurar ajuda médica
-4. Disclaimer: "Esta é apenas uma análise preliminar e não substitui consulta médica profissional"
-
-Sintomas relatados: ${symptoms}`,
-                        generationConfig: {
-                            maxOutputTokens: 300,
-                            temperature: 0.3,
-                            topP: 0.8,
-                            topK: 40
-                        }
-                    };
-                    
-                    console.log('📤 Enviando requisição para Edge Function...');
-                    
-                    const response = await fetch(GEMINI_API_ENDPOINT, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(requestBody)
-                    });
-                    
-                    console.log('📥 Resposta recebida:', response.status);
-                    
-                    if (!response.ok) {
-                        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
-                        console.error('❌ Erro da Edge Function:', errorData);
-                        throw new Error(`Erro da API: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
-                    }
-                    
-                    const data = await response.json();
-                    console.log('✅ Dados recebidos:', data);
-                    
-                    if (data.response) {
-                        diagnosis = data.response;
-                    } else {
-                        console.error('❌ Estrutura de resposta inválida:', data);
-                        throw new Error('Resposta da Edge Function em formato inválido');
-                    }
-                }
-                
-                // Exibir o diagnóstico
-                diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
-                diagnosisResult.classList.remove('hidden');
-                
-                // SEMPRE buscar e exibir vídeos educativos relacionados
-                console.log('🎥 Buscando vídeos educativos...');
-                const educationalVideos = generateEducationalVideos(symptoms);
-                displayHealthVideos(educationalVideos);
-                
-                // GARANTIR que a seção de vídeos seja visível
-                const videoSection = document.getElementById('videoSection');
-                if (videoSection) {
-                    videoSection.classList.remove('hidden');
-                    videoSection.style.display = 'block';
-                }
-                
-                showNotification('Análise concluída!', 'Relatório médico gerado com vídeos educativos', 'success');
-                console.log('✅ Análise concluída com sucesso');
-                
-            } catch (error) {
-                console.error('❌ Erro completo:', error);
-                
-                // Usar fallback em caso de erro
-                console.log('🔄 Usando resposta de fallback devido ao erro');
-                const fallbackDiagnosis = getSymptomsFallbackResponse(symptoms);
-                diagnosisText.innerHTML = fallbackDiagnosis.replace(/\n/g, '<br>');
-                diagnosisResult.classList.remove('hidden');
-                
-                // SEMPRE buscar vídeos educativos mesmo em caso de erro
-                console.log('🎥 Buscando vídeos educativos (fallback)...');
-                const educationalVideos = generateEducationalVideos(symptoms);
-                displayHealthVideos(educationalVideos);
-                
-                // GARANTIR que a seção de vídeos seja visível mesmo no fallback
-                const videoSection = document.getElementById('videoSection');
-                if (videoSection) {
-                    videoSection.classList.remove('hidden');
-                    videoSection.style.display = 'block';
-                }
-                
-                showNotification('Análise (Demo)!', 'Usando resposta simulada devido a erro de conexão', 'warning');
-            } finally {
-                analyzeBtn.disabled = false;
-                analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
-            }
-        }
-        
-        // Função de fallback para análise de sintomas
-        function getSymptomsFallbackResponse(symptoms) {
-            const symptomsLower = symptoms.toLowerCase();
-            
-            if (symptomsLower.includes('dor de cabeça') || symptomsLower.includes('cefaleia')) {
-                return `**Análise Preliminar - Dor de Cabeça**
-
-**Possíveis causas:**
-- Tensão muscular
-- Desidratação
-- Estresse
-- Falta de sono
-- Problemas de visão
-
-**Cuidados recomendados:**
-- Hidrate-se adequadamente
-- Descanse em ambiente escuro
-- Aplique compressas frias na testa
-- Evite ruídos altos
-
-**Procure ajuda médica se:**
-- Dor muito intensa ou súbita
-- Acompanhada de febre alta
-- Persistir por mais de 3 dias
-- Houver alterações na visão
-
-*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
-            }
-            
-            if (symptomsLower.includes('febre') || symptomsLower.includes('temperatura')) {
-                return `**Análise Preliminar - Febre**
-
-**Possíveis causas:**
-- Infecção viral ou bacteriana
-- Reação inflamatória
-- Desidratação
-- Reação a medicamentos
-
-**Cuidados recomendados:**
-- Mantenha-se hidratado
-- Descanse adequadamente
-- Use roupas leves
-- Monitore a temperatura
-
-**Procure ajuda médica se:**
-- Febre acima de 39°C
-- Persistir por mais de 3 dias
-- Acompanhada de dificuldade respiratória
-- Houver sinais de desidratação
-
-*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
-            }
-            
-            if (symptomsLower.includes('tosse') || symptomsLower.includes('garganta')) {
-                return `**Análise Preliminar - Sintomas Respiratórios**
-
-**Possíveis causas:**
-- Infecção viral (resfriado)
-- Irritação das vias aéreas
-- Alergia respiratória
-- Refluxo gastroesofágico
-
-**Cuidados recomendados:**
-- Mantenha-se hidratado
-- Use umidificador de ar
-- Evite irritantes (fumaça, poeira)
-- Faça gargarejos com água morna e sal
-
-**Procure ajuda médica se:**
-- Dificuldade para respirar
-- Tosse com sangue
-- Febre alta persistente
-- Piora dos sintomas
-
-*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
-            }
-            
-            // Resposta genérica
-            return `**Análise Preliminar dos Sintomas**
-
-Com base nos sintomas relatados: "${symptoms}"
-
-**Recomendações gerais:**
-- Monitore a evolução dos sintomas
-- Mantenha-se hidratado
-- Descanse adequadamente
-- Evite automedicação
-
-**Cuidados importantes:**
-- Anote quando os sintomas começaram
-- Observe se há piora ou melhora
-- Mantenha alimentação leve
-- Evite atividades físicas intensas
-
-**Procure ajuda médica se:**
-- Os sintomas piorarem
-- Surgirem novos sintomas
-- Houver dor intensa
-- Persistir por mais de alguns dias
-
-*Esta é apenas uma análise preliminar e não substitui consulta médica profissional. Recomendamos consultar um médico para avaliação adequada.*`;
-        }
-
-        // Gerar vídeos educativos específicos por sintoma
-        function generateEducationalVideos(query) {
-            const queryLower = query.toLowerCase();
-            
-            // Vídeos específicos por sintoma
-            if (queryLower.includes('dor de cabeça') || queryLower.includes('cefaleia') || queryLower.includes('enxaqueca')) {
-                return [
-                    {
-                        title: "Como Aliviar Dor de Cabeça Naturalmente - Técnicas Eficazes",
-                        channelTitle: "Saúde e Bem-Estar",
-                        searchQuery: "como aliviar dor de cabeça naturalmente técnicas",
-                        thumbnail: "https://via.placeholder.com/120x90/4ade80/ffffff?text=💊"
-                    },
-                    {
-                        title: "Exercícios para Dor de Cabeça Tensional - Alívio Imediato",
-                        channelTitle: "Fisioterapia Online",
-                        searchQuery: "exercícios dor de cabeça tensional alívio",
-                        thumbnail: "https://via.placeholder.com/120x90/06b6d4/ffffff?text=🧘"
-                    },
-                    {
-                        title: "Dor de Cabeça: Quando Procurar o Médico - Sinais de Alerta",
-                        channelTitle: "Dr. Medicina",
-                        searchQuery: "dor de cabeça quando procurar médico sinais alerta",
-                        thumbnail: "https://via.placeholder.com/120x90/ef4444/ffffff?text=🚨"
-                    }
-                ];
-            }
-            
-            if (queryLower.includes('febre') || queryLower.includes('temperatura')) {
-                return [
-                    {
-                        title: "Como Baixar a Febre em Casa - Métodos Seguros e Eficazes",
-                        channelTitle: "Saúde Familiar",
-                        searchQuery: "como baixar febre em casa métodos seguros",
-                        thumbnail: "https://via.placeholder.com/120x90/f59e0b/ffffff?text=🌡️"
-                    },
-                    {
-                        title: "Febre: Quando Procurar o Médico - Guia Completo",
-                        channelTitle: "Dr. Pediatria",
-                        searchQuery: "febre quando procurar médico guia completo",
-                        thumbnail: "https://via.placeholder.com/120x90/dc2626/ffffff?text=🏥"
-                    },
-                    {
-                        title: "Hidratação Durante a Febre - Importância e Dicas",
-                        channelTitle: "Nutrição e Saúde",
-                        searchQuery: "hidratação durante febre importância dicas",
-                        thumbnail: "https://via.placeholder.com/120x90/3b82f6/ffffff?text=💧"
-                    }
-                ];
-            }
-            
-            if (queryLower.includes('tosse') || queryLower.includes('garganta')) {
-                return [
-                    {
-                        title: "Remédios Caseiros para Tosse - Receitas Naturais Eficazes",
-                        channelTitle: "Medicina Natural",
-                        searchQuery: "remédios caseiros tosse receitas naturais",
-                        thumbnail: "https://via.placeholder.com/120x90/10b981/ffffff?text=🌿"
-                    },
-                    {
-                        title: "Diferenças Entre Tipos de Tosse - Seca vs Produtiva",
-                        channelTitle: "Dr. Pneumologia",
-                        searchQuery: "diferenças tipos tosse seca produtiva",
-                        thumbnail: "https://via.placeholder.com/120x90/8b5cf6/ffffff?text=🫁"
-                    },
-                    {
-                        title: "Tosse Persistente: Causas e Tratamentos",
-                        channelTitle: "Saúde Respiratória",
-                        searchQuery: "tosse persistente causas tratamentos",
-                        thumbnail: "https://via.placeholder.com/120x90/f97316/ffffff?text=⚕️"
-                    }
-                ];
-            }
-            
-            if (queryLower.includes('dor no peito') || queryLower.includes('coração') || queryLower.includes('palpitação')) {
-                return [
-                    {
-                        title: "Dor no Peito: Quando é Emergência - Sinais de Infarto",
-                        channelTitle: "Dr. Cardiologia",
-                        searchQuery: "dor no peito emergência sinais infarto",
-                        thumbnail: "https://via.placeholder.com/120x90/dc2626/ffffff?text=❤️"
-                    },
-                    {
-                        title: "Exercícios para Fortalecer o Coração - Prevenção Cardiovascular",
-                        channelTitle: "Cardiologia Preventiva",
-                        searchQuery: "exercícios fortalecer coração prevenção",
-                        thumbnail: "https://via.placeholder.com/120x90/059669/ffffff?text=💪"
-                    },
-                    {
-                        title: "Palpitações: Causas Comuns e Quando Se Preocupar",
-                        channelTitle: "Saúde do Coração",
-                        searchQuery: "palpitações causas quando preocupar",
-                        thumbnail: "https://via.placeholder.com/120x90/7c3aed/ffffff?text=💓"
-                    }
-                ];
-            }
-            
-            if (queryLower.includes('dor nas costas') || queryLower.includes('coluna')) {
-                return [
-                    {
-                        title: "Exercícios para Dor nas Costas - Alívio e Fortalecimento",
-                        channelTitle: "Fisioterapia Especializada",
-                        searchQuery: "exercícios dor nas costas alívio fortalecimento",
-                        thumbnail: "https://via.placeholder.com/120x90/06b6d4/ffffff?text=🏃"
-                    },
-                    {
-                        title: "Postura Correta no Trabalho - Prevenção de Dores",
-                        channelTitle: "Ergonomia e Saúde",
-                        searchQuery: "postura correta trabalho prevenção dores",
-                        thumbnail: "https://via.placeholder.com/120x90/10b981/ffffff?text=🪑"
-                    },
-                    {
-                        title: "Dor na Coluna: Tratamentos e Cuidados Essenciais",
-                        channelTitle: "Ortopedia Online",
-                        searchQuery: "dor coluna tratamentos cuidados essenciais",
-                        thumbnail: "https://via.placeholder.com/120x90/f59e0b/ffffff?text=🦴"
-                    }
-                ];
-            }
-            
-            // Vídeos genéricos para outros sintomas
-            return [
-                {
-                    title: "Primeiros Socorros em Casa - Guia Essencial de Saúde",
-                    channelTitle: "Medicina de Emergência",
-                    searchQuery: `${query} primeiros socorros saúde medicina`,
-                    thumbnail: "https://via.placeholder.com/120x90/ef4444/ffffff?text=🚑"
-                },
-                {
-                    title: "Quando Procurar Ajuda Médica - Sinais de Alerta",
-                    channelTitle: "Dr. Clínica Geral",
-                    searchQuery: `${query} quando procurar médico sinais alerta`,
-                    thumbnail: "https://via.placeholder.com/120x90/3b82f6/ffffff?text=🏥"
-                },
-                {
-                    title: "Cuidados Básicos de Saúde - Prevenção e Bem-Estar",
-                    channelTitle: "Saúde Preventiva",
-                    searchQuery: `${query} cuidados básicos saúde prevenção`,
-                    thumbnail: "https://via.placeholder.com/120x90/10b981/ffffff?text=💚"
-                }
-            ];
-        }
-
-        // FUNÇÃO PRINCIPAL PARA EXIBIR VÍDEOS - 100% FUNCIONAL GARANTIDO
-        function displayHealthVideos(videos) {
-            console.log('🎥 INICIANDO displayHealthVideos - GARANTINDO FUNCIONAMENTO 100%');
-            console.log('📹 Vídeos recebidos:', videos.length);
-            
-            const videoSection = document.getElementById('videoSection');
-            
-            if (!videoSection) {
-                console.error('❌ ERRO CRÍTICO: videoSection não encontrado');
-                // CRIAR A SEÇÃO SE NÃO EXISTIR
-                const diagnosisResult = document.getElementById('diagnosisResult');
-                if (diagnosisResult) {
-                    const newVideoSection = document.createElement('div');
-                    newVideoSection.id = 'videoSection';
-                    newVideoSection.className = 'mt-6';
-                    diagnosisResult.parentNode.insertBefore(newVideoSection, diagnosisResult.nextSibling);
-                    console.log('✅ videoSection CRIADA dinamicamente');
-                } else {
-                    console.error('❌ FALHA TOTAL: Não foi possível criar videoSection');
-                    return;
-                }
-            }
-            
-            // FORÇAR VISIBILIDADE ABSOLUTA
-            videoSection.classList.remove('hidden');
-            videoSection.style.display = 'block !important';
-            videoSection.style.visibility = 'visible';
-            videoSection.style.opacity = '1';
-            
-            console.log('🎥 CONSTRUINDO HTML DOS VÍDEOS...');
-            
-            let videosHtml = `
-                <div class="bg-blue-900 bg-opacity-50 rounded-xl p-6 mt-4" style="display: block !important; visibility: visible !important;">
-                    <h5 class="text-xl font-bold mb-4 text-blue-300 flex items-center">
-                        <span class="mr-2 text-2xl">📺</span>
-                        VÍDEOS EDUCATIVOS RELACIONADOS
-                    </h5>
-                    <p class="text-sm text-blue-200 mb-4">✅ Assista a conteúdos educativos sobre seus sintomas:</p>
-                    <div class="bg-green-800 bg-opacity-30 p-3 rounded-lg mb-4">
-                        <p class="text-green-200 text-sm font-semibold">🎯 ${videos.length} vídeos encontrados e carregados com sucesso!</p>
-                    </div>
-            `;
-            
-            videos.forEach((video, index) => {
-                const title = video.title || `Vídeo Educativo ${index + 1}`;
-                const channelTitle = video.channelTitle || 'Canal Médico Educativo';
-                const thumbnailUrl = video.thumbnail || `https://via.placeholder.com/120x90/10b981/ffffff?text=📺${index + 1}`;
-                const searchQuery = video.searchQuery || title;
-                
-                console.log(`📹 Processando vídeo ${index + 1}: ${title}`);
-                
-                videosHtml += `
-                    <div class="bg-gray-800 rounded-lg p-4 mb-3 border-2 border-blue-500 hover:border-green-400 transition-all duration-300 shadow-lg">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-24 h-18 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
-                                <img src="${thumbnailUrl}" alt="Thumbnail do vídeo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/120x90/10b981/ffffff?text=📺${index + 1}';">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h6 class="font-bold text-sm mb-2 text-white leading-tight">${title}</h6>
-                                <p class="text-xs text-blue-300 mb-3 font-medium">🏥 ${channelTitle}</p>
-                                <button onclick="searchVideoOnYouTube('${searchQuery.replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 flex items-center space-x-2 shadow-md transform hover:scale-105">
-                                    <span class="text-base">🔍</span>
-                                    <span>ASSISTIR NO YOUTUBE</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            videosHtml += `
-                    <div class="text-center mt-6 p-4 bg-green-900 bg-opacity-40 rounded-lg">
-                        <p class="text-sm text-green-300 font-semibold">✅ VÍDEOS CARREGADOS COM SUCESSO!</p>
-                        <p class="text-xs text-green-200 mt-1">💡 Conteúdo educativo baseado nos seus sintomas específicos</p>
-                    </div>
-                </div>
-            `;
-            
-            // INSERIR HTML COM FORÇA TOTAL
-            videoSection.innerHTML = videosHtml;
-            
-            // GARANTIAS MÚLTIPLAS DE VISIBILIDADE
-            setTimeout(() => {
-                videoSection.classList.remove('hidden');
-                videoSection.style.display = 'block';
-                videoSection.style.visibility = 'visible';
-                videoSection.style.opacity = '1';
-                console.log('🔄 SEGUNDA VERIFICAÇÃO DE VISIBILIDADE APLICADA');
-            }, 100);
-            
-            setTimeout(() => {
-                videoSection.classList.remove('hidden');
-                videoSection.style.display = 'block';
-                console.log('🔄 TERCEIRA VERIFICAÇÃO DE VISIBILIDADE APLICADA');
-            }, 500);
-            
-            console.log('✅ VÍDEOS EDUCATIVOS INSERIDOS COM SUCESSO TOTAL!');
-            console.log('🔍 Estado final da seção:', {
-                existe: !!videoSection,
-                hidden: videoSection.classList.contains('hidden'),
-                display: videoSection.style.display,
-                visibility: videoSection.style.visibility,
-                opacity: videoSection.style.opacity,
-                conteudo: videoSection.innerHTML.length > 0,
-                totalVideos: videos.length
-            });
-            
-            // LOG DE CONFIRMAÇÃO FINAL
-            console.log('🎯 MISSÃO CUMPRIDA: Vídeos educativos 100% funcionais e visíveis!');
-        }
-
-        function searchVideoOnYouTube(query) {
-            const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-            window.open(youtubeUrl, '_blank');
-            showNotification('Redirecionando...', 'Abrindo busca no YouTube', 'info');
-        }
-
         // AI Specialist Response System
         async function getAISpecialistResponse(patientMessage, roomType) {
             // Validar se o roomType é válido
@@ -2025,6 +1562,287 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             }
         }
 
+        // Gemini AI Integration
+        async function analyzeSymptoms() {
+            const symptomsInput = document.getElementById('symptomsInput');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const diagnosisResult = document.getElementById('diagnosisResult');
+            const diagnosisText = document.getElementById('diagnosisText');
+            
+            const symptoms = symptomsInput.value.trim();
+            
+            if (!symptoms) {
+                showNotification('Atenção!', 'Por favor, descreva seus sintomas', 'warning');
+                return;
+            }
+            
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '🔄 Analisando...';
+            
+            console.log('🚀 Iniciando análise médica...');
+            
+            try {
+                let diagnosis;
+                
+                // Verificar se deve usar fallback
+                if (USE_FALLBACK) {
+                    console.log('🔧 Usando resposta simulada para análise de sintomas');
+                    diagnosis = getSymptomsFallbackResponse(symptoms);
+                } else {
+                    const requestBody = {
+                        symptoms: symptoms,
+                        type: 'symptom_analysis',
+                        prompt: `Você é um assistente médico virtual. Analise os sintomas descritos e forneça uma resposta em português brasileiro com no máximo 200 palavras.
+
+Inclua:
+1. Possíveis causas
+2. Cuidados básicos recomendados  
+3. Quando procurar ajuda médica
+4. Disclaimer: "Esta é apenas uma análise preliminar e não substitui consulta médica profissional"
+
+Sintomas relatados: ${symptoms}`,
+                        generationConfig: {
+                            maxOutputTokens: 300,
+                            temperature: 0.3,
+                            topP: 0.8,
+                            topK: 40
+                        }
+                    };
+                    
+                    console.log('📤 Enviando requisição para Edge Function...');
+                    
+                    const response = await fetch(GEMINI_API_ENDPOINT, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+                    
+                    console.log('📥 Resposta recebida:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                        console.error('❌ Erro da Edge Function:', errorData);
+                        throw new Error(`Erro da API: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log('✅ Dados recebidos:', data);
+                    
+                    if (data.response) {
+                        diagnosis = data.response;
+                    } else {
+                        console.error('❌ Estrutura de resposta inválida:', data);
+                        throw new Error('Resposta da Edge Function em formato inválido');
+                    }
+                }
+                
+                diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
+                diagnosisResult.classList.remove('hidden');
+                
+                // Search for related videos
+                searchHealthVideos(symptoms);
+                
+                showNotification('Análise concluída!', 'Relatório médico gerado com sucesso', 'success');
+                console.log('✅ Análise concluída com sucesso');
+                
+            } catch (error) {
+                console.error('❌ Erro completo:', error);
+                
+                // Usar fallback em caso de erro
+                console.log('🔄 Usando resposta de fallback devido ao erro');
+                const fallbackDiagnosis = getSymptomsFallbackResponse(symptoms);
+                diagnosisText.innerHTML = fallbackDiagnosis.replace(/\n/g, '<br>');
+                diagnosisResult.classList.remove('hidden');
+                
+                showNotification('Análise (Demo)!', 'Usando resposta simulada devido a erro de conexão', 'warning');
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
+            }
+        }
+        
+        // Função de fallback para análise de sintomas
+        function getSymptomsFallbackResponse(symptoms) {
+            const symptomsLower = symptoms.toLowerCase();
+            
+            if (symptomsLower.includes('dor de cabeça') || symptomsLower.includes('cefaleia')) {
+                return `**Análise Preliminar - Dor de Cabeça**
+
+**Possíveis causas:**
+- Tensão muscular
+- Desidratação
+- Estresse
+- Falta de sono
+- Problemas de visão
+
+**Cuidados recomendados:**
+- Hidrate-se adequadamente
+- Descanse em ambiente escuro
+- Aplique compressas frias na testa
+- Evite ruídos altos
+
+**Procure ajuda médica se:**
+- Dor muito intensa ou súbita
+- Acompanhada de febre alta
+- Persistir por mais de 3 dias
+- Houver alterações na visão
+
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            if (symptomsLower.includes('febre') || symptomsLower.includes('temperatura')) {
+                return `**Análise Preliminar - Febre**
+
+**Possíveis causas:**
+- Infecção viral ou bacteriana
+- Reação inflamatória
+- Desidratação
+- Reação a medicamentos
+
+**Cuidados recomendados:**
+- Mantenha-se hidratado
+- Descanse adequadamente
+- Use roupas leves
+- Monitore a temperatura
+
+**Procure ajuda médica se:**
+- Febre acima de 39°C
+- Persistir por mais de 3 dias
+- Acompanhada de dificuldade respiratória
+- Houver sinais de desidratação
+
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            if (symptomsLower.includes('tosse') || symptomsLower.includes('garganta')) {
+                return `**Análise Preliminar - Sintomas Respiratórios**
+
+**Possíveis causas:**
+- Infecção viral (resfriado)
+- Irritação das vias aéreas
+- Alergia respiratória
+- Refluxo gastroesofágico
+
+**Cuidados recomendados:**
+- Mantenha-se hidratado
+- Use umidificador de ar
+- Evite irritantes (fumaça, poeira)
+- Faça gargarejos com água morna e sal
+
+**Procure ajuda médica se:**
+- Dificuldade para respirar
+- Tosse com sangue
+- Febre alta persistente
+- Piora dos sintomas
+
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            // Resposta genérica
+            return `**Análise Preliminar dos Sintomas**
+
+Com base nos sintomas relatados: "${symptoms}"
+
+**Recomendações gerais:**
+- Monitore a evolução dos sintomas
+- Mantenha-se hidratado
+- Descanse adequadamente
+- Evite automedicação
+
+**Cuidados importantes:**
+- Anote quando os sintomas começaram
+- Observe se há piora ou melhora
+- Mantenha alimentação leve
+- Evite atividades físicas intensas
+
+**Procure ajuda médica se:**
+- Os sintomas piorarem
+- Surgirem novos sintomas
+- Houver dor intensa
+- Persistir por mais de alguns dias
+
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional. Recomendamos consultar um médico para avaliação adequada.*`;
+        }
+
+        // YouTube API Integration
+        async function searchHealthVideos(query) {
+            try {
+                console.log('🔍 Buscando vídeos relacionados...');
+                const searchQuery = `${query} saúde medicina tratamento cuidados`;
+                
+                const response = await fetch(`${YOUTUBE_API_ENDPOINT}?q=${encodeURIComponent(searchQuery)}&maxResults=3&regionCode=BR&relevanceLanguage=pt`);
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    console.error('❌ Erro YouTube Edge Function:', errorData);
+                    throw new Error(`Erro YouTube: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('📺 Vídeos encontrados:', data.items?.length || 0);
+                
+                if (data.items && data.items.length > 0) {
+                    displayHealthVideos(data.items);
+                } else {
+                    console.log('📺 Nenhum vídeo encontrado para:', query);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao buscar vídeos:', error);
+                // Não mostrar erro para o usuário, apenas log
+            }
+        }
+
+        function displayHealthVideos(videos) {
+            const videoSection = document.getElementById('videoSection');
+            
+            let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
+            
+            videos.forEach(video => {
+                videosHtml += `
+                    <div class="bg-gray-800 rounded-lg p-4 mb-3">
+                        <div class="flex items-start space-x-3">
+                            <img src="${video.snippet.thumbnails.default.url}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
+                            <div class="flex-1">
+                                <h6 class="font-semibold text-sm mb-2">${video.snippet.title}</h6>
+                                <p class="text-xs text-gray-400 mb-2">${video.snippet.channelTitle}</p>
+                                <button onclick="playVideo('${video.id.videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
+                                    ▶️ Assistir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            videoSection.innerHTML = videosHtml;
+        }
+
+        function playVideo(videoId) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-gray-900 rounded-xl p-6 max-w-4xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">📺 Vídeo Educativo</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white text-2xl">✕</button>
+                    </div>
+                    <div class="aspect-video">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            src="https://www.youtube.com/embed/${videoId}" 
+                            frameborder="0" 
+                            allowfullscreen
+                            class="rounded-lg"
+                        ></iframe>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
         // Consultation Rooms
         function toggleConsultation() {
             const consultationContainer = document.getElementById('consultationContainer');
@@ -2197,249 +2015,75 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
 
-        // FUNÇÕES COMPLETAMENTE FUNCIONAIS
-        function scrollToServices() {
-            document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+        // Firebase and Chat Functions (keeping original functionality)
+        function initializeFirebase() {
+            if (firebaseConfig.apiKey === "SUA_API_KEY_AQUI") {
+                console.log('Firebase não configurado - usando modo demo');
+                return false;
+            }
+
+            try {
+                firebase.initializeApp(firebaseConfig);
+                database = firebase.database();
+                messagesRef = database.ref('messages');
+                
+                messagesRef.on('child_added', (snapshot) => {
+                    const message = snapshot.val();
+                    if (message.userId !== userId) {
+                        displayMessage(message, false);
+                        playReceiveSound();
+                        
+                        // Show notification for new message
+                        const messagePreview = message.text ? 
+                            (message.text.length > 50 ? message.text.substring(0, 50) + '...' : message.text) :
+                            message.type === 'image' ? '📷 Imagem recebida' : 
+                            message.type === 'audio' ? '🎤 Áudio recebido' : 'Nova mensagem';
+                            
+                        showNotification('Nova mensagem!', `${message.userName}: ${messagePreview}`, 'message');
+                    }
+                });
+
+                firebaseConnected = true;
+                return true;
+            } catch (error) {
+                console.error('Erro ao conectar com Firebase:', error);
+                return false;
+            }
         }
 
+        function initWebSocket() {
+            const connected = initializeFirebase();
+        }
+
+        // Auto Chat Functions
         function toggleAutoChat() {
             const autoChatContainer = document.getElementById('autoChatContainer');
             autoChatOpen = !autoChatOpen;
             
             if (autoChatOpen) {
                 autoChatContainer.classList.add('open');
-                showNotification('Autoatendimento ativo!', 'Assistente médico virtual conectado', 'success');
             } else {
                 autoChatContainer.classList.remove('open');
             }
         }
 
-        function toggleChat() {
-            const chatContainer = document.getElementById('chatContainer');
-            chatOpen = !chatOpen;
-            
-            if (chatOpen) {
-                chatContainer.classList.add('open');
-                initializeLiveChat();
-                showNotification('Chat médico ativo!', '2 médicos online para ajudar', 'success');
-            } else {
-                chatContainer.classList.remove('open');
-            }
-        }
-
-        function toggleNutritionChat() {
-            const nutritionContainer = document.getElementById('nutritionChatContainer');
-            const isOpen = nutritionContainer.classList.contains('open');
-            
-            if (!isOpen) {
-                nutritionContainer.classList.add('open');
-                showNotification('Dr. Nutricionista online!', 'Dra. Ana pronta para ajudar', 'success');
-            } else {
-                nutritionContainer.classList.remove('open');
-            }
-        }
-
-        function closeNutritionChat() {
-            document.getElementById('nutritionChatContainer').classList.remove('open');
-        }
-
-        function togglePsychologyChat() {
-            const psychologyContainer = document.getElementById('psychologyChatContainer');
-            const isOpen = psychologyContainer.classList.contains('open');
-            
-            if (!isOpen) {
-                psychologyContainer.classList.add('open');
-                showNotification('Dr. Psicólogo online!', 'Dr. Carlos especialista em vícios', 'success');
-            } else {
-                psychologyContainer.classList.remove('open');
-            }
-        }
-
-        function closePsychologyChat() {
-            document.getElementById('psychologyChatContainer').classList.remove('open');
-        }
-
-        function togglePharmacyFinder() {
-            const pharmacyContainer = document.getElementById('pharmacyContainer');
-            pharmacyOpen = !pharmacyOpen;
-            
-            if (pharmacyOpen) {
-                pharmacyContainer.classList.add('open');
-                initializePharmacyMap();
-                showNotification('Farmácias localizadas!', 'Encontre medicamentos em Caruaru', 'success');
-            } else {
-                pharmacyContainer.classList.remove('open');
-            }
-        }
-
-        function toggleConsultation() {
-            const consultationContainer = document.getElementById('consultationContainer');
-            consultationOpen = !consultationOpen;
-            
-            if (consultationOpen) {
-                consultationContainer.classList.add('open');
-                showRoomSelection();
-                showNotification('Salas abertas!', '3 especialistas disponíveis', 'success');
-            } else {
-                consultationContainer.classList.remove('open');
-                leaveRoom();
-            }
-        }
-
-        // FUNÇÕES COMPLETAMENTE FUNCIONAIS
-        function searchByAddress() {
-            const locationInput = document.getElementById('locationInput');
-            const location = locationInput.value.trim();
-            
-            if (!location) {
-                showNotification('Digite um local!', 'Informe um bairro de Caruaru-PE', 'warning');
-                return;
-            }
-            
-            searchPharmaciesInCaruaru(location);
-        }
-
-        function useCurrentLocation() {
-            if (!navigator.geolocation) {
-                showNotification('GPS não disponível!', 'Seu navegador não suporta geolocalização', 'error');
-                return;
-            }
-            
-            showNotification('Localizando...', 'Obtendo sua localização atual', 'info');
-            
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    userLocation = { lat, lng };
-                    
-                    showNotification('Localização obtida!', 'Buscando farmácias próximas', 'success');
-                    searchNearbyPharmacies(lat, lng);
-                },
-                (error) => {
-                    showNotification('Erro de GPS!', 'Não foi possível obter sua localização', 'error');
-                    console.error('Erro de geolocalização:', error);
-                }
-            );
-        }
-
-        function clickOnMap() {
-            showNotification('Mapa ativo!', 'Clique no mapa para buscar farmácias na região', 'info');
-            initializeInteractiveMap();
-        }
-
-        async function sendAutoMessage() {
+        function sendAutoMessage() {
             const input = document.getElementById('autoMessageInput');
             const text = input.value.trim();
             
             if (!text) return;
+
+            displayAutoMessage(text, true);
             
-            addAutoMessage(text, true, 'Você');
-            input.value = '';
-            
-            // Simular resposta do bot
             setTimeout(() => {
-                const responses = [
-                    'Entendo sua preocupação. Pode me dar mais detalhes sobre os sintomas?',
-                    'Baseado no que descreveu, recomendo agendar uma consulta com nosso clínico geral.',
-                    'Para sintomas como esses, é importante fazer uma avaliação médica adequada.',
-                    'Posso ajudar a agendar uma consulta ou conectá-lo com um de nossos especialistas.',
-                    'Vou anotar essas informações. Gostaria de falar com um médico agora?'
-                ];
-                
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                addAutoMessage(response, false, 'Assistente Virtual');
-            }, 1500);
-        }
-
-        async function sendRoomMessage() {
-            const input = document.getElementById('roomMessageInput');
-            const text = input.value.trim();
+                const response = responderAutomaticamente(text);
+                displayAutoMessage(response, false);
+            }, 800);
             
-            if (!text) return;
-            
-            if (!currentRoom) {
-                showNotification('Erro!', 'Nenhuma sala selecionada', 'error');
-                return;
-            }
-            
-            addRoomMessage(text, true, 'Você');
             input.value = '';
-            
-            // Show typing indicator
-            const typingId = addTypingIndicator();
-            
-            try {
-                const response = await getAISpecialistResponse(text, currentRoom);
-                removeTypingIndicator(typingId);
-                
-                const roomData = {
-                    'geral': 'Dr. Clínico Geral',
-                    'cardio': 'Dr. Cardiologista', 
-                    'derma': 'Dr. Dermatologista'
-                };
-                
-                addRoomMessage(response, false, roomData[currentRoom]);
-                
-            } catch (error) {
-                removeTypingIndicator(typingId);
-                console.error('Erro ao obter resposta:', error);
-                
-                const fallbackResponse = 'Desculpe, estou com dificuldades técnicas no momento. Pode repetir sua pergunta?';
-                addRoomMessage(fallbackResponse, false, 'Médico');
-            }
         }
 
-        async function sendNutritionChatMessage() {
-            const input = document.getElementById('nutritionMessageInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            
-            addNutritionMessage(text, true, 'Você');
-            input.value = '';
-            
-            // Simular resposta da nutricionista
-            setTimeout(() => {
-                const responses = [
-                    'Ótima pergunta sobre nutrição! Para uma dieta equilibrada, recomendo incluir mais vegetais e proteínas magras.',
-                    'Baseado no que descreveu, vamos ajustar seu plano alimentar. Quantas refeições faz por dia?',
-                    'Para seus objetivos nutricionais, é importante manter hidratação adequada e horários regulares.',
-                    'Vou criar um plano personalizado para você. Tem alguma restrição alimentar ou alergia?',
-                    'Excelente! Nutrição é fundamental para saúde. Vamos trabalhar juntos seus hábitos alimentares.'
-                ];
-                
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                addNutritionMessage(response, false, 'Dra. Ana - Nutricionista');
-            }, 2000);
-        }
-
-        async function sendPsychologyChatMessage() {
-            const input = document.getElementById('psychologyMessageInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            
-            addPsychologyMessage(text, true, 'Você');
-            input.value = '';
-            
-            // Simular resposta do psicólogo
-            setTimeout(() => {
-                const responses = [
-                    'Entendo como se sente. Vamos trabalhar juntos essas questões. Pode me contar mais sobre quando isso começou?',
-                    'É normal sentir-se assim. Como psicólogo especialista em vícios, posso ajudar com estratégias eficazes.',
-                    'Obrigado por compartilhar isso comigo. Vamos desenvolver técnicas para lidar com essa situação.',
-                    'Seus sentimentos são válidos. Que tal explorarmos algumas técnicas de enfrentamento?',
-                    'Estou aqui para apoiá-lo. Juntos podemos encontrar caminhos para superar esses desafios.'
-                ];
-                
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                addPsychologyMessage(response, false, 'Dr. Carlos - Psicólogo');
-            }, 2500);
-        }
-
-        // FUNÇÕES AUXILIARES PARA CHATS
-        function addAutoMessage(text, isUser, sender) {
+        function displayAutoMessage(text, isUser) {
             const messagesArea = document.getElementById('autoMessagesArea');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-green-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
@@ -2451,14 +2095,1448 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             
             messageDiv.innerHTML = `
                 <p class="text-sm">${text}</p>
-                <span class="text-xs text-gray-400">${sender} • ${time}</span>
+                <span class="text-xs text-gray-400">${isUser ? 'Você' : 'Bot'} • ${time}</span>
             `;
             
             messagesArea.appendChild(messageDiv);
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
 
-        function addNutritionMessage(text, isUser, sender) {
+        function responderAutomaticamente(texto) {
+            texto = texto.toLowerCase();
+
+            if (["dor de cabeça", "enxaqueca", "cefaleia"].some(p => texto.includes(p))) {
+                return "🩺 Para dores de cabeça: descanse, hidrate-se e evite luzes fortes. Se persistir, consulte um médico.";
+            }
+
+            if (["febre", "temperatura", "calor"].some(p => texto.includes(p))) {
+                return "🌡️ Para febre: mantenha-se hidratado, descanse e monitore a temperatura. Acima de 38°C, procure ajuda médica.";
+            }
+
+            if (["pressão alta", "hipertensão", "pressão"].some(p => texto.includes(p))) {
+                return "❤️ Para pressão alta: reduza sal, exercite-se e monitore regularmente. Consulte um cardiologista.";
+            }
+
+            if (["consulta", "agendar", "marcar"].some(p => texto.includes(p))) {
+                return "📅 Para agendar consultas: (11) 99999-9999 ou use nossas salas de consulta online 🏥";
+            }
+
+            if (["emergência", "urgente", "grave"].some(p => texto.includes(p))) {
+                return "🚨 EMERGÊNCIA: Ligue 192 (SAMU) ou vá ao pronto-socorro mais próximo imediatamente!";
+            }
+
+            if (["horário", "funcionamento", "atendimento"].some(p => texto.includes(p))) {
+                return "📅 Atendimento: 24h online | Presencial: 08h-18h, seg-sex | Emergência: 24h";
+            }
+
+            if (["preço", "valor", "custo", "consulta"].some(p => texto.includes(p))) {
+                return "💰 Consultas: R$ 89,90 (Geral) a R$ 149,90 (Especialistas). Convênios aceitos!";
+            }
+
+            if (["médico", "doutor", "especialista"].some(p => texto.includes(p))) {
+                return "👨‍⚕️ Temos especialistas em: Clínica Geral, Cardiologia, Dermatologia, Psicologia e Pediatria.";
+            }
+
+            return "🤖 Não entendi sua pergunta médica. Tente ser mais específico ou use as salas de consulta 🏥";
+        }
+
+        // Live Chat Functions (keeping original)
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatOpen = !chatOpen;
+            
+            if (chatOpen) {
+                chatContainer.classList.add('open');
+                if (!ws) {
+                    initWebSocket();
+                }
+            } else {
+                chatContainer.classList.remove('open');
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            const message = {
+                text: text,
+                userId: userId,
+                timestamp: Date.now(),
+                userName: 'Você',
+                type: 'text'
+            };
+
+            displayMessage(message, true);
+            
+            if (firebaseConnected && messagesRef) {
+                messagesRef.push(message).catch((error) => {
+                    console.error('Erro ao enviar mensagem:', error);
+                    addSystemMessage('❌ Erro ao enviar mensagem');
+                });
+            }
+            
+            playSendSound();
+            input.value = '';
+            updateMainButton();
+        }
+
+        function handleMainAction() {
+            const messageInput = document.getElementById('messageInput');
+            const text = messageInput.value.trim();
+            
+            if (text) {
+                sendMessage();
+            } else {
+                toggleRecording();
+            }
+        }
+
+        function updateMainButton() {
+            const messageInput = document.getElementById('messageInput');
+            const mainActionIcon = document.getElementById('mainActionIcon');
+            const mainActionBtn = document.getElementById('mainActionBtn');
+            const text = messageInput.value.trim();
+            
+            if (isRecording) {
+                mainActionIcon.textContent = '⏹️';
+                mainActionBtn.className = 'bg-red-600 w-12 h-12 rounded-full hover:bg-red-700 transition flex-shrink-0 flex items-center justify-center recording';
+            } else if (text) {
+                mainActionIcon.textContent = '📤';
+                mainActionBtn.className = 'bg-blue-600 w-12 h-12 rounded-full hover:bg-blue-700 transition flex-shrink-0 flex items-center justify-center';
+            } else {
+                mainActionIcon.textContent = '🎤';
+                mainActionBtn.className = 'bg-green-600 w-12 h-12 rounded-full hover:bg-green-700 transition flex-shrink-0 flex items-center justify-center';
+            }
+        }
+
+        function displayMessage(message, isSent) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-bubble ${isSent ? 'ml-auto bg-blue-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
+            
+            let content = '';
+            
+            if (message.type === 'image') {
+                content = `<img src="${message.imageData}" class="max-w-full rounded-lg mb-2">`;
+            } else if (message.type === 'audio') {
+                const audioId = 'audio_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                const mimeType = message.mimeType || 'audio/webm';
+                
+                content = `
+                    <div class="audio-message bg-gray-600 rounded-lg p-3 mb-2">
+                        <div class="flex items-center space-x-3">
+                            <button onclick="toggleAudioPlayback('${audioId}')" class="bg-blue-500 hover:bg-blue-600 rounded-full w-10 h-10 flex items-center justify-center transition">
+                                <span id="playIcon_${audioId}">▶️</span>
+                            </button>
+                            <div class="flex-1">
+                                <div class="bg-gray-700 rounded-full h-2 mb-1">
+                                    <div id="progress_${audioId}" class="bg-blue-500 h-2 rounded-full transition-all duration-100" style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-400">
+                                    <span id="currentTime_${audioId}">0:00</span>
+                                    <span id="duration_${audioId}">0:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="${audioId}" preload="auto" style="display: none;">
+                            <source src="${message.audioData}" type="${mimeType}">
+                        </audio>
+                    </div>
+                `;
+            } else {
+                content = `<p class="text-sm">${message.text}</p>`;
+            }
+            
+            const time = new Date(message.timestamp).toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                ${content}
+                <span class="text-xs text-gray-400">${message.userName} • ${time}</span>
+            `;
+            
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function addSystemMessage(text) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message-bubble bg-yellow-900 bg-opacity-50 p-3 rounded-xl max-w-xs mx-auto text-center';
+            messageDiv.innerHTML = `<p class="text-sm text-yellow-200">${text}</p>`;
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        async function toggleRecording() {
+            const micStatus = document.getElementById('micStatus');
+            
+            if (!isRecording) {
+                try {
+                    const constraints = {
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            autoGainControl: true,
+                            sampleRate: 44100,
+                            channelCount: 1
+                        }
+                    };
+
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    
+                    let options = { audioBitsPerSecond: 96000 };
+                    
+                    if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+                        options.mimeType = 'audio/webm;codecs=opus';
+                    } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+                        options.mimeType = 'audio/webm';
+                    } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+                        options.mimeType = 'audio/mp4';
+                    }
+                    
+                    mediaRecorder = new MediaRecorder(stream, options);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = (event) => {
+                        if (event.data && event.data.size > 0) {
+                            audioChunks.push(event.data);
+                        }
+                    };
+                    
+                    mediaRecorder.onstop = async () => {
+                        try {
+                            const mimeType = mediaRecorder.mimeType || 'audio/webm';
+                            const audioBlob = new Blob(audioChunks, { type: mimeType });
+                            
+                            if (audioBlob.size === 0) {
+                                throw new Error('Áudio vazio gravado');
+                            }
+                            
+                            const audioUrl = URL.createObjectURL(audioBlob);
+                            
+                            const message = {
+                                audioData: audioUrl,
+                                mimeType: mimeType,
+                                userId: userId,
+                                timestamp: Date.now(),
+                                userName: 'Você',
+                                type: 'audio'
+                            };
+                            
+                            displayMessage(message, true);
+                            
+                            if (firebaseConnected && messagesRef) {
+                                const reader = new FileReader();
+                                reader.onload = () => {
+                                    const firebaseMessage = {
+                                        audioData: reader.result,
+                                        mimeType: mimeType,
+                                        userId: userId,
+                                        timestamp: message.timestamp,
+                                        userName: 'Você',
+                                        type: 'audio'
+                                    };
+                                    messagesRef.push(firebaseMessage).catch(console.error);
+                                };
+                                reader.readAsDataURL(audioBlob);
+                            }
+                            
+                            playSendSound();
+                            
+                        } catch (error) {
+                            console.error('Erro ao processar áudio:', error);
+                            addSystemMessage('❌ Erro ao processar áudio gravado');
+                        }
+                    };
+                    
+                    mediaRecorder.onerror = (event) => {
+                        console.error('Erro na gravação:', event.error);
+                        addSystemMessage('❌ Erro durante a gravação');
+                        resetRecordingState();
+                    };
+                    
+                    mediaRecorder.start(250);
+                    isRecording = true;
+                    micStatus.classList.remove('hidden');
+                    updateMainButton();
+                    
+                    setTimeout(() => {
+                        if (isRecording) {
+                            toggleRecording();
+                        }
+                    }, 60000);
+                    
+                } catch (error) {
+                    console.error('Erro ao acessar microfone:', error);
+                    
+                    let errorMessage = '🎤 Erro ao acessar microfone!';
+                    
+                    if (error.name === 'NotAllowedError') {
+                        errorMessage = '🎤 Permissão negada!\n\nClique no ícone de microfone na barra de endereços e selecione "Permitir"';
+                    } else if (error.name === 'NotFoundError') {
+                        errorMessage = '🎤 Microfone não encontrado!\n\nVerifique se está conectado e funcionando';
+                    }
+                    
+                    alert(errorMessage);
+                    resetRecordingState();
+                }
+            } else {
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                }
+                resetRecordingState();
+            }
+        }
+
+        function resetRecordingState() {
+            isRecording = false;
+            document.getElementById('micStatus').classList.add('hidden');
+            updateMainButton();
+            
+            if (mediaRecorder && mediaRecorder.stream) {
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        function sendImage() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+            
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imageData = reader.result;
+                const message = {
+                    imageData: imageData,
+                    userId: userId,
+                    timestamp: Date.now(),
+                    userName: 'Você',
+                    type: 'image'
+                };
+                
+                displayMessage(message, true);
+                
+                if (firebaseConnected && messagesRef) {
+                    messagesRef.push(message).catch((error) => {
+                        console.error('Erro ao enviar imagem:', error);
+                    });
+                }
+                
+                playSendSound();
+            };
+            reader.readAsDataURL(file);
+            input.value = '';
+        }
+
+        function playSendSound() {
+            playNotificationSound('send');
+            // Fallback to HTML audio if available
+            const audio = document.getElementById('sendSound');
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+            }
+        }
+
+        function playReceiveSound() {
+            playNotificationSound('receive');
+            // Fallback to HTML audio if available
+            const audio = document.getElementById('receiveSound');
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+            }
+        }
+
+        function bookConsultation(service, price) {
+            const message = `Olá! Gostaria de agendar uma consulta de *${service}* por R$ ${price}. Quando há disponibilidade?`;
+            const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showNotification('Redirecionando...', `Agendando consulta de ${service}`, 'info');
+        }
+
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleAudioPlayback(audioId) {
+            const audio = document.getElementById(audioId);
+            const playIcon = document.getElementById(`playIcon_${audioId}`);
+            const progressBar = document.getElementById(`progress_${audioId}`);
+            const currentTimeSpan = document.getElementById(`currentTime_${audioId}`);
+            const durationSpan = document.getElementById(`duration_${audioId}`);
+            
+            if (!audio) return;
+            
+            if (audio.paused) {
+                document.querySelectorAll('audio').forEach(otherAudio => {
+                    if (otherAudio !== audio && !otherAudio.paused) {
+                        otherAudio.pause();
+                        const otherId = otherAudio.id;
+                        const otherIcon = document.getElementById(`playIcon_${otherId}`);
+                        if (otherIcon) otherIcon.textContent = '▶️';
+                    }
+                });
+                
+                audio.play().then(() => {
+                    playIcon.textContent = '⏸️';
+                }).catch(error => {
+                    console.error('Erro ao reproduzir áudio:', error);
+                    playIcon.textContent = '❌';
+                });
+            } else {
+                audio.pause();
+                playIcon.textContent = '▶️';
+            }
+            
+            if (!audio.hasEventListeners) {
+                audio.addEventListener('loadedmetadata', () => {
+                    durationSpan.textContent = formatTime(audio.duration);
+                });
+                
+                audio.addEventListener('timeupdate', () => {
+                    if (audio.duration) {
+                        const progress = (audio.currentTime / audio.duration) * 100;
+                        progressBar.style.width = progress + '%';
+                        currentTimeSpan.textContent = formatTime(audio.currentTime);
+                    }
+                });
+                
+                audio.addEventListener('ended', () => {
+                    playIcon.textContent = '▶️';
+                    progressBar.style.width = '0%';
+                    currentTimeSpan.textContent = '0:00';
+                    audio.currentTime = 0;
+                });
+                
+                audio.addEventListener('error', (e) => {
+                    console.error('Erro no áudio:', e);
+                    playIcon.textContent = '❌';
+                });
+                
+                audio.hasEventListeners = true;
+            }
+        }
+        
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Event Listeners
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleMainAction();
+            }
+        });
+
+        document.getElementById('autoMessageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendAutoMessage();
+            }
+        });
+
+        document.getElementById('roomMessageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendRoomMessage();
+            }
+        });
+
+        document.getElementById('messageInput').addEventListener('input', updateMainButton);
+
+
+
+        // Pharmacy Finder Functions
+        function togglePharmacyFinder() {
+            const pharmacyContainer = document.getElementById('pharmacyContainer');
+            pharmacyOpen = !pharmacyOpen;
+            
+            if (pharmacyOpen) {
+                pharmacyContainer.classList.add('open');
+                showNotification('Farmácias PE!', 'Encontre farmácias em Pernambuco', 'info');
+            } else {
+                pharmacyContainer.classList.remove('open');
+            }
+        }
+
+        // New location functions
+        function useCurrentLocation() {
+            showNotification('Localizando...', 'Buscando sua localização atual', 'info');
+            
+            if (!navigator.geolocation) {
+                showNotification('Erro!', 'Geolocalização não suportada pelo navegador', 'error');
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    
+                    document.getElementById('locationInput').value = `📍 Localização atual (${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)})`;
+                    
+                    await initializeMap();
+                    await searchNearbyPharmacies(userLocation);
+                },
+                (error) => {
+                    console.error('Erro de geolocalização:', error);
+                    
+                    let errorMessage = 'Erro ao obter localização';
+                    if (error.code === 1) {
+                        errorMessage = 'Permissão de localização negada';
+                    } else if (error.code === 2) {
+                        errorMessage = 'Localização indisponível';
+                    } else if (error.code === 3) {
+                        errorMessage = 'Tempo limite excedido';
+                    }
+                    
+                    showNotification('Erro!', errorMessage, 'error');
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 300000
+                }
+            );
+        }
+
+        async function searchByAddress() {
+            const locationInput = document.getElementById('locationInput');
+            const address = locationInput.value.trim();
+            
+            if (!address) {
+                showNotification('Atenção!', 'Digite um endereço de Caruaru-PE', 'warning');
+                return;
+            }
+            
+            showNotification('Buscando...', `Procurando em Caruaru: ${address}`, 'info');
+            
+            try {
+                // Geocodificação específica para Caruaru
+                const coordinates = await geocodeCaruaruAddress(address);
+                
+                if (coordinates) {
+                    userLocation = coordinates;
+                    locationInput.value = `📍 ${address} - Caruaru, PE`;
+                    
+                    await initializeMap();
+                    await searchNearbyPharmacies(userLocation);
+                    
+                    showNotification('Encontrado!', 'Localização em Caruaru confirmada', 'success');
+                } else {
+                    showNotification('Não encontrado!', 'Digite um endereço válido de Caruaru-PE', 'warning');
+                    // Sugerir Caruaru como padrão
+                    userLocation = { lat: -8.2837, lng: -35.9761 };
+                    locationInput.value = '📍 Centro de Caruaru, PE';
+                    await initializeMap();
+                    await searchNearbyPharmacies(userLocation);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar endereço:', error);
+                showNotification('Erro!', 'Usando localização padrão de Caruaru', 'info');
+                // Fallback para centro de Caruaru
+                userLocation = { lat: -8.2837, lng: -35.9761 };
+                locationInput.value = '📍 Centro de Caruaru, PE';
+                await initializeMap();
+                await searchNearbyPharmacies(userLocation);
+            }
+        }
+
+        async function geocodeCaruaruAddress(address) {
+            // Coordenadas específicas de Caruaru e bairros
+            const caruaruLocations = {
+                'centro': { lat: -8.2837, lng: -35.9761 },
+                'universitario': { lat: -8.2650, lng: -35.9550 },
+                'mauricio de nassau': { lat: -8.2900, lng: -35.9800 },
+                'kennedy': { lat: -8.2700, lng: -35.9900 },
+                'nova caruaru': { lat: -8.2600, lng: -35.9600 },
+                'indianopolis': { lat: -8.2950, lng: -35.9650 },
+                'petropolis': { lat: -8.2750, lng: -35.9850 },
+                'salgado': { lat: -8.2550, lng: -35.9450 },
+                'cedro': { lat: -8.2400, lng: -35.9300 },
+                'vassoural': { lat: -8.3000, lng: -35.9900 },
+                'rendeiras': { lat: -8.2500, lng: -35.9200 },
+                'boa vista': { lat: -8.2800, lng: -36.0000 }
+            };
+            
+            const normalizedAddress = address.toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9\s]/g, '');
+            
+            // Buscar por bairros específicos de Caruaru
+            for (const [bairro, coords] of Object.entries(caruaruLocations)) {
+                if (normalizedAddress.includes(bairro)) {
+                    return coords;
+                }
+            }
+            
+            // Se mencionar Caruaru
+            if (normalizedAddress.includes('caruaru')) {
+                return caruaruLocations.centro;
+            }
+            
+            // CEPs de Caruaru (55000-000 a 55299-999)
+            const cepMatch = address.match(/55[0-2]\d{2}-?\d{3}/);
+            if (cepMatch) {
+                return caruaruLocations.centro;
+            }
+            
+            // Ruas conhecidas de Caruaru
+            const caruaruStreets = [
+                'agamenon magalhaes', 'vigario freire', 'adjar da silva case',
+                'sete de setembro', 'rio branco', 'coronel jose carvalho',
+                'quinze de novembro', 'treze de maio', 'joao pessoa'
+            ];
+            
+            for (const street of caruaruStreets) {
+                if (normalizedAddress.includes(street)) {
+                    return caruaruLocations.centro;
+                }
+            }
+            
+            return null;
+        }
+
+
+
+        function clickOnMap() {
+            showNotification('Modo mapa!', 'Clique no mapa para selecionar sua localização', 'info');
+            
+            // Inicializar mapa interativo
+            initializeInteractiveMap();
+        }
+
+        function initializeInteractiveMap() {
+            const mapContainer = document.getElementById('map');
+            const mapPlaceholder = document.getElementById('mapPlaceholder');
+            
+            mapPlaceholder.style.display = 'none';
+            
+            // Criar mapa interativo clicável
+            mapContainer.innerHTML = `
+                <div class="w-full h-full bg-gray-700 rounded-lg relative overflow-hidden" onclick="selectLocationOnMap(event)">
+                    <!-- Fundo do mapa -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-600 via-blue-600 to-purple-600 opacity-30"></div>
+                    
+                    <!-- Grid do mapa -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="grid grid-cols-10 grid-rows-8 h-full">
+                            ${Array(80).fill().map(() => '<div class="border border-gray-400"></div>').join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Instruções -->
+                    <div class="absolute top-2 left-2 bg-black bg-opacity-70 rounded px-3 py-2 z-20">
+                        <p class="text-xs text-white">🖱️ Clique para selecionar sua localização</p>
+                    </div>
+                    
+                    <!-- Marcador de seleção (inicialmente oculto) -->
+                    <div id="selectedLocationMarker" class="absolute z-20 hidden">
+                        <div class="bg-red-500 w-4 h-4 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                        <div class="text-xs text-white font-semibold mt-1 text-center whitespace-nowrap">Selecionado</div>
+                    </div>
+                    
+                    <!-- Coordenadas -->
+                    <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 rounded px-2 py-1 z-20">
+                        <p id="mapCoordinates" class="text-xs text-white">Clique no mapa</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectLocationOnMap(event) {
+            const mapContainer = event.currentTarget;
+            const rect = mapContainer.getBoundingClientRect();
+            
+            // Calcular posição relativa do clique
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Converter para coordenadas (simulação)
+            // São Paulo como centro: -23.5505, -46.6333
+            const lat = -23.5505 - ((y / rect.height - 0.5) * 0.2); // ±0.1 grau
+            const lng = -46.6333 + ((x / rect.width - 0.5) * 0.2); // ±0.1 grau
+            
+            userLocation = { lat, lng };
+            
+            // Mostrar marcador na posição clicada
+            const marker = document.getElementById('selectedLocationMarker');
+            marker.style.left = (x - 8) + 'px'; // -8 para centralizar o marcador
+            marker.style.top = (y - 8) + 'px';
+            marker.classList.remove('hidden');
+            
+            // Atualizar coordenadas
+            document.getElementById('mapCoordinates').textContent = `📍 ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+            
+            // Atualizar input de localização
+            document.getElementById('locationInput').value = `📍 Localização selecionada (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+            
+            // Buscar farmácias próximas
+            searchNearbyPharmacies(userLocation);
+            
+            showNotification('Localização selecionada!', 'Buscando farmácias próximas', 'success');
+        }
+
+        async function findNearbyPharmacies() {
+            if (!userLocation) {
+                showNotification('Atenção!', 'Primeiro selecione sua localização', 'warning');
+                return;
+            }
+            
+            await searchNearbyPharmacies(userLocation);
+        }
+
+        async function initializeMap() {
+            const mapContainer = document.getElementById('map');
+            const mapPlaceholder = document.getElementById('mapPlaceholder');
+            
+            mapPlaceholder.style.display = 'none';
+            
+            // Criar mapa visual com farmácias
+            mapContainer.innerHTML = `
+                <div class="w-full h-full bg-gray-700 rounded-lg relative overflow-hidden">
+                    <!-- Fundo do mapa -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-600 via-blue-600 to-purple-600 opacity-30"></div>
+                    
+                    <!-- Grid do mapa -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="grid grid-cols-8 grid-rows-6 h-full">
+                            ${Array(48).fill().map(() => '<div class="border border-gray-400"></div>').join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Sua localização (centro) -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                        <div class="bg-blue-500 w-4 h-4 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                        <div class="text-xs text-white font-semibold mt-1 text-center whitespace-nowrap">Você</div>
+                    </div>
+                    
+                    <!-- Farmácias próximas -->
+                    <div class="absolute top-1/4 left-1/3 z-10">
+                        <div class="bg-red-500 w-3 h-3 rounded-full border border-white"></div>
+                        <div class="text-xs text-white mt-1">🏪</div>
+                    </div>
+                    
+                    <div class="absolute top-3/4 left-2/3 z-10">
+                        <div class="bg-red-500 w-3 h-3 rounded-full border border-white"></div>
+                        <div class="text-xs text-white mt-1">🏪</div>
+                    </div>
+                    
+                    <div class="absolute top-1/3 left-3/4 z-10">
+                        <div class="bg-red-500 w-3 h-3 rounded-full border border-white"></div>
+                        <div class="text-xs text-white mt-1">🏪</div>
+                    </div>
+                    
+                    <div class="absolute top-2/3 left-1/4 z-10">
+                        <div class="bg-red-500 w-3 h-3 rounded-full border border-white"></div>
+                        <div class="text-xs text-white mt-1">🏪</div>
+                    </div>
+                    
+                    <!-- Info da localização -->
+                    <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded px-2 py-1 z-20">
+                        <p class="text-xs text-white">📍 ${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function searchNearbyPharmacies(location) {
+            try {
+                showNotification('Buscando...', 'Procurando farmácias próximas', 'info');
+                
+                // Tentar buscar farmácias reais usando API pública
+                let pharmacies = [];
+                
+                try {
+                    // Usar Overpass API (OpenStreetMap) para buscar farmácias reais
+                    const overpassQuery = `
+                        [out:json][timeout:10];
+                        (
+                          node["amenity"="pharmacy"](around:5000,${location.lat},${location.lng});
+                          way["amenity"="pharmacy"](around:5000,${location.lat},${location.lng});
+                          relation["amenity"="pharmacy"](around:5000,${location.lat},${location.lng});
+                        );
+                        out center meta;
+                    `;
+                    
+                    const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`;
+                    
+                    console.log('🔍 Buscando farmácias reais via Overpass API...');
+                    
+                    const response = await fetch(overpassUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('✅ Dados recebidos da Overpass API:', data.elements?.length || 0, 'farmácias');
+                        
+                        if (data.elements && data.elements.length > 0) {
+                            pharmacies = data.elements.slice(0, 10).map((element, index) => {
+                                const lat = element.lat || element.center?.lat || location.lat;
+                                const lng = element.lon || element.center?.lon || location.lng;
+                                const distance = calculateDistance(location.lat, location.lng, lat, lng);
+                                
+                                return {
+                                    id: element.id || index,
+                                    name: element.tags?.name || element.tags?.brand || `Farmácia ${index + 1}`,
+                                    address: formatAddress(element.tags),
+                                    distance: distance.toFixed(1),
+                                    rating: (Math.random() * 1.5 + 3.5).toFixed(1),
+                                    phone: generateRealisticPhone(location),
+                                    hours: element.tags?.opening_hours || (Math.random() > 0.3 ? '08:00 - 22:00' : '24 horas'),
+                                    services: getPharmacyServices(element.tags),
+                                    lat: lat,
+                                    lng: lng,
+                                    isOpen: !element.tags?.opening_hours || Math.random() > 0.2,
+                                    hasDelivery: Math.random() > 0.4,
+                                    acceptsInsurance: Math.random() > 0.3,
+                                    isReal: true
+                                };
+                            });
+                        }
+                    }
+                } catch (apiError) {
+                    console.warn('⚠️ Erro na API Overpass:', apiError.message);
+                }
+                
+                // Se não conseguiu dados reais, usar dados demo
+                if (pharmacies.length === 0) {
+                    console.log('📋 Usando dados demo como fallback');
+                    pharmacies = generateDemoPharmacies(location);
+                }
+                
+                displayPharmacyResults(pharmacies);
+                
+                const realCount = pharmacies.filter(p => p.isReal).length;
+                const message = realCount > 0 ? 
+                    `${realCount} farmácias reais encontradas!` : 
+                    `${pharmacies.length} farmácias próximas (demo)`;
+                
+                showNotification('Encontradas!', message, 'success');
+                
+            } catch (error) {
+                console.error('Erro ao buscar farmácias:', error);
+                showNotification('Erro!', 'Não foi possível buscar farmácias', 'error');
+            }
+        }
+
+        // Funções auxiliares para API de farmácias
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371; // Raio da Terra em km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        function formatAddress(tags) {
+            if (!tags) return 'Endereço não disponível';
+            
+            const parts = [];
+            if (tags['addr:street']) parts.push(tags['addr:street']);
+            if (tags['addr:housenumber']) parts.push(tags['addr:housenumber']);
+            if (tags['addr:neighbourhood']) parts.push(tags['addr:neighbourhood']);
+            if (tags['addr:city']) parts.push(tags['addr:city']);
+            
+            return parts.length > 0 ? parts.join(', ') : 'Endereço não disponível';
+        }
+        
+        function getPharmacyServices(tags) {
+            const services = [];
+            
+            if (tags?.dispensing === 'yes') services.push('Medicamentos com receita');
+            if (tags?.wheelchair === 'yes') services.push('Acessível');
+            if (tags?.opening_hours?.includes('24/7')) services.push('24 horas');
+            if (tags?.phone) services.push('Atendimento telefônico');
+            if (tags?.website) services.push('Site próprio');
+            
+            // Adicionar serviços padrão se não houver informações específicas
+            if (services.length === 0) {
+                const defaultServices = [
+                    'Medicamentos gerais', 'Produtos de higiene', 'Cosméticos',
+                    'Medição de pressão', 'Aplicação de injeções'
+                ];
+                services.push(...defaultServices.slice(0, 3));
+            }
+            
+            return services;
+        }
+
+        function generateRealisticAddress(location, index) {
+            // Ruas típicas por região
+            const streetsByRegion = {
+                'sao_paulo': [
+                    'Rua Augusta', 'Av. Paulista', 'Rua Oscar Freire', 'Rua da Consolação', 'Av. Faria Lima',
+                    'Rua Teodoro Sampaio', 'Av. Rebouças', 'Rua Haddock Lobo', 'Av. Brigadeiro Luís Antônio'
+                ],
+                'rio_janeiro': [
+                    'Av. Copacabana', 'Rua Barata Ribeiro', 'Av. Atlântica', 'Rua Visconde de Pirajá',
+                    'Av. Nossa Senhora de Copacabana', 'Rua General Osório', 'Av. Prado Júnior'
+                ],
+                'belo_horizonte': [
+                    'Av. Afonso Pena', 'Rua da Bahia', 'Av. Amazonas', 'Rua Tupis', 'Av. do Contorno',
+                    'Rua Curitiba', 'Av. Brasil', 'Rua Espírito Santo'
+                ],
+                'brasilia': [
+                    'SQN 102', 'SQS 308', 'CLN 204', 'CLS 405', 'W3 Norte', 'W3 Sul', 'Asa Norte', 'Asa Sul'
+                ],
+                'salvador': [
+                    'Av. Sete de Setembro', 'Rua Chile', 'Av. Oceânica', 'Rua Carlos Gomes',
+                    'Av. Antônio Carlos Magalhães', 'Rua da Paciência'
+                ],
+                'fortaleza': [
+                    'Av. Beira Mar', 'Rua Major Facundo', 'Av. Dom Luís', 'Rua Barão do Rio Branco',
+                    'Av. Santos Dumont', 'Rua Senador Pompeu'
+                ],
+                'recife': [
+                    'Av. Boa Viagem', 'Rua do Hospício', 'Av. Conde da Boa Vista', 'Rua da Aurora',
+                    'Av. Agamenon Magalhães', 'Rua Benfica'
+                ],
+                'porto_alegre': [
+                    'Av. Borges de Medeiros', 'Rua da Praia', 'Av. Osvaldo Aranha', 'Rua Voluntários da Pátria',
+                    'Av. Ipiranga', 'Rua Sarmento Leite'
+                ],
+                'curitiba': [
+                    'Rua XV de Novembro', 'Av. Cândido de Abreu', 'Rua Marechal Deodoro', 'Av. Batel',
+                    'Rua Comendador Araújo', 'Av. Paraná'
+                ],
+                'default': [
+                    'Rua das Flores', 'Av. Principal', 'Rua do Comércio', 'Rua Central', 'Av. da Saúde',
+                    'Rua São João', 'Av. Brasil', 'Rua Quinze de Novembro'
+                ]
+            };
+            
+            // Determinar região baseada na localização
+            let streets = streetsByRegion.default;
+            
+            if (location.lat > -20 && location.lat < -19 && location.lng > -44 && location.lng < -43) {
+                streets = streetsByRegion.belo_horizonte;
+            } else if (location.lat > -23 && location.lat < -22 && location.lng > -44 && location.lng < -43) {
+                streets = streetsByRegion.rio_janeiro;
+            } else if (location.lat > -16 && location.lat < -15 && location.lng > -48 && location.lng < -47) {
+                streets = streetsByRegion.brasilia;
+            } else if (location.lat > -13 && location.lat < -12 && location.lng > -39 && location.lng < -38) {
+                streets = streetsByRegion.salvador;
+            } else if (location.lat > -4 && location.lat < -3 && location.lng > -39 && location.lng < -38) {
+                streets = streetsByRegion.fortaleza;
+            } else if (location.lat > -9 && location.lat < -8 && location.lng > -35 && location.lng < -34) {
+                streets = streetsByRegion.recife;
+            } else if (location.lat > -31 && location.lat < -30 && location.lng > -52 && location.lng < -51) {
+                streets = streetsByRegion.porto_alegre;
+            } else if (location.lat > -26 && location.lat < -25 && location.lng > -50 && location.lng < -49) {
+                streets = streetsByRegion.curitiba;
+            } else if (location.lat > -24 && location.lat < -23 && location.lng > -47 && location.lng < -46) {
+                streets = streetsByRegion.sao_paulo;
+            }
+            
+            const street = streets[Math.floor(Math.random() * streets.length)];
+            const number = Math.floor(Math.random() * 2000) + 100;
+            
+            return `${street}, ${number}`;
+        }
+
+        function generateCaruaruAddress(location, index) {
+            // Ruas e avenidas específicas de Caruaru
+            const caruaruStreets = [
+                'Av. Agamenon Magalhães', 'Rua Vigário Freire', 'Av. Adjar da Silva Casé',
+                'Rua Sete de Setembro', 'Av. Rio Branco', 'Rua Coronel José Carvalho',
+                'Av. José Rodrigues de Jesus', 'Rua Quinze de Novembro', 'Av. Portugal',
+                'Rua Treze de Maio', 'Av. Oscar Laranjeira', 'Rua João Pessoa',
+                'Av. Universitária', 'Rua Padre Carapuceiro', 'Av. Maurício de Nassau',
+                'Rua Barão do Rio Branco', 'Av. Central', 'Rua Dom Pedro II',
+                'Av. Cleto Campelo', 'Rua José Mariano'
+            ];
+            
+            const street = caruaruStreets[Math.floor(Math.random() * caruaruStreets.length)];
+            const number = Math.floor(Math.random() * 2000) + 100;
+            
+            // Bairros específicos de Caruaru
+            const caruaruNeighborhoods = [
+                'Centro', 'Universitário', 'Maurício de Nassau', 'Petrópolis',
+                'Indianópolis', 'Nova Caruaru', 'Kennedy', 'Salgado',
+                'Cedro', 'Vassoural', 'Alto do Moura', 'Rendeiras',
+                'Boa Vista', 'São Francisco', 'Riachão', 'Caiucá'
+            ];
+            
+            const neighborhood = caruaruNeighborhoods[Math.floor(Math.random() * caruaruNeighborhoods.length)];
+            
+            return `${street}, ${number} - ${neighborhood}, Caruaru-PE`;
+        }
+
+
+
+        function generatePernambucoPhone(location) {
+            // Códigos de área específicos de Pernambuco
+            const pernambucoCodes = ['81', '87'];
+            
+            const areaCode = pernambucoCodes[Math.floor(Math.random() * pernambucoCodes.length)];
+            const number = Math.floor(Math.random() * 90000000) + 10000000; // 8 dígitos
+            const formattedNumber = number.toString().replace(/(\d{4})(\d{4})/, '$1-$2');
+            
+            return `(${areaCode}) 9${formattedNumber}`;
+        }
+
+        function generateRealisticPhone(location) {
+            // Para compatibilidade, usar função específica de PE
+            return generatePernambucoPhone(location);
+        }
+
+        function generateDemoPharmacies(location) {
+            // Farmácias específicas de Caruaru - PE
+            const caruaruPharmacies = [
+                { name: 'Farmácia Pague Menos Caruaru', chain: true },
+                { name: 'Drogasil Centro', chain: true },
+                { name: 'Farmácia São João', chain: false },
+                { name: 'Drogaria Rosário', chain: false },
+                { name: 'Farmácia Popular Caruaru', chain: true },
+                { name: 'Drogaria Universitário', chain: false },
+                { name: 'Farmácia Santa Clara', chain: false },
+                { name: 'Drogaria Kennedy', chain: false },
+                { name: 'Farmácia Central Caruaru', chain: false },
+                { name: 'Drogaria Agreste', chain: false },
+                { name: 'Farmácia Boa Saúde', chain: false },
+                { name: 'Drogaria Maurício de Nassau', chain: false }
+            ];
+            
+            const services = [
+                'Entrega em domicílio', 'Farmácia 24h', 'Teste de COVID-19', 
+                'Aplicação de vacinas', 'Medição de pressão', 'Teste de glicemia',
+                'Perfumaria', 'Produtos naturais', 'Manipulação', 'Fraldário',
+                'Aferição de temperatura', 'Nebulização'
+            ];
+
+            return caruaruPharmacies.slice(0, 10).map((pharmacy, index) => {
+                // Gerar coordenadas próximas (raio de ~5km)
+                const latOffset = (Math.random() - 0.5) * 0.05;
+                const lngOffset = (Math.random() - 0.5) * 0.05;
+                
+                const distance = Math.random() * 4 + 0.5; // 0.5 a 4.5 km
+                const rating = (Math.random() * 1.5 + 3.5).toFixed(1); // 3.5 a 5.0
+                
+                const availableServices = services
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, Math.floor(Math.random() * 4) + 2);
+
+                return {
+                    id: index + 1,
+                    name: pharmacy.name,
+                    address: generateCaruaruAddress(location, index),
+                    distance: distance.toFixed(1),
+                    rating: rating,
+                    phone: generatePernambucoPhone(location),
+                    hours: Math.random() > 0.3 ? '06:00 - 22:00' : '24 horas',
+                    services: availableServices,
+                    lat: location.lat + latOffset,
+                    lng: location.lng + lngOffset,
+                    isOpen: Math.random() > 0.15,
+                    hasDelivery: Math.random() > 0.3,
+                    acceptsInsurance: Math.random() > 0.2,
+                    isChain: pharmacy.chain
+                };
+            });
+        }
+
+        function displayPharmacyResults(pharmacies) {
+            const resultsContainer = document.getElementById('pharmacyResults');
+            
+            const realCount = pharmacies.filter(p => p.isReal).length;
+            const statusText = realCount > 0 ? 
+                `📍 ${realCount} farmácias reais + ${pharmacies.length - realCount} demo` : 
+                `📍 ${pharmacies.length} farmácias próximas (demo)`;
+            
+            let html = `
+                <div class="mb-2 p-2 bg-orange-900 bg-opacity-30 rounded-lg border border-orange-500">
+                    <h6 class="font-bold text-orange-300 text-center text-xs">${statusText}</h6>
+                    <p class="text-xs text-orange-200 text-center mt-1">Clique para ligar, ver rota ou delivery</p>
+                </div>
+            `;
+            
+            pharmacies.forEach((pharmacy, index) => {
+                const statusColor = pharmacy.isOpen ? 'text-green-400' : 'text-red-400';
+                const statusText = pharmacy.isOpen ? '🟢' : '🔴';
+                const deliveryBadge = pharmacy.hasDelivery ? '🚚' : '';
+                const insuranceBadge = pharmacy.acceptsInsurance ? '💳' : '';
+                const realBadge = pharmacy.isReal ? '✅' : '🔄';
+                
+                html += `
+                    <div class="bg-gray-800 rounded-lg p-2 border border-gray-600 hover:border-orange-500 transition mb-1 shadow-lg">
+                        <!-- Cabeçalho Compacto -->
+                        <div class="flex justify-between items-start mb-1">
+                            <div class="flex-1 min-w-0">
+                                <h7 class="font-bold text-white text-xs truncate block">${pharmacy.name}</h7>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <span class="${statusColor} text-xs">${statusText}</span>
+                                    <span class="text-yellow-400 text-xs">⭐${pharmacy.rating}</span>
+                                    <span class="text-gray-400 text-xs">${pharmacy.distance}km</span>
+                                    ${deliveryBadge ? `<span class="text-purple-400 text-xs">${deliveryBadge}</span>` : ''}
+                                    ${insuranceBadge ? `<span class="text-blue-400 text-xs">${insuranceBadge}</span>` : ''}
+                                    <span class="text-xs" title="${pharmacy.isReal ? 'Farmácia real' : 'Dados demo'}">${realBadge}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Endereço Compacto -->
+                        <div class="text-xs text-gray-300 mb-1 truncate">
+                            📍 ${pharmacy.address}
+                        </div>
+                        
+                        <!-- Telefone e Horário -->
+                        <div class="flex justify-between text-xs text-gray-400 mb-2">
+                            <span class="font-mono truncate">📞 ${pharmacy.phone}</span>
+                            <span class="text-orange-400">🕒 ${pharmacy.hours}</span>
+                        </div>
+                        
+                        <!-- Botões Compactos -->
+                        <div class="grid grid-cols-3 gap-1">
+                            <button onclick="callPharmacy('${pharmacy.phone}')" class="bg-green-600 hover:bg-green-700 py-1 px-1 rounded text-xs font-semibold transition">
+                                📞
+                            </button>
+                            <button onclick="getDirections(${pharmacy.lat}, ${pharmacy.lng})" class="bg-blue-600 hover:bg-blue-700 py-1 px-1 rounded text-xs font-semibold transition">
+                                🗺️
+                            </button>
+                            ${pharmacy.hasDelivery ? 
+                                `<button onclick="orderDelivery('${pharmacy.name}')" class="bg-purple-600 hover:bg-purple-700 py-1 px-1 rounded text-xs font-semibold transition">
+                                    🚚
+                                </button>` : 
+                                `<button onclick="visitPharmacy('${pharmacy.name}', '${pharmacy.address}')" class="bg-gray-600 hover:bg-gray-700 py-1 px-1 rounded text-xs font-semibold transition">
+                                    💬
+                                </button>`
+                            }
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+
+
+        async function searchMedicineInPharmacies(medicine) {
+            // Simular dados de medicamentos
+            const commonMedicines = {
+                'dipirona': { price: 'R$ 8,90', generic: true, prescription: false },
+                'paracetamol': { price: 'R$ 6,50', generic: true, prescription: false },
+                'ibuprofeno': { price: 'R$ 12,30', generic: true, prescription: false },
+                'amoxicilina': { price: 'R$ 18,90', generic: true, prescription: true },
+                'losartana': { price: 'R$ 15,60', generic: true, prescription: true },
+                'sinvastatina': { price: 'R$ 22,40', generic: true, prescription: true },
+                'omeprazol': { price: 'R$ 14,80', generic: true, prescription: false },
+                'metformina': { price: 'R$ 11,20', generic: true, prescription: true }
+            };
+            
+            const searchKey = medicine.toLowerCase();
+            const medicineData = commonMedicines[searchKey] || {
+                price: `R$ ${(Math.random() * 50 + 5).toFixed(2)}`,
+                generic: Math.random() > 0.3,
+                prescription: Math.random() > 0.5
+            };
+            
+            // Gerar resultados para diferentes farmácias
+            const pharmacyNames = ['Drogasil', 'Droga Raia', 'Pacheco', 'Ultrafarma', 'Drogaria São Paulo'];
+            
+            return pharmacyNames.map((pharmacy, index) => {
+                const basePrice = parseFloat(medicineData.price.replace('R$ ', ''));
+                const variation = (Math.random() - 0.5) * 0.3; // ±30% de variação
+                const finalPrice = (basePrice * (1 + variation)).toFixed(2);
+                
+                return {
+                    pharmacy: pharmacy,
+                    medicine: medicine,
+                    price: `R$ ${finalPrice}`,
+                    available: Math.random() > 0.2,
+                    generic: medicineData.generic,
+                    prescription: medicineData.prescription,
+                    discount: Math.random() > 0.6 ? Math.floor(Math.random() * 20 + 5) : null,
+                    delivery: Math.random() > 0.4,
+                    distance: (Math.random() * 3 + 0.5).toFixed(1)
+                };
+            });
+        }
+
+        function displayMedicineResults(results, medicine) {
+            const resultsContainer = document.getElementById('pharmacyResults');
+            
+            let html = `<h6 class="font-semibold mb-3 text-orange-300">💊 Resultados para "${medicine}"</h6>`;
+            
+            results.forEach(result => {
+                const availabilityColor = result.available ? 'text-green-400' : 'text-red-400';
+                const availabilityText = result.available ? 'Disponível' : 'Indisponível';
+                
+                html += `
+                    <div class="bg-gray-800 rounded-xl p-4 border border-gray-600 hover:border-orange-500 transition">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h7 class="font-semibold text-white">${result.pharmacy}</h7>
+                                <p class="text-sm text-gray-400">${result.distance} km de distância</p>
+                            </div>
+                            <span class="${availabilityColor} text-sm font-medium">${availabilityText}</span>
+                        </div>
+                        
+                        <div class="space-y-1 text-sm mb-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Preço:</span>
+                                <span class="text-green-400 font-semibold">${result.price}</span>
+                            </div>
+                            ${result.discount ? 
+                                `<div class="flex justify-between">
+                                    <span class="text-gray-300">Desconto:</span>
+                                    <span class="text-orange-400">${result.discount}% OFF</span>
+                                </div>` : ''
+                            }
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            ${result.generic ? '<span class="bg-blue-900 bg-opacity-50 text-blue-200 px-2 py-1 rounded-full text-xs">Genérico</span>' : ''}
+                            ${result.prescription ? '<span class="bg-red-900 bg-opacity-50 text-red-200 px-2 py-1 rounded-full text-xs">Receita</span>' : ''}
+                            ${result.delivery ? '<span class="bg-purple-900 bg-opacity-50 text-purple-200 px-2 py-1 rounded-full text-xs">Delivery</span>' : ''}
+                        </div>
+                        
+                        ${result.available ? `
+                            <div class="flex space-x-2">
+                                <button onclick="reserveMedicine('${result.pharmacy}', '${medicine}')" class="flex-1 bg-orange-600 hover:bg-orange-700 py-2 px-3 rounded-lg text-sm transition">
+                                    📋 Reservar
+                                </button>
+                                ${result.delivery ? 
+                                    `<button onclick="orderMedicine('${result.pharmacy}', '${medicine}')" class="flex-1 bg-green-600 hover:bg-green-700 py-2 px-3 rounded-lg text-sm transition">
+                                        🛒 Comprar
+                                    </button>` : ''
+                                }
+                            </div>
+                        ` : `
+                            <button class="w-full bg-gray-600 py-2 px-3 rounded-lg text-sm cursor-not-allowed" disabled>
+                                ❌ Indisponível
+                            </button>
+                        `}
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+            showNotification('Busca concluída!', `${results.filter(r => r.available).length} farmácias têm o medicamento`, 'success');
+        }
+
+        function callPharmacy(phone) {
+            const cleanPhone = phone.replace(/\D/g, '');
+            window.open(`tel:${cleanPhone}`, '_self');
+            showNotification('Ligando...', `Conectando com ${phone}`, 'info');
+        }
+
+        function getDirections(lat, lng) {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+            window.open(url, '_blank');
+            showNotification('Abrindo rota...', 'Redirecionando para Google Maps', 'info');
+        }
+
+        function orderDelivery(pharmacyName) {
+            const message = `Olá! Gostaria de solicitar delivery da ${pharmacyName}. Podem me ajudar?`;
+            const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showNotification('Delivery!', `Solicitando delivery da ${pharmacyName}`, 'success');
+        }
+
+        function reserveMedicine(pharmacy, medicine) {
+            const message = `Olá! Gostaria de reservar o medicamento "${medicine}" na ${pharmacy}. Está disponível?`;
+            const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showNotification('Reservando...', `Medicamento ${medicine} na ${pharmacy}`, 'success');
+        }
+
+        function orderMedicine(pharmacy, medicine) {
+            const message = `Olá! Gostaria de comprar "${medicine}" na ${pharmacy} com delivery. Qual o prazo de entrega?`;
+            const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showNotification('Comprando...', `Pedido de ${medicine} enviado`, 'success');
+        }
+
+        function visitPharmacy(pharmacyName, address) {
+            const message = `Olá! Gostaria de informações sobre a ${pharmacyName} localizada em ${address}. Vocês têm os medicamentos que preciso?`;
+            const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showNotification('Contato!', `Entrando em contato com ${pharmacyName}`, 'info');
+        }
+
+        async function searchMedicine() {
+            const searchInput = document.getElementById('medicineSearch');
+            const medicine = searchInput.value.trim();
+            
+            if (!medicine) {
+                showNotification('Atenção!', 'Digite o nome do medicamento', 'warning');
+                return;
+            }
+            
+            if (!userLocation) {
+                showNotification('Atenção!', 'Primeiro selecione sua localização', 'warning');
+                return;
+            }
+            
+            showNotification('Buscando...', `Procurando ${medicine}`, 'info');
+            
+            // Simular busca de medicamentos
+            const results = await searchMedicineInPharmacies(medicine);
+            displayMedicineResults(results, medicine);
+        }
+
+        // Event Listeners for Pharmacy Search
+        document.addEventListener('DOMContentLoaded', () => {
+            const medicineSearch = document.getElementById('medicineSearch');
+            if (medicineSearch) {
+                medicineSearch.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        searchMedicine();
+                    }
+                });
+            }
+            
+            const locationInput = document.getElementById('locationInput');
+            if (locationInput) {
+                locationInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        searchByAddress();
+                    }
+                });
+            }
+        });
+
+        // Nutrition Chat Functions
+        let nutritionChatOpen = false;
+
+        function toggleNutritionChat() {
+            const nutritionChatContainer = document.getElementById('nutritionChatContainer');
+            nutritionChatOpen = !nutritionChatOpen;
+            
+            if (nutritionChatOpen) {
+                nutritionChatContainer.classList.add('open');
+                showNotification('Nutricionista!', 'Dr. Nutricionista está online', 'success');
+            } else {
+                nutritionChatContainer.classList.remove('open');
+            }
+        }
+
+        function closeNutritionChat() {
+            const nutritionChatContainer = document.getElementById('nutritionChatContainer');
+            nutritionChatOpen = false;
+            nutritionChatContainer.classList.remove('open');
+        }
+
+        async function sendNutritionChatMessage() {
+            const input = document.getElementById('nutritionMessageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            // Adicionar mensagem do usuário
+            addNutritionChatMessage(text, true, 'Você');
+            input.value = '';
+
+            // Mostrar indicador de digitação
+            const typingId = addNutritionTypingIndicator();
+
+            try {
+                // Chamar IA Gemini para resposta da nutricionista
+                const response = await getNutritionistAIResponse(text);
+                removeNutritionTypingIndicator(typingId);
+                addNutritionChatMessage(response, false, 'Dr. Nutricionista');
+                
+            } catch (error) {
+                removeNutritionTypingIndicator(typingId);
+                console.error('Erro na IA Gemini:', error);
+                
+                // Resposta de fallback
+                const fallbackResponse = getNutritionFallbackResponse(text);
+                addNutritionChatMessage(fallbackResponse, false, 'Dr. Nutricionista');
+            }
+        }
+
+        async function getNutritionistAIResponse(message) {
+            // Verificar se deve usar fallback
+            if (USE_FALLBACK) {
+                console.log('🔧 Usando resposta simulada para nutricionista');
+                return getNutritionFallbackResponse(message);
+            }
+            
+            const prompt = `Você é o Dr. Nutricionista, especialista experiente com 15 anos de experiência em nutrição clínica.
+
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Nutricionista" e NUNCA usar outros nomes.
+
+PROTOCOLO DE ATENDIMENTO NUTRICIONAL OBRIGATÓRIO:
+1. SEMPRE inicie com: "Olá! Sou o Dr. Nutricionista"
+2. Mantenha identidade consistente como Dr. Nutricionista especialista
+3. Use linguagem nutricional técnica mas acessível e acolhedora
+4. Seja empático, motivacional e demonstre experiência clínica
+5. Forneça orientações nutricionais ESPECÍFICAS e práticas
+6. Inclua dicas de alimentação saudável e receitas quando apropriado
+7. Demonstre conhecimento em nutrição clínica, dietas, suplementação
+8. Seja encorajador, motivacional e ofereça esperança realista
+9. Ofereça planos alimentares personalizados com base científica
+10. SEMPRE inclua disclaimer: "Esta orientação não substitui consulta nutricional presencial."
+11. Limite resposta a 180 palavras máximo
+12. Use português brasileiro técnico nutricional
+13. Mantenha consistência de personalidade profissional experiente
+
+PERGUNTA DO PACIENTE: "${message}"
+
+Responda EXCLUSIVAMENTE como Dr. Nutricionista especialista:`;
+
+            const requestBody = {
+                message: message,
+                type: 'nutrition_consultation',
+                prompt: prompt,
+                specialist: 'nutrition',
+                generationConfig: {
+                    maxOutputTokens: 250,
+                    temperature: 0.4,
+                    topP: 0.8,
+                    topK: 40
+                }
+            };
+
+            try {
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.response) {
+                    return data.response;
+                } else {
+                    throw new Error('Resposta inválida da Edge Function');
+                }
+            } catch (error) {
+                console.error('❌ Erro na API Nutricionista, usando fallback:', error);
+                return getNutritionFallbackResponse(message);
+            }
+        }
+
+        function addNutritionChatMessage(text, isUser, sender) {
             const messagesArea = document.getElementById('nutritionMessagesArea');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-green-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
@@ -2469,7 +3547,7 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             });
             
             messageDiv.innerHTML = `
-                <p class="text-sm">${text}</p>
+                <p class="text-sm whitespace-pre-line">${text}</p>
                 <span class="text-xs text-gray-400">${sender} • ${time}</span>
             `;
             
@@ -2477,7 +3555,407 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
 
-        function addPsychologyMessage(text, isUser, sender) {
+        function addNutritionTypingIndicator() {
+            const messagesArea = document.getElementById('nutritionMessagesArea');
+            const typingDiv = document.createElement('div');
+            const typingId = 'nutrition_typing_' + Date.now();
+            
+            typingDiv.id = typingId;
+            typingDiv.className = 'message-bubble bg-gray-700 p-3 rounded-xl max-w-xs';
+            typingDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <span class="text-xs text-gray-400">Dr. Nutricionista digitando...</span>
+                </div>
+            `;
+            
+            messagesArea.appendChild(typingDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+            
+            return typingId;
+        }
+
+        function removeNutritionTypingIndicator(typingId) {
+            const typingElement = document.getElementById(typingId);
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+
+        async function generateNutritionPlan() {
+            const age = document.getElementById('userAge').value;
+            const weight = document.getElementById('userWeight').value;
+            const goal = document.getElementById('userGoal').value;
+
+            if (!age || !weight || !goal) {
+                showNotification('Atenção!', 'Preencha todos os campos para gerar o plano', 'warning');
+                return;
+            }
+
+            userProfile = { age: parseInt(age), weight: parseFloat(weight), goal };
+
+            const planMessage = generateNutritionPlanText(userProfile);
+            addNutritionMessage(planMessage, false, 'Dra. Ana Nutrição');
+
+            // Gerar lista de alimentos recomendados
+            const foodList = generateFoodRecommendations(userProfile);
+            addNutritionMessage(foodList, false, 'Dra. Ana Nutrição');
+
+            showNotification('Plano gerado!', 'Seu plano alimentar personalizado está pronto', 'success');
+        }
+
+        function generateNutritionPlanText(profile) {
+            const goalTexts = {
+                'perder_peso': 'perder peso de forma saudável',
+                'ganhar_peso': 'ganhar peso com qualidade',
+                'manter_peso': 'manter seu peso atual',
+                'ganhar_massa': 'ganhar massa muscular',
+                'saude_geral': 'melhorar sua saúde geral'
+            };
+
+            const calories = calculateCalories(profile);
+            
+            return `🍎 **Plano Personalizado**
+
+**Perfil:** ${profile.age} anos, ${profile.weight}kg
+**Objetivo:** ${goalTexts[profile.goal]}
+**Calorias diárias:** ~${calories} kcal
+
+**Distribuição:**
+• Café da manhã: 25% (${Math.round(calories * 0.25)} kcal)
+• Almoço: 35% (${Math.round(calories * 0.35)} kcal)
+• Jantar: 30% (${Math.round(calories * 0.30)} kcal)
+• Lanches: 10% (${Math.round(calories * 0.10)} kcal)
+
+**Hidratação:** ${Math.round(profile.weight * 35)}ml de água por dia`;
+        }
+
+        function calculateCalories(profile) {
+            // Fórmula básica TMB + ajuste por objetivo
+            let bmr = 10 * profile.weight + 6.25 * 170 - 5 * profile.age; // Assumindo altura média
+            
+            const adjustments = {
+                'perder_peso': 0.8,
+                'ganhar_peso': 1.2,
+                'manter_peso': 1.0,
+                'ganhar_massa': 1.15,
+                'saude_geral': 1.0
+            };
+
+            return Math.round(bmr * 1.5 * adjustments[profile.goal]); // Fator atividade moderada
+        }
+
+        function generateFoodRecommendations(profile) {
+            const foods = {
+                'perder_peso': {
+                    title: '🥗 Alimentos para Perda de Peso',
+                    items: [
+                        'Vegetais folhosos (espinafre, couve, alface)',
+                        'Proteínas magras (frango, peixe, ovos)',
+                        'Frutas com baixo índice glicêmico (maçã, pêra)',
+                        'Grãos integrais (quinoa, aveia)',
+                        'Leguminosas (feijão, lentilha)',
+                        'Oleaginosas com moderação (castanhas)'
+                    ]
+                },
+                'ganhar_peso': {
+                    title: '🍖 Alimentos para Ganho de Peso',
+                    items: [
+                        'Carnes vermelhas magras',
+                        'Peixes gordurosos (salmão, sardinha)',
+                        'Carboidratos complexos (batata doce, arroz)',
+                        'Frutas calóricas (banana, abacate)',
+                        'Oleaginosas (amendoim, castanhas)',
+                        'Laticínios integrais'
+                    ]
+                },
+                'ganhar_massa': {
+                    title: '💪 Alimentos para Massa Muscular',
+                    items: [
+                        'Proteínas completas (whey, carne, ovos)',
+                        'Carboidratos pós-treino (banana, batata)',
+                        'Creatina natural (carne vermelha)',
+                        'Aminoácidos (peixes, frango)',
+                        'Carboidratos complexos (aveia, quinoa)',
+                        'Gorduras boas (azeite, abacate)'
+                    ]
+                },
+                'manter_peso': {
+                    title: '⚖️ Alimentos para Manutenção',
+                    items: [
+                        'Dieta balanceada e variada',
+                        'Proteínas moderadas (peixe, frango)',
+                        'Carboidratos integrais',
+                        'Vegetais e frutas diversas',
+                        'Gorduras saudáveis',
+                        'Hidratação adequada'
+                    ]
+                },
+                'saude_geral': {
+                    title: '🌟 Alimentos para Saúde Geral',
+                    items: [
+                        'Antioxidantes (frutas vermelhas)',
+                        'Ômega-3 (peixes, linhaça)',
+                        'Fibras (vegetais, grãos integrais)',
+                        'Probióticos (iogurte, kefir)',
+                        'Vitaminas (frutas cítricas, vegetais)',
+                        'Minerais (folhosos verdes, castanhas)'
+                    ]
+                }
+            };
+
+            const recommendation = foods[profile.goal];
+            let text = `${recommendation.title}\n\n`;
+            recommendation.items.forEach((item, index) => {
+                text += `${index + 1}. ${item}\n`;
+            });
+
+            return text;
+        }
+
+        async function sendNutritionMessage() {
+            const input = document.getElementById('nutritionInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            addNutritionMessage(text, true, 'Você');
+            input.value = '';
+
+            // Simular resposta da nutricionista IA
+            setTimeout(async () => {
+                try {
+                    const response = await getNutritionistResponse(text, userProfile);
+                    addNutritionMessage(response, false, 'Dra. Ana Nutrição');
+                } catch (error) {
+                    const fallbackResponse = getNutritionFallbackResponse(text);
+                    addNutritionMessage(fallbackResponse, false, 'Dra. Ana Nutrição');
+                }
+            }, 1000);
+        }
+
+        async function getNutritionistResponse(message, profile) {
+            const profileInfo = profile ? 
+                `Perfil do paciente: ${profile.age} anos, ${profile.weight}kg, objetivo: ${profile.goal}` : 
+                'Perfil não informado ainda';
+
+            const prompt = `Você é o Dr. Nutricionista, especialista experiente e empático.
+
+CONTEXTO: ${profileInfo}
+
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Nutricionista" e NUNCA usar outros nomes.
+
+INSTRUÇÕES:
+- Responda como Dr. Nutricionista profissional
+- Use linguagem acessível e acolhedora
+- Forneça orientações nutricionais específicas
+- Inclua dicas práticas e receitas quando apropriado
+- Limite sua resposta a 150 palavras
+- Use português brasileiro
+- Sempre inclua disclaimer sobre consulta presencial quando necessário
+
+PERGUNTA DO PACIENTE: "${message}"
+
+Responda como Dr. Nutricionista:`;
+
+            const requestBody = {
+                message: message,
+                profile: profile,
+                type: 'nutrition_consultation_with_profile',
+                prompt: prompt,
+                specialist: 'nutrition',
+                generationConfig: {
+                    maxOutputTokens: 250,
+                    temperature: 0.4,
+                    topP: 0.8,
+                    topK: 40
+                }
+            };
+
+            const response = await fetch(GEMINI_API_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.response) {
+                return data.response;
+            } else {
+                throw new Error('Resposta inválida da Edge Function');
+            }
+        }
+
+        function getNutritionFallbackResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes('receita') || msg.includes('como fazer')) {
+                return '👩‍🍳 Adoraria compartilhar receitas! Para receitas personalizadas, preciso conhecer suas restrições alimentares e objetivos. Que tipo de prato você gostaria?';
+            }
+            
+            if (msg.includes('emagrecer') || msg.includes('perder peso')) {
+                return '🥗 Para emagrecer de forma saudável: priorize vegetais, proteínas magras, beba bastante água e evite açúcares. Quer um plano mais específico?';
+            }
+            
+            if (msg.includes('ganhar peso') || msg.includes('engordar')) {
+                return '🍖 Para ganho de peso saudável: aumente proteínas, inclua gorduras boas, faça refeições frequentes. Precisa de sugestões específicas?';
+            }
+            
+            if (msg.includes('suplemento') || msg.includes('vitamina')) {
+                return '💊 Suplementos devem ser prescritos individualmente. Prefira sempre alimentos naturais. Que nutriente específico te preocupa?';
+            }
+            
+            return '🥗 Entendo sua dúvida nutricional. Para orientações mais precisas, seria ideal uma consulta personalizada. Pode me dar mais detalhes sobre sua situação?';
+        }
+
+        function addNutritionMessage(text, isUser, sender) {
+            const messagesArea = document.getElementById('nutritionMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-green-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
+            
+            const time = new Date().toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <p class="text-sm whitespace-pre-line">${text}</p>
+                <span class="text-xs text-gray-400">${sender} • ${time}</span>
+            `;
+            
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // Psychology Chat Functions
+        let psychologyChatOpen = false;
+
+        function togglePsychologyChat() {
+            const psychologyChatContainer = document.getElementById('psychologyChatContainer');
+            psychologyChatOpen = !psychologyChatOpen;
+            
+            if (psychologyChatOpen) {
+                psychologyChatContainer.classList.add('open');
+                showNotification('Psicólogo!', 'Dr. Psicólogo está online', 'success');
+            } else {
+                psychologyChatContainer.classList.remove('open');
+            }
+        }
+
+        function closePsychologyChat() {
+            const psychologyChatContainer = document.getElementById('psychologyChatContainer');
+            psychologyChatOpen = false;
+            psychologyChatContainer.classList.remove('open');
+        }
+
+        async function sendPsychologyChatMessage() {
+            const input = document.getElementById('psychologyMessageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            // Adicionar mensagem do usuário
+            addPsychologyChatMessage(text, true, 'Você');
+            input.value = '';
+
+            // Mostrar indicador de digitação
+            const typingId = addPsychologyTypingIndicator();
+
+            try {
+                // Chamar IA Gemini para resposta do psicólogo
+                const response = await getPsychologistAIResponse(text);
+                removePsychologyTypingIndicator(typingId);
+                addPsychologyChatMessage(response, false, 'Dr. Psicólogo');
+                
+            } catch (error) {
+                removePsychologyTypingIndicator(typingId);
+                console.error('Erro na IA Gemini:', error);
+                
+                // Resposta de fallback
+                const fallbackResponse = getPsychologyFallbackResponse(text);
+                addPsychologyChatMessage(fallbackResponse, false, 'Dr. Psicólogo');
+            }
+        }
+
+        async function getPsychologistAIResponse(message) {
+            // Verificar se deve usar fallback
+            if (USE_FALLBACK) {
+                console.log('🔧 Usando resposta simulada para psicólogo');
+                return getPsychologyFallbackResponse(message);
+            }
+            
+            const prompt = `Você é o Dr. Psicólogo, especialista experiente com 20 anos de experiência em psicologia clínica e tratamento de dependências.
+
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Psicólogo" e NUNCA usar outros nomes.
+
+PROTOCOLO DE ATENDIMENTO PSICOLÓGICO OBRIGATÓRIO:
+1. SEMPRE inicie com: "Olá! Sou o Dr. Psicólogo"
+2. Mantenha identidade consistente como Dr. Psicólogo especialista
+3. Use linguagem psicológica técnica mas acolhedora e não julgadora
+4. Seja empático, compreensivo e demonstre experiência clínica
+5. Forneça orientações psicológicas ESPECÍFICAS para vícios e saúde mental
+6. Inclua técnicas práticas de TCC, mindfulness, enfrentamento
+7. Demonstre conhecimento em dependências, ansiedade, depressão
+8. Seja encorajador, motivacional e ofereça esperança realista
+9. Ofereça apoio emocional genuíno com base científica
+10. SEMPRE inclua disclaimer: "Esta orientação não substitui consulta psicológica presencial."
+11. Limite resposta a 180 palavras máximo
+12. Use português brasileiro técnico psicológico
+13. Mantenha consistência de personalidade profissional experiente
+
+MENSAGEM DO PACIENTE: "${message}"
+
+Responda EXCLUSIVAMENTE como Dr. Psicólogo especialista:`;
+
+            const requestBody = {
+                message: message,
+                type: 'psychology_consultation',
+                prompt: prompt,
+                specialist: 'psychology',
+                generationConfig: {
+                    maxOutputTokens: 250,
+                    temperature: 0.4,
+                    topP: 0.8,
+                    topK: 40
+                }
+            };
+
+            try {
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.response) {
+                    return data.response;
+                } else {
+                    throw new Error('Resposta inválida da Edge Function');
+                }
+            } catch (error) {
+                console.error('❌ Erro na API Psicólogo, usando fallback:', error);
+                return getPsychologyFallbackResponse(message);
+            }
+        }
+
+        function addPsychologyChatMessage(text, isUser, sender) {
             const messagesArea = document.getElementById('psychologyMessagesArea');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-purple-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
@@ -2488,7 +3966,7 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             });
             
             messageDiv.innerHTML = `
-                <p class="text-sm">${text}</p>
+                <p class="text-sm whitespace-pre-line">${text}</p>
                 <span class="text-xs text-gray-400">${sender} • ${time}</span>
             `;
             
@@ -2496,136 +3974,320 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
 
-        // FUNÇÕES DE FARMÁCIA
-        function searchPharmaciesInCaruaru(location) {
-            const pharmacyResults = document.getElementById('pharmacyResults');
-            const locationLower = location.toLowerCase();
+        function addPsychologyTypingIndicator() {
+            const messagesArea = document.getElementById('psychologyMessagesArea');
+            const typingDiv = document.createElement('div');
+            const typingId = 'psychology_typing_' + Date.now();
             
-            showNotification('Buscando farmácias...', `Procurando em ${location}`, 'info');
+            typingDiv.id = typingId;
+            typingDiv.className = 'message-bubble bg-gray-700 p-3 rounded-xl max-w-xs';
+            typingDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <span class="text-xs text-gray-400">Dr. Psicólogo digitando...</span>
+                </div>
+            `;
             
-            const pharmacies = {
-                'centro': [
-                    { name: 'Farmácia Central', address: 'Rua 15 de Novembro, 123', phone: '(87) 3721-1234', distance: '0.2 km' },
-                    { name: 'Drogaria São Paulo', address: 'Av. Agamenon Magalhães, 456', phone: '(87) 3721-5678', distance: '0.5 km' },
-                    { name: 'Farmácia Pague Menos', address: 'Rua Vigário Freire, 789', phone: '(87) 3721-9012', distance: '0.8 km' }
+            messagesArea.appendChild(typingDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+            
+            return typingId;
+        }
+
+        function removePsychologyTypingIndicator(typingId) {
+            const typingElement = document.getElementById(typingId);
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+
+        function startAddictionAssessment() {
+            const addictionType = document.getElementById('addictionType').value;
+            const addictionLevel = document.getElementById('addictionLevel').value;
+
+            if (!addictionType || !addictionLevel) {
+                showNotification('Atenção!', 'Selecione o tipo e nível de dependência', 'warning');
+                return;
+            }
+
+            addictionProfile = { type: addictionType, level: addictionLevel };
+
+            const assessmentMessage = generateAddictionAssessment(addictionProfile);
+            addAddictionMessage(assessmentMessage, false, 'Dr. Carlos Psicologia');
+
+            const treatmentPlan = generateTreatmentPlan(addictionProfile);
+            setTimeout(() => {
+                addAddictionMessage(treatmentPlan, false, 'Dr. Carlos Psicologia');
+            }, 2000);
+
+            showNotification('Avaliação iniciada!', 'Plano de tratamento personalizado gerado', 'success');
+        }
+
+        function generateAddictionAssessment(profile) {
+            const addictionInfo = {
+                'alcool': {
+                    name: 'Dependência de Álcool',
+                    risks: 'problemas hepáticos, cardiovasculares e neurológicos',
+                    symptoms: 'tremores, ansiedade, insônia, irritabilidade'
+                },
+                'cigarro': {
+                    name: 'Dependência de Nicotina',
+                    risks: 'câncer, doenças pulmonares e cardiovasculares',
+                    symptoms: 'ansiedade, irritabilidade, dificuldade de concentração'
+                },
+                'drogas': {
+                    name: 'Dependência Química',
+                    risks: 'danos cerebrais, problemas cardíacos, overdose',
+                    symptoms: 'abstinência, mudanças comportamentais, isolamento'
+                },
+                'jogos': {
+                    name: 'Vício em Jogos/Apostas',
+                    risks: 'problemas financeiros, familiares e sociais',
+                    symptoms: 'ansiedade, depressão, mentiras, isolamento'
+                },
+                'internet': {
+                    name: 'Dependência Digital',
+                    risks: 'isolamento social, problemas posturais, insônia',
+                    symptoms: 'ansiedade sem internet, negligência de responsabilidades'
+                },
+                'comida': {
+                    name: 'Compulsão Alimentar',
+                    risks: 'obesidade, diabetes, problemas cardiovasculares',
+                    symptoms: 'comer emocional, culpa, perda de controle'
+                },
+                'compras': {
+                    name: 'Compulsão por Compras',
+                    risks: 'problemas financeiros, endividamento, ansiedade',
+                    symptoms: 'compras impulsivas, arrependimento, esconder compras'
+                },
+                'outro': {
+                    name: 'Outro Tipo de Dependência',
+                    risks: 'varia conforme o tipo específico',
+                    symptoms: 'perda de controle, negligência de responsabilidades'
+                }
+            };
+
+            const levelTexts = {
+                'leve': 'uso ocasional com alguns sinais de dependência',
+                'moderado': 'uso regular com impacto na vida diária',
+                'severo': 'dependência forte com graves consequências'
+            };
+
+            const info = addictionInfo[profile.type];
+            const levelText = levelTexts[profile.level];
+
+            return `🧠 **Avaliação Psicológica**
+
+**Diagnóstico:** ${info.name}
+**Nível:** ${levelText}
+
+**Riscos Associados:**
+${info.risks}
+
+**Sintomas Comuns:**
+${info.symptoms}
+
+**Impacto na Saúde Mental:**
+- Ansiedade e depressão
+- Baixa autoestima
+- Isolamento social
+- Problemas de relacionamento
+- Perda de controle
+
+Vamos trabalhar juntos para sua recuperação! 💪`;
+        }
+
+        function generateTreatmentPlan(profile) {
+            const treatments = {
+                'alcool': [
+                    'Terapia cognitivo-comportamental',
+                    'Grupos de apoio (AA)',
+                    'Medicação quando necessário',
+                    'Desintoxicação supervisionada',
+                    'Terapia familiar'
                 ],
-                'universitário': [
-                    { name: 'Farmácia Universitária', address: 'Av. Universitária, 321', phone: '(87) 3722-1111', distance: '0.3 km' },
-                    { name: 'Drogasil', address: 'Rua dos Estudantes, 654', phone: '(87) 3722-2222', distance: '0.6 km' },
-                    { name: 'Farmácia Popular', address: 'Av. Brasil, 987', phone: '(87) 3722-3333', distance: '1.0 km' }
+                'cigarro': [
+                    'Terapia de reposição de nicotina',
+                    'Técnicas de relaxamento',
+                    'Mudança de hábitos',
+                    'Apoio psicológico',
+                    'Medicação específica'
                 ],
-                'kennedy': [
-                    { name: 'Farmácia Kennedy', address: 'Av. Kennedy, 111', phone: '(87) 3723-4444', distance: '0.4 km' },
-                    { name: 'Drogaria Pacheco', address: 'Rua JK, 222', phone: '(87) 3723-5555', distance: '0.7 km' },
-                    { name: 'Farmácia Nissei', address: 'Av. das Américas, 333', phone: '(87) 3723-6666', distance: '1.2 km' }
+                'drogas': [
+                    'Desintoxicação médica',
+                    'Terapia intensiva',
+                    'Internação quando necessário',
+                    'Grupos de apoio',
+                    'Acompanhamento psiquiátrico'
+                ],
+                'jogos': [
+                    'Terapia cognitivo-comportamental',
+                    'Controle financeiro',
+                    'Grupos de apoio',
+                    'Técnicas de autocontrole',
+                    'Terapia familiar'
+                ],
+                'internet': [
+                    'Detox digital gradual',
+                    'Estabelecimento de limites',
+                    'Atividades offline',
+                    'Terapia comportamental',
+                    'Mindfulness'
+                ],
+                'comida': [
+                    'Terapia nutricional',
+                    'Diário alimentar',
+                    'Técnicas de controle emocional',
+                    'Grupos de apoio',
+                    'Exercícios físicos'
+                ],
+                'compras': [
+                    'Controle financeiro',
+                    'Terapia cognitiva',
+                    'Técnicas de autocontrole',
+                    'Identificação de gatilhos',
+                    'Atividades alternativas'
+                ],
+                'outro': [
+                    'Avaliação específica',
+                    'Terapia personalizada',
+                    'Grupos de apoio',
+                    'Técnicas de autocontrole',
+                    'Acompanhamento contínuo'
                 ]
             };
-            
-            let results = [];
-            
-            // Buscar por bairro específico
-            for (const [bairro, farmaciasList] of Object.entries(pharmacies)) {
-                if (locationLower.includes(bairro)) {
-                    results = farmaciasList;
-                    break;
-                }
-            }
-            
-            // Se não encontrou por bairro, buscar em todas
-            if (results.length === 0) {
-                results = Object.values(pharmacies).flat().slice(0, 5);
-            }
-            
-            displayPharmacyResults(results);
-        }
 
-        function displayPharmacyResults(pharmacies) {
-            const pharmacyResults = document.getElementById('pharmacyResults');
+            const planItems = treatments[profile.type];
+            let plan = '📋 **Plano de Tratamento Personalizado**\n\n';
             
-            let html = '<div class="space-y-3">';
-            
-            pharmacies.forEach(pharmacy => {
-                html += `
-                    <div class="bg-gray-800 rounded-lg p-3 border border-gray-600">
-                        <div class="flex items-start justify-between">
-                            <div class="flex-1">
-                                <h6 class="font-semibold text-white mb-1">${pharmacy.name}</h6>
-                                <p class="text-xs text-gray-400 mb-2">${pharmacy.address}</p>
-                                <div class="flex items-center space-x-4 text-xs">
-                                    <span class="text-green-400">📞 ${pharmacy.phone}</span>
-                                    <span class="text-blue-400">📍 ${pharmacy.distance}</span>
-                                </div>
-                            </div>
-                            <button onclick="callPharmacy('${pharmacy.phone}')" class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-xs transition">
-                                Ligar
-                            </button>
-                        </div>
-                    </div>
-                `;
+            planItems.forEach((item, index) => {
+                plan += `${index + 1}. ${item}\n`;
             });
-            
-            html += '</div>';
-            pharmacyResults.innerHTML = html;
-            
-            showNotification('Farmácias encontradas!', `${pharmacies.length} farmácias na região`, 'success');
+
+            plan += '\n**Próximos Passos:**\n';
+            plan += '• Consulta presencial recomendada\n';
+            plan += '• Avaliação médica completa\n';
+            plan += '• Início do acompanhamento terapêutico\n';
+            plan += '• Envolvimento da família/apoio social\n\n';
+            plan += '💙 Lembre-se: a recuperação é possível e você não está sozinho!';
+
+            return plan;
         }
 
-        function callPharmacy(phone) {
-            window.open(`tel:${phone}`, '_self');
-            showNotification('Ligando...', `Conectando com ${phone}`, 'info');
-        }
-
-        function searchNearbyPharmacies(lat, lng) {
-            // Simular busca por GPS
-            const nearbyPharmacies = [
-                { name: 'Farmácia Mais Próxima', address: 'Localizada via GPS', phone: '(87) 3721-0000', distance: '0.1 km' },
-                { name: 'Drogaria 24h', address: 'Aberta 24 horas', phone: '(87) 3721-2424', distance: '0.3 km' },
-                { name: 'Farmácia Popular', address: 'Preços populares', phone: '(87) 3721-1000', distance: '0.5 km' }
-            ];
-            
-            displayPharmacyResults(nearbyPharmacies);
-        }
-
-        function initializePharmacyMap() {
-            const mapPlaceholder = document.getElementById('mapPlaceholder');
-            mapPlaceholder.innerHTML = `
-                <div class="w-full h-full bg-green-100 rounded-lg flex items-center justify-center cursor-pointer" onclick="showMapInteraction()">
-                    <div class="text-center text-green-800">
-                        <div class="text-2xl mb-2">🗺️</div>
-                        <p class="text-sm font-semibold">Mapa de Caruaru</p>
-                        <p class="text-xs">Clique para interagir</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function showMapInteraction() {
-            showNotification('Mapa ativo!', 'Funcionalidade de mapa em desenvolvimento', 'info');
-        }
-
-        function initializeInteractiveMap() {
-            initializePharmacyMap();
-        }
-
-        function initializeLiveChat() {
-            const messagesArea = document.getElementById('messagesArea');
-            messagesArea.innerHTML = `
-                <div class="message-bubble bg-gray-700 p-3 rounded-xl max-w-xs">
-                    <p class="text-sm">👋 Olá! Bem-vindo ao chat médico ao vivo. Como posso ajudar?</p>
-                    <span class="text-xs text-gray-400">Dr. Médico • agora</span>
-                </div>
-            `;
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
+        async function sendAddictionMessage() {
+            const input = document.getElementById('addictionInput');
             const text = input.value.trim();
             
             if (!text) return;
+
+            addAddictionMessage(text, true, 'Você');
+            input.value = '';
+
+            // Simular resposta do psicólogo IA
+            setTimeout(async () => {
+                try {
+                    const response = await getPsychologistResponse(text, addictionProfile);
+                    addAddictionMessage(response, false, 'Dr. Carlos Psicologia');
+                } catch (error) {
+                    const fallbackResponse = getPsychologyFallbackResponse(text);
+                    addAddictionMessage(fallbackResponse, false, 'Dr. Carlos Psicologia');
+                }
+            }, 1000);
+        }
+
+        async function getPsychologistResponse(message, profile) {
+            const profileInfo = profile ? 
+                `Perfil do paciente: dependência de ${profile.type}, nível ${profile.level}` : 
+                'Perfil não informado ainda';
+
+            const prompt = `Você é o Dr. Psicólogo, especialista em dependências e saúde mental.
+
+CONTEXTO: ${profileInfo}
+
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Psicólogo" e NUNCA usar outros nomes.
+
+INSTRUÇÕES:
+- Responda como Dr. Psicólogo experiente e empático
+- Use linguagem acolhedora e não julgadora
+- Forneça orientações psicológicas específicas para vícios
+- Inclua técnicas práticas de enfrentamento
+- Seja encorajador e motivacional
+- Limite sua resposta a 150 palavras
+- Use português brasileiro
+- Sempre inclua disclaimer sobre consulta presencial quando necessário
+
+MENSAGEM DO PACIENTE: "${message}"
+
+Responda como Dr. Psicólogo:`;
+
+            const requestBody = {
+                message: message,
+                profile: profile,
+                type: 'psychology_consultation_with_profile',
+                prompt: prompt,
+                specialist: 'psychology',
+                generationConfig: {
+                    maxOutputTokens: 250,
+                    temperature: 0.4,
+                    topP: 0.8,
+                    topK: 40
+                }
+            };
+
+            const response = await fetch(GEMINI_API_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+            }
+
+            const data = await response.json();
             
-            const messagesArea = document.getElementById('messagesArea');
+            if (data.response) {
+                return data.response;
+            } else {
+                throw new Error('Resposta inválida da Edge Function');
+            }
+        }
+
+        function getPsychologyFallbackResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes('ansiedade') || msg.includes('ansioso')) {
+                return '🌸 A ansiedade é comum na recuperação. Pratique respiração profunda: inspire por 4 segundos, segure por 4, expire por 6. Isso acalma o sistema nervoso. Você está no caminho certo!';
+            }
+            
+            if (msg.includes('recaída') || msg.includes('voltei a usar')) {
+                return '💙 Recaídas fazem parte do processo de recuperação. Não se culpe! O importante é recomeçar. Identifique o que levou à recaída e vamos fortalecer suas estratégias de enfrentamento.';
+            }
+            
+            if (msg.includes('família') || msg.includes('relacionamento')) {
+                return '👨‍👩‍👧‍👦 Os relacionamentos são fundamentais na recuperação. Comunicação honesta, estabelecimento de limites e terapia familiar podem ajudar muito. Quer conversar sobre isso?';
+            }
+            
+            if (msg.includes('depressão') || msg.includes('triste')) {
+                return '🌈 A depressão frequentemente acompanha vícios. É importante tratar ambos. Atividades prazerosas, exercícios e conexões sociais ajudam. Considera acompanhamento psiquiátrico também?';
+            }
+            
+            if (msg.includes('parar') || msg.includes('como fazer')) {
+                return '🎯 Parar requer estratégia: identifique gatilhos, crie novos hábitos, busque apoio social, pratique técnicas de relaxamento. Cada pequeno passo conta. Vamos planejar juntos?';
+            }
+            
+            return '🧠 Entendo que está passando por um momento difícil. A recuperação é um processo único para cada pessoa. Estou aqui para apoiá-lo. Pode me contar mais sobre como se sente?';
+        }
+
+        function addAddictionMessage(text, isUser, sender) {
+            const messagesArea = document.getElementById('addictionMessages');
             const messageDiv = document.createElement('div');
-            messageDiv.className = 'message-bubble ml-auto bg-blue-600 p-3 rounded-xl max-w-xs';
+            messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-purple-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
             
             const time = new Date().toLocaleTimeString('pt-BR', {
                 hour: '2-digit',
@@ -2633,82 +4295,84 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
             });
             
             messageDiv.innerHTML = `
-                <p class="text-sm">${text}</p>
-                <span class="text-xs text-gray-400">Você • ${time}</span>
+                <p class="text-sm whitespace-pre-line">${text}</p>
+                <span class="text-xs text-gray-400">${sender} • ${time}</span>
             `;
             
             messagesArea.appendChild(messageDiv);
             messagesArea.scrollTop = messagesArea.scrollHeight;
-            input.value = '';
-            
-            // Simular resposta médica
-            setTimeout(() => {
-                const responses = [
-                    'Entendo sua situação. Pode me dar mais detalhes sobre os sintomas?',
-                    'Baseado no que descreveu, vou encaminhar para o especialista adequado.',
-                    'É importante fazer uma avaliação presencial. Posso agendar uma consulta?',
-                    'Vou anotar essas informações no seu prontuário. Mais alguma dúvida?'
-                ];
-                
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                const responseDiv = document.createElement('div');
-                responseDiv.className = 'message-bubble bg-gray-700 p-3 rounded-xl max-w-xs';
-                responseDiv.innerHTML = `
-                    <p class="text-sm">${response}</p>
-                    <span class="text-xs text-gray-400">Dr. Médico • ${time}</span>
-                `;
-                
-                messagesArea.appendChild(responseDiv);
-                messagesArea.scrollTop = messagesArea.scrollHeight;
-            }, 2000);
         }
 
-        function sendImage() {
-            showNotification('Imagem enviada!', 'Foto enviada para análise médica', 'success');
-        }
-
-        function handleMainAction() {
-            const messageInput = document.getElementById('messageInput');
-            if (messageInput.value.trim()) {
-                sendMessage();
-            } else {
-                showNotification('Áudio ativo!', 'Funcionalidade de áudio em desenvolvimento', 'info');
-            }
-        }
-
-        // INICIALIZAÇÃO SIMPLES
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ Clínica Digital Pro carregada!');
-            
-            // Solicitar permissão para notificações
-            if ('Notification' in window && Notification.permission === 'default') {
-                Notification.requestPermission();
+        // Event Listeners for chat inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            // Nutrition Chat
+            const nutritionMessageInput = document.getElementById('nutritionMessageInput');
+            if (nutritionMessageInput) {
+                nutritionMessageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendNutritionChatMessage();
+                    }
+                });
             }
             
-            // Verificar APIs
+            // Psychology Chat
+            const psychologyMessageInput = document.getElementById('psychologyMessageInput');
+            if (psychologyMessageInput) {
+                psychologyMessageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendPsychologyChatMessage();
+                    }
+                });
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
             checkApiKeys();
+            updateMainButton();
             
-            showNotification('Bem-vindo!', 'Clínica Digital Pro está online', 'success');
-        });
-
-        // ENTER KEY HANDLERS
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                if (e.target.id === 'symptomsInput') {
-                    analyzeSymptoms();
-                } else if (e.target.id === 'messageInput') {
-                    sendMessage();
-                } else if (e.target.id === 'autoMessageInput') {
-                    sendAutoMessage();
-                } else if (e.target.id === 'roomMessageInput') {
-                    sendRoomMessage();
-                } else if (e.target.id === 'nutritionMessageInput') {
-                    sendNutritionChatMessage();
-                } else if (e.target.id === 'psychologyMessageInput') {
-                    sendPsychologyChatMessage();
+            // Request notification permission immediately
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        showNotification('Notificações ativadas!', 'Você receberá alertas de mensagens e consultas', 'success');
+                    }
+                });
+            }
+            
+            // Welcome notification
+            setTimeout(() => {
+                if (USE_FALLBACK) {
+                    showNotification('Modo Demo!', 'Clínica Digital Pro - Usando respostas simuladas para desenvolvimento', 'info');
+                } else {
+                    showNotification('Bem-vindo!', 'Clínica Digital Pro - Cuidando da sua saúde com tecnologia', 'success');
                 }
+            }, 1500);
+            
+            // Show chat buttons hint
+            setTimeout(() => {
+                showNotification('Dica!', 'Use os botões do lado direito para acessar nossos serviços', 'info');
+            }, 3000);
+            
+            // Adicionar indicador visual de modo demo
+            if (USE_FALLBACK) {
+                const demoIndicator = document.createElement('div');
+                demoIndicator.className = 'fixed top-4 left-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-50';
+                demoIndicator.innerHTML = '🔧 MODO DEMO';
+                document.body.appendChild(demoIndicator);
             }
         });
+
+         </script>
+
+ <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker registrado', reg))
+        .catch(err => console.error('❌ Erro ao registrar o SW:', err));
+    });
+     }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98197dc654c5cad8',t:'MTc1ODI4OTE4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
