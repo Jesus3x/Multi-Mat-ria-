@@ -1,12 +1,24 @@
-[[edge_functions]]
-path = "/gemini-api"
-function = "gemini-api"
+[build]
+  functions = "netlify/functions"
 
-[[edge_functions]]
-path = "/youtube-api"
-function = "youtube-api"
+[functions]
+  node_bundler = "esbuild"
 
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+[dev]
+  functions = "netlify/functions"
+  port = 8888
