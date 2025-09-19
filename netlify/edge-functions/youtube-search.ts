@@ -1,61 +1,52 @@
-export default async (request) => {
-  // CORS pré-vôo
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
-  }
+//netlify/edge-functions/youtube-search.ts
 
-  // Permite apenas POST
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-  }
 
-  const YOUTUBE_API_KEY = Deno.env.get("YOUTUBE_API_KEY");
+import type { Context } from "https://edge.netlify.com/";
 
-  if (!YOUTUBE_API_KEY) {
-    return new Response(JSON.stringify({ error: "API key for YouTube is not configured." }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
+// A função de borda que faz a chamada à API do YouTube de forma segura.
+export default async (request: Request, context: Context) => {
   try {
-    const { query } = await request.json();
+    // Pega a chave de API da variável de ambiente, garantindo que ela não seja exposta.
+    const apiKey = Deno.env.get("YOUTUBE_API_KEY");
 
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(query)}&type=video&key=${YOUTUBE_API_KEY}`;
+    // Verifica se a chave de API existe.
+    if (!apiKey) {
+      return new Response(JSON.stringify({ error: "Chave da API do YouTube não configurada." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-    const youtubeResponse = await fetch(apiUrl);
-    const youtubeData = await youtubeResponse.json();
+    // Pega o parâmetro de busca "q" da URL.
+    const url = new URL(request.url);
+    const query = url.searchParams.get("q");
 
-    return new Response(JSON.stringify(youtubeData), {
-      status: youtubeResponse.status,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+    // Verifica se o termo de busca foi fornecido.
+    if (!query) {
+      return new Response(JSON.stringify({ error: "Parâmetro de busca 'q' é obrigatório." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Monta a URL da API do YouTube.
+    const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(query)}&type=video&key=${apiKey}`;
+
+    // Faz a chamada à API.
+    const response = await fetch(youtubeApiUrl);
+    const data = await response.json();
+
+    // Retorna a resposta da API do YouTube.
+    return new Response(JSON.stringify(data), {
+      status: response.status,
+      headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
-    console.error("Erro na função de borda do YouTube:", error);
-    return new Response(JSON.stringify({ error: "Internal server error." }), {
+
+ } catch (error) {
+    console.error("Erro na Edge Function:", error);
+    return new Response(JSON.stringify({ error: "Erro interno do servidor." }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
   }
 };
-
-export const config = {
-  path: "/youtube-api",
-};
-      
