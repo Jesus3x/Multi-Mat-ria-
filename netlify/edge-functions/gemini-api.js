@@ -1,4 +1,3 @@
-
 // netlify/edge-functions/gemini-api.js
 
 export default async (request) => {
@@ -56,3 +55,4 @@ export default async (request) => {
 export const config = {
   path: "/gemini-api",
 };
+
