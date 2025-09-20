@@ -1512,9 +1512,9 @@ Sintomas relatados: ${symptoms}`
             }
         }
 
-        // YouTube API Integration
-        async function searchHealthVideos(query) {
-        async function searchHealthVideos(query) {
+        // YouTube API Integrationconst isYouTubeConfigured = () => true; // ou remova essa linha e o if abaixo
+
+async function searchHealthVideos(query) {
     if (!isYouTubeConfigured()) {
         console.log('📺 YouTube API não configurada - pulando busca de vídeos');
         return;
@@ -1523,7 +1523,6 @@ Sintomas relatados: ${symptoms}`
     try {
         console.log('🔍 Buscando vídeos relacionados...');
         
-        // Chamada à sua Edge Function no servidor, não diretamente à API do YouTube
         const response = await fetch(`/youtube-search?q=${encodeURIComponent(query)}`, {
             method: 'GET',
             headers: {
@@ -1548,35 +1547,38 @@ Sintomas relatados: ${symptoms}`
 
     } catch (error) {
         console.error('❌ Erro ao buscar vídeos:', error);
-        // Deixe o erro no console, não bloqueie o app
     }
 }
 
-
-        function displayHealthVideos(videos) {
-            const videoSection = document.getElementById('videoSection');
-            
-            let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
-            
-            videos.forEach(video => {
-                videosHtml += `
-                    <div class="bg-gray-800 rounded-lg p-4 mb-3">
-                        <div class="flex items-start space-x-3">
-                            <img src="${video.snippet.thumbnails.default.url}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
-                            <div class="flex-1">
-                                <h6 class="font-semibold text-sm mb-2">${video.snippet.title}</h6>
-                                <p class="text-xs text-gray-400 mb-2">${video.snippet.channelTitle}</p>
-                                <button onclick="playVideo('${video.id.videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
-                                    ▶️ Assistir
-                                </button>
-                            </div>
-                        </div>
+function displayHealthVideos(videos) {
+    const videoSection = document.getElementById('videoSection');
+    
+    let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
+    
+    videos.forEach(video => {
+        videosHtml += `
+            <div class="bg-gray-800 rounded-lg p-4 mb-3">
+                <div class="flex items-start space-x-3">
+                    <img src="${video.snippet.thumbnails.default.url}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
+                    <div class="flex-1">
+                        <h6 class="font-semibold text-sm mb-2">${video.snippet.title}</h6>
+                        <p class="text-xs text-gray-400 mb-2">${video.snippet.channelTitle}</p>
+                        <button onclick="playVideo('${video.id.videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
+                            ▶️ Assistir
+                        </button>
                     </div>
-                `;
-            });
-            
-            videoSection.innerHTML = videosHtml;
-        }
+                </div>
+            </div>
+        `;
+    });
+
+    videoSection.innerHTML = videosHtml;
+}
+
+function playVideo(videoId) {
+    const url = `https://www.youtube.com/watch?v=${videoId}`;
+    window.open(url, '_blank');
+}
 
         function playVideo(videoId) {
             const modal = document.createElement('div');
