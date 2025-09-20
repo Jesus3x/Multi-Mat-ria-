@@ -1,4 +1,5 @@
           // netlify/edge-functions/gemini-api.js
+// netlify/edge-functions/gemini-api.js
 
 export default async (request) => {
   if (request.method === "OPTIONS") {
