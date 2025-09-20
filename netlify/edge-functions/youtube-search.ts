@@ -1,102 +1,54 @@
-// netlify/functions/youtube-search.js
 
-exports.handler = async (event, context) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Content-Type': 'application/json'
-  };
+    //netlify/edge-functions/youtube-search.ts
 
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
-  }
 
-  if (event.httpMethod === 'GET') {
-    try {
-      const params = event.queryStringParameters || {};
+import type { Context } from "https://edge.netlify.com/";
 
-      // Requisição de teste
-      if (params.test) {
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ status: 'ok', message: 'YouTube Edge Function funcionando' })
-        };
-      }
+// A função de borda que faz a chamada à API do YouTube de forma segura.
+export default async (request: Request, context: Context) => {
+  try {
+    // Pega a chave de API da variável de ambiente, garantindo que ela não seja exposta.
+    const apiKey = Deno.env.get("YOUTUBE_API_KEY");
 
-      const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+    // Verifica se a chave de API existe.
+    if (!apiKey) {
+      return new Response(JSON.stringify({ error: "Chave da API do YouTube não configurada." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-      if (!YOUTUBE_API_KEY) {
-        return {
-          statusCode: 500,
-          headers,
-          body: JSON.stringify({ error: 'YOUTUBE_API_KEY não configurada no Netlify' })
-        };
-      }
+    // Pega o parâmetro de busca "q" da URL.
+    const url = new URL(request.url);
+    const query = url.searchParams.get("q");
 
-      const query = params.q || '';
-      const maxResults = params.maxResults || '3';
-      const regionCode = params.regionCode || 'BR';
-      const relevanceLanguage = params.relevanceLanguage || 'pt';
+    // Verifica se o termo de busca foi fornecido.
+    if (!query) {
+      return new Response(JSON.stringify({ error: "Parâmetro de busca 'q' é obrigatório." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-      if (!query) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: 'Parâmetro q (query) é obrigatório' })
-        };
-      }
+    // Monta a URL da API do YouTube.
+    const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(query)}&type=video&key=${apiKey}`;
 
-      const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${encodeURIComponent(query)}&type=video&regionCode=${regionCode}&relevanceLanguage=${relevanceLanguage}&key=${YOUTUBE_API_KEY}`;
+    // Faz a chamada à API.
+    const response = await fetch(youtubeApiUrl);
+    const data = await response.json();
 
-      const response = await fetch(youtubeUrl);
+    // Retorna a resposta da API do YouTube.
+    return new Response(JSON.stringify(data), {
+      status: response.status,
+      headers: { "Content-Type": "application/json" },
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Erro YouTube API:', errorData);
-        return {
-          statusCode: response.status,
-          headers,
-          body: JSON.stringify({
-            error: `Erro YouTube API: ${response.status}`,
-            details: errorData.error?.message || 'Erro desconhecido'
-          })
-        };
-      }
-
-      const data = await response.json();
-
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          items: data.items || [],
-          totalResults: data.pageInfo?.totalResults || 0
-        })
-      };
-
-    } catch (error) {
-      console.error('Erro na função YouTube:', error);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({
-          error: 'Erro interno da função YouTube',
-          details: error.message
-        })
-      };
-    }
-  }
-
-  return {
-    statusCode: 405,
-    headers,
-    body: JSON.stringify({ error: 'Método não permitido' })
-  };
+ } catch (error) {
+    console.error("Erro na Edge Function:", error);
+    return new Response(JSON.stringify({ error: "Erro interno do servidor." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 };
-    
+
