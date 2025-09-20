@@ -1521,37 +1521,44 @@ Sintomas relatados: ${symptoms}`
 
         // YouTube API Integration
         async function searchHealthVideos(query) {
-            if (!isYouTubeConfigured()) {
-                console.log('📺 YouTube API não configurada - pulando busca de vídeos');
-                return;
+        async function searchHealthVideos(query) {
+    if (!isYouTubeConfigured()) {
+        console.log('📺 YouTube API não configurada - pulando busca de vídeos');
+        return;
+    }
+
+    try {
+        console.log('🔍 Buscando vídeos relacionados...');
+        
+        // Chamada à sua Edge Function no servidor, não diretamente à API do YouTube
+        const response = await fetch(`/youtube-search?q=${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             }
-            
-            try {
-                console.log('🔍 Buscando vídeos relacionados...');
-                const searchQuery = `${query} saúde medicina tratamento cuidados`;
-                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(searchQuery)}&type=video&regionCode=BR&relevanceLanguage=pt&key=${YOUTUBE_API_KEY}`;
-                
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('❌ Erro YouTube API:', errorData);
-                    throw new Error(`Erro YouTube: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('📺 Vídeos encontrados:', data.items?.length || 0);
-                
-                if (data.items && data.items.length > 0) {
-                    displayHealthVideos(data.items);
-                } else {
-                    console.log('📺 Nenhum vídeo encontrado para:', query);
-                }
-            } catch (error) {
-                console.error('❌ Erro ao buscar vídeos:', error);
-                // Não mostrar erro para o usuário, apenas log
-            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('❌ Erro YouTube API:', errorData);
+            throw new Error(`Erro YouTube: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log('📺 Vídeos encontrados:', data.items?.length || 0);
+
+        if (data.items && data.items.length > 0) {
+            displayHealthVideos(data.items);
+        } else {
+            console.log('📺 Nenhum vídeo encontrado para:', query);
+        }
+
+    } catch (error) {
+        console.error('❌ Erro ao buscar vídeos:', error);
+        // Deixe o erro no console, não bloqueie o app
+    }
+}
+
 
         function displayHealthVideos(videos) {
             const videoSection = document.getElementById('videoSection');
