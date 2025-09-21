@@ -4086,8 +4086,82 @@ Responda como Dr. Carlos:`;
                 showNotification('Dica!', 'Use os botões do lado direito para acessar nossos serviços', 'info');
             }, 3000);
         });
+
+        ///////////////
+        // script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 🔧 Cria os elementos dinamicamente
+  const container = document.createElement("div");
+  container.style.padding = "1rem";
+  container.innerHTML = `
+    <section>
+      <h2>🔍 Buscar no YouTube</h2>
+      <input type="text" id="youtubeTermo" placeholder="Digite um termo..." />
+      <button id="buscarYoutube">Buscar</button>
+      <pre id="youtubeResultado"></pre>
+    </section>
+    <hr />
+    <section>
+      <h2>💡 Prompt Generativo (Gemini)</h2>
+      <input type="text" id="geminiPrompt" placeholder="Digite um prompt..." />
+      <button id="enviarGemini">Enviar</button>
+      <pre id="geminiResultado"></pre>
+    </section>
+  `;
+
+  document.body.appendChild(container);
+
+  // 🔁 Função de busca no YouTube
+  const youtubeBtn = document.getElementById("buscarYoutube");
+  const youtubeTermo = document.getElementById("youtubeTermo");
+  const youtubeResultado = document.getElementById("youtubeResultado");
+
+  youtubeBtn.addEventListener("click", async () => {
+    const termo = youtubeTermo.value.trim();
+    if (!termo) return alert("Digite um termo para buscar no YouTube.");
+
+    try {
+      const res = await fetch(`/youtube-api?q=${encodeURIComponent(termo)}`);
+      const data = await res.json();
+      youtubeResultado.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      youtubeResultado.textContent = "Erro na busca do YouTube.";
+      console.error(err);
+    }
+  });
+
+  // 🔁 Função generativa (Gemini)
+  const geminiBtn = document.getElementById("enviarGemini");
+  const geminiPrompt = document.getElementById("geminiPrompt");
+  const geminiResultado = document.getElementById("geminiResultado");
+
+  geminiBtn.addEventListener("click", async () => {
+    const prompt = geminiPrompt.value.trim();
+    if (!prompt) return alert("Digite um prompt para o Gemini.");
+
+    try {
+      const res = await fetch("/gemini-api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      geminiResultado.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      geminiResultado.textContent = "Erro na geração com o Gemini.";
+      console.error(err);
+    }
+  });
+});
+
     </script>
     <script>
+
+        
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('service-worker.js')
