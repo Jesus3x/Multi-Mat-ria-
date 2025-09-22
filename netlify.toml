@@ -23,25 +23,3 @@
   functions = "netlify/functions"
   port = 8888
 
-# Configuração de funções Edge
-[[edge_functions]]
-path = "/gemini-api"
-function = "gemini-api"
-
-[[edge_functions]]
-path = "/youtube-api"
-function = "youtube-api"
-
-# Redirecionamento geral da PWA
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
-
-# Exceção para o arquivo de teste
-[[redirects]]
-from = "/test-no-fallback.html"
-to = "/test-no-fallback.html"
-status = 200
-force = true
-
