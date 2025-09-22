@@ -1,3 +1,5 @@
+
+
 [build]
   functions = "netlify/functions"
 
@@ -11,8 +13,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[headers]]
+    [[headers]]
   for = "/.netlify/functions/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
@@ -22,4 +23,3 @@
 [dev]
   functions = "netlify/functions"
   port = 8888
-
