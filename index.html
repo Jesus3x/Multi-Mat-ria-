@@ -1343,68 +1343,48 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
                 }
             };
             
-            const response = await fetch("/gemini-api", {
-   
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('❌ Erro da API Gemini:', errorData);
-                throw new Error(`Erro da API: ${response.status} - ${errorData.error?.message || 'Erro desconhecido'}`);
-            }
-            
-            const data = await response.json();
-            
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                const aiResponse = data.candidates[0].content.parts[0].text;
-                console.log(`✅ Resposta do ${specialist.persona} recebida para sala ${roomType}`);
-                
-                // Validar se a resposta contém a identificação do especialista
-                if (!aiResponse.includes(specialist.greeting.split(',')[0])) {
-                    console.warn(`⚠️ Resposta pode não estar correta para ${specialist.persona}`);
-                }
-                
-                return aiResponse;
-            } else {
-                console.error('❌ Estrutura de resposta inválida:', data);
-                throw new Error('Resposta da API em formato inválido');
-            }
+            try {
+    const response = await fetch("/gemini-api", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+    });
+
+    // Ler o JSON apenas uma vez
+    let data;
+    try {
+        data = await response.json();
+    } catch (e) {
+        console.error("❌ Erro ao interpretar JSON da resposta da API:", e);
+        throw new Error(`Erro da API: ${response.status} - resposta inválida`);
+    }
+
+    // Verifica se a resposta está ok
+    if (!response.ok) {
+        console.error('❌ Erro da API Gemini:', data);
+        throw new Error(`Erro da API: ${response.status} - ${data.error?.message || 'Erro desconhecido'}`);
+    }
+
+    // Processa a resposta válida
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        console.log(`✅ Resposta do ${specialist.persona} recebida para sala ${roomType}`);
+
+        // Valida se a resposta contém a identificação do especialista
+        if (!aiResponse.includes(specialist.greeting.split(',')[0])) {
+            console.warn(`⚠️ Resposta pode não estar correta para ${specialist.persona}`);
         }
-        
-        // Typing Indicator Functions
-        function addTypingIndicator() {
-            const messagesArea = document.getElementById('roomMessages');
-            const typingDiv = document.createElement('div');
-            const typingId = 'typing_' + Date.now();
-            
-            typingDiv.id = typingId;
-            typingDiv.className = 'message-bubble bg-gray-700 p-3 rounded-xl max-w-xs';
-            typingDiv.innerHTML = `
-                <div class="flex items-center space-x-2">
-                    <div class="flex space-x-1">
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                    </div>
-                    <span class="text-xs text-gray-400">Médico digitando...</span>
-                </div>
-            `;
-            
-            messagesArea.appendChild(typingDiv);
-            messagesArea.scrollTop = messagesArea.scrollHeight;
-            
-            return typingId;
-        }
-        
-        function removeTypingIndicator(typingId) {
-            const typingElement = document.getElementById(typingId);
-            if (typingElement) {
-                typingElement.remove();
-            }
-        }
+
+        return aiResponse;
+    } else {
+        console.error('❌ Estrutura de resposta inválida:', data);
+        throw new Error('Resposta da API em formato inválido');
+    }
+
+} catch (error) {
+    console.error("❌ Erro no fetch da Gemini:", error);
+    throw error;
+}
 
         // Gemini AI Integration
         async function analyzeSymptoms() {
@@ -1455,66 +1435,63 @@ Sintomas relatados: ${symptoms}`
                 };
                 
                 console.log('📤 Enviando requisição para análise...');
-                
-                const response = await fetch("/gemini-api", {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(requestBody)
-});
 
+try {
+    const response = await fetch("/gemini-api", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+    });
 
-                
-                console.log('📥 Resposta recebida:', response.status);
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('❌ Erro da API:', errorData);
-                    throw new Error(`Erro da API: ${response.status} - ${errorData.error?.message || 'Erro desconhecido'}`);
-                }
-                
-                const data = await response.json();
-                console.log('✅ Dados recebidos:', data);
-                
-                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                    const diagnosis = data.candidates[0].content.parts[0].text;
-                    diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
-                    diagnosisResult.classList.remove('hidden');
-                    
-                    // Search for related videos
-                    searchHealthVideos(symptoms);
-                    
-                    showNotification('Análise concluída!', 'Relatório médico gerado com sucesso', 'success');
-                    console.log('✅ Análise concluída com sucesso');
-                } else {
-                    console.error('❌ Estrutura de resposta inválida:', data);
-                    throw new Error('Resposta da API em formato inválido');
-                }
-                
-            } catch (error) {
-                console.error('❌ Erro completo:', error);
-                let errorMessage = 'Erro ao analisar sintomas: ';
-                
-                if (error.message.includes('API key')) {
-                    errorMessage += 'Chave da API inválida';
-                } else if (error.message.includes('quota')) {
-                    errorMessage += 'Limite de uso da API excedido';
-                } else if (error.message.includes('network')) {
-                    errorMessage += 'Erro de conexão';
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                showNotification('Erro na análise!', errorMessage, 'error');
-            } finally {
-                analyzeBtn.disabled = false;
-                analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
-            }
-        }
+    // Lê o JSON **uma única vez**
+    const data = await response.json();
+    console.log('📥 Resposta recebida:', response.status, data);
+
+    if (!response.ok) {
+        console.error('❌ Erro da API:', data);
+        throw new Error(`Erro da API: ${response.status} - ${data.error?.message || 'Erro desconhecido'}`);
+    }
+
+    if (data?.candidates?.[0]?.content) {
+        const diagnosis = data.candidates[0].content.parts[0].text;
+        diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
+        diagnosisResult.classList.remove('hidden');
+
+        // Search for related videos
+        searchHealthVideos(symptoms);
+
+        showNotification('Análise concluída!', 'Relatório médico gerado com sucesso', 'success');
+        console.log('✅ Análise concluída com sucesso');
+    } else {
+        console.error('❌ Estrutura de resposta inválida:', data);
+        throw new Error('Resposta da API em formato inválido');
+    }
+
+} catch (error) {
+    console.error('❌ Erro completo:', error);
+    let errorMessage = 'Erro ao analisar sintomas: ';
+
+    if (error.message.includes('API key')) {
+        errorMessage += 'Chave da API inválida';
+    } else if (error.message.includes('quota')) {
+        errorMessage += 'Limite de uso da API excedido';
+    } else if (error.message.includes('network')) {
+        errorMessage += 'Erro de conexão';
+    } else {
+        errorMessage += error.message;
+    }
+
+    showNotification('Erro na análise!', errorMessage, 'error');
+
+} finally {
+    analyzeBtn.disabled = false;
+    analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
+}
+
 
         // YouTube API Integrationconst isYouTubeConfigured = () => true; // ou remova essa linha e o if abaixo
 
+// Busca vídeos relacionados à saúde
 async function searchHealthVideos(query) {
     if (!isYouTubeConfigured()) {
         console.log('📺 YouTube API não configurada - pulando busca de vídeos');
@@ -1523,25 +1500,27 @@ async function searchHealthVideos(query) {
 
     try {
         console.log('🔍 Buscando vídeos relacionados...');
-        
+
         const response = await fetch("/youtube-api", {
-    method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
         });
 
+        // Lê o JSON apenas uma vez
+        const data = await response.json();
+        console.log('📥 Resposta YouTube:', response.status, data);
+
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error('❌ Erro YouTube API:', errorData);
+            console.error('❌ Erro YouTube API:', data);
             throw new Error(`Erro YouTube: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log('📺 Vídeos encontrados:', data.items?.length || 0);
+        const items = data.items || [];
+        console.log('📺 Vídeos encontrados:', items.length);
 
-        if (data.items && data.items.length > 0) {
-            displayHealthVideos(data.items);
+        if (items.length > 0) {
+            displayHealthVideos(items);
         } else {
             console.log('📺 Nenhum vídeo encontrado para:', query);
         }
@@ -1551,20 +1530,29 @@ async function searchHealthVideos(query) {
     }
 }
 
+// Exibe vídeos na seção dedicada
 function displayHealthVideos(videos) {
     const videoSection = document.getElementById('videoSection');
-    
+    if (!videoSection) return;
+
     let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
-    
+
     videos.forEach(video => {
+        const thumb = video.snippet?.thumbnails?.default?.url || '';
+        const title = video.snippet?.title || 'Sem título';
+        const channel = video.snippet?.channelTitle || 'Canal desconhecido';
+        const videoId = video.id?.videoId;
+
+        if (!videoId) return; // ignora vídeos sem id válido
+
         videosHtml += `
             <div class="bg-gray-800 rounded-lg p-4 mb-3">
                 <div class="flex items-start space-x-3">
-                    <img src="${video.snippet.thumbnails.default.url}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
+                    <img src="${thumb}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
                     <div class="flex-1">
-                        <h6 class="font-semibold text-sm mb-2">${video.snippet.title}</h6>
-                        <p class="text-xs text-gray-400 mb-2">${video.snippet.channelTitle}</p>
-                        <button onclick="playVideo('${video.id.videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
+                        <h6 class="font-semibold text-sm mb-2">${title}</h6>
+                        <p class="text-xs text-gray-400 mb-2">${channel}</p>
+                        <button onclick="playVideoModal('${videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
                             ▶️ Assistir
                         </button>
                     </div>
@@ -1576,34 +1564,30 @@ function displayHealthVideos(videos) {
     videoSection.innerHTML = videosHtml;
 }
 
-function playVideo(videoId) {
-    const url = `https://www.youtube.com/watch?v=${videoId}`;
-    window.open(url, '_blank');
+// Função para exibir modal com vídeo
+function playVideoModal(videoId) {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+    modal.innerHTML = `
+        <div class="bg-gray-900 rounded-xl p-6 max-w-4xl w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">📺 Vídeo Educativo</h3>
+                <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white text-2xl">✕</button>
+            </div>
+            <div class="aspect-video">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${videoId}" 
+                    frameborder="0" 
+                    allowfullscreen
+                    class="rounded-lg"
+                ></iframe>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
 }
-
-        function playVideo(videoId) {
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-            modal.innerHTML = `
-                <div class="bg-gray-900 rounded-xl p-6 max-w-4xl w-full mx-4">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold">📺 Vídeo Educativo</h3>
-                        <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white text-2xl">✕</button>
-                    </div>
-                    <div class="aspect-video">
-                        <iframe 
-                            width="100%" 
-                            height="100%" 
-                            src="https://www.youtube.com/embed/${videoId}" 
-                            frameborder="0" 
-                            allowfullscreen
-                            class="rounded-lg"
-                        ></iframe>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
 
         // Consultation Rooms
         function toggleConsultation() {
@@ -1665,169 +1649,176 @@ function playVideo(videoId) {
             }
             
             console.log(`✅ Configurando sala: ${room.title} - ${room.aiPersona}`);
-            
-            document.getElementById('roomIcon').textContent = room.icon;
-            document.getElementById('roomTitle').textContent = room.title;
-            document.getElementById('roomDoctor').textContent = room.doctor;
-            
-            document.getElementById('roomSelection').classList.add('hidden');
-            document.getElementById('roomChat').classList.remove('hidden');
-            
-            // Limpar mensagens anteriores
-            const messagesArea = document.getElementById('roomMessages');
-            messagesArea.innerHTML = '';
-            
-            // Add welcome message
-            addRoomMessage(room.welcome, false, room.aiPersona);
-            
-            showNotification('Consulta iniciada!', `Você entrou na ${room.title}`, 'success');
-            console.log(`🏥 Sala ${roomType} configurada com sucesso - Especialista: ${room.aiPersona}`);
-        }
+// Variável global para controlar a sala atual
+let currentRoom = null;
 
-        function leaveRoom() {
-            if (currentRoom) {
-                showNotification('Consulta finalizada!', 'Você saiu da sala de consulta', 'info');
+// Dados dos especialistas
+const roomData = {
+    'geral': { name: 'Dr. Clínico Geral', persona: 'Clínico Geral' },
+    'cardio': { name: 'Dr. Cardiologista', persona: 'Cardiologista' },
+    'derma': { name: 'Dr. Dermatologista', persona: 'Dermatologista' }
+};
+
+// Respostas fallback
+const fallbackResponses = {
+    'geral': [
+        'Olá! Sou o Dr. Clínico Geral. Pode me dar mais detalhes sobre os sintomas?',
+        'Como Dr. Clínico Geral, seria importante fazer uma avaliação mais detalhada. Há quanto tempo sente isso?',
+        'Vou anotar essas informações importantes. Tem histórico familiar de doenças?',
+        'Posso ajudar com diversos problemas de saúde. Me conte sobre seu histórico médico e sintomas atuais.'
+    ],
+    'cardio': [
+        'Olá! Sou o Dr. Cardiologista. Questões do coração requerem atenção especial. Me conte sobre dor no peito ou palpitações.',
+        'Vamos investigar sua saúde cardiovascular. Tem histórico familiar de problemas cardíacos?',
+        'É importante monitorar esses sintomas. Qual sua pressão arterial habitual?',
+        'Pressão arterial, colesterol e ritmo cardíaco são fundamentais. Quando foi seu último eletrocardiograma?'
+    ],
+    'derma': [
+        'Olá! Sou o Dr. Dermatologista. Problemas de pele podem ter várias causas. Pode descrever a lesão?',
+        'Quando começou a notar essas alterações na pele?',
+        'Para cuidados com a pele, preciso entender melhor. Há coceira, dor ou descamação?',
+        'Pele, cabelo e unhas são minha especialidade. Conte sobre exposição solar e histórico dermatológico.'
+    ]
+};
+
+// Entrar em uma sala
+function enterRoom(roomType) {
+    if (!roomData[roomType]) {
+        console.error('❌ Sala desconhecida:', roomType);
+        showNotification('Erro!', 'Sala desconhecida', 'error');
+        return;
+    }
+
+    currentRoom = roomType;
+
+    const room = roomData[roomType];
+
+    document.getElementById('roomIcon').textContent = room.icon || '🏥';
+    document.getElementById('roomTitle').textContent = room.name;
+    document.getElementById('roomDoctor').textContent = room.name;
+
+    document.getElementById('roomSelection').classList.add('hidden');
+    document.getElementById('roomChat').classList.remove('hidden');
+
+    const messagesArea = document.getElementById('roomMessages');
+    messagesArea.innerHTML = '';
+
+    addRoomMessage(`Bem-vindo à consulta do ${room.name}`, false, room.persona);
+
+    showNotification('Consulta iniciada!', `Você entrou na ${room.name}`, 'success');
+    console.log(`🏥 Sala ${roomType} configurada com sucesso`);
+}
+
+// Sair da sala
+function leaveRoom() {
+    if (currentRoom) {
+        showNotification('Consulta finalizada!', 'Você saiu da sala de consulta', 'info');
+        currentRoom = null;
+    }
+    showRoomSelection();
+}
+
+// Enviar mensagem para a sala
+async function sendRoomMessage() {
+    const input = document.getElementById('roomMessageInput');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    if (!currentRoom) {
+        showNotification('Erro!', 'Nenhuma sala selecionada', 'error');
+        return;
+    }
+
+    addRoomMessage(text, true, 'Você');
+    input.value = '';
+
+    // Show typing indicator
+    const typingId = addTypingIndicator();
+
+    const roomData = {
+        'geral': 'Dr. Clínico Geral',
+        'cardio': 'Dr. Cardiologista', 
+        'derma': 'Dr. Dermatologista'
+    };
+
+    console.log(`🏥 Enviando pergunta para sala: ${currentRoom} (${roomData[currentRoom]})`);
+
+    try {
+        // Chamada exclusiva à API, sem fallback
+        const response = await getAISpecialistResponse(text, currentRoom);
+
+        removeTypingIndicator(typingId);
+
+        console.log(`✅ Resposta recebida do ${roomData[currentRoom]}:`, response);
+        addRoomMessage(response, false, roomData[currentRoom]);
+
+    } catch (error) {
+        removeTypingIndicator(typingId);
+        console.error(`❌ Erro ao obter resposta para sala ${currentRoom}:`, error);
+
+        showNotification('Erro na consulta!', `Não foi possível obter resposta do especialista: ${error.message}`, 'error');
+    }
+}
+
+
+// Inicializa Firebase
+function initializeFirebase() {
+    if (firebaseConfig.apiKey === "SUA_API_KEY_AQUI") {
+        console.log('Firebase não configurado - usando modo demo');
+        return false;
+    }
+
+    try {
+        firebase.initializeApp(firebaseConfig);
+        database = firebase.database();
+        messagesRef = database.ref('messages');
+
+        messagesRef.on('child_added', (snapshot) => {
+            const message = snapshot.val();
+            if (message.userId !== userId) {
+                displayMessage(message, false);
+                playReceiveSound();
+
+                // Pré-visualização da mensagem
+                let messagePreview = 'Nova mensagem';
+                if (message.text) {
+                    messagePreview = message.text.length > 50 ? message.text.substring(0, 50) + '...' : message.text;
+                } else if (message.type === 'image') {
+                    messagePreview = '📷 Imagem recebida';
+                } else if (message.type === 'audio') {
+                    messagePreview = '🎤 Áudio recebido';
+                }
+
+                showNotification('Nova mensagem!', `${message.userName}: ${messagePreview}`, 'message');
             }
-            showRoomSelection();
-        }
+        });
 
-        async function sendRoomMessage() {
-            const input = document.getElementById('roomMessageInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            
-            if (!currentRoom) {
-                showNotification('Erro!', 'Nenhuma sala selecionada', 'error');
-                return;
-            }
-            
-            addRoomMessage(text, true, 'Você');
-            input.value = '';
-            
-            // Show typing indicator
-            const typingId = addTypingIndicator();
-            
-            // Dados dos especialistas por sala
-            const roomData = {
-                'geral': 'Dr. Clínico Geral',
-                'cardio': 'Dr. Cardiologista', 
-                'derma': 'Dr. Dermatologista'
-            };
-            
-            console.log(`🏥 Enviando pergunta para sala: ${currentRoom} (${roomData[currentRoom]})`);
-            
-            try {
-                const response = await getAISpecialistResponse(text, currentRoom);
-                removeTypingIndicator(typingId);
-                
-                console.log(`✅ Resposta recebida do ${roomData[currentRoom]}`);
-                addRoomMessage(response, false, roomData[currentRoom]);
-                
-            } catch (error) {
-                removeTypingIndicator(typingId);
-                console.error(`❌ Erro ao obter resposta para sala ${currentRoom}:`, error);
-                
-                // Fallback responses específicos por especialidade
-                const fallbackResponses = {
-                    'geral': [
-                        'Olá! Sou o Dr. Clínico Geral. Entendo sua preocupação. Pode me dar mais detalhes sobre os sintomas, quando começaram e sua intensidade?',
-                        'Como Dr. Clínico Geral com 15 anos de experiência, baseado no que descreveu, seria importante fazer uma avaliação mais detalhada. Há quanto tempo sente isso?',
-                        'Sou o Dr. Clínico Geral. Vou anotar essas informações importantes. Tem histórico familiar de doenças? Toma algum medicamento?',
-                        'Como Dr. Clínico Geral, posso ajudar com diversos problemas de saúde. Me conte mais sobre seu histórico médico e sintomas atuais.'
-                    ],
-                    'cardio': [
-                        'Olá! Sou o Dr. Cardiologista. Questões do coração requerem atenção especial. Me conte mais sobre dor no peito, palpitações ou falta de ar.',
-                        'Como Dr. Cardiologista com 12 anos de experiência, vamos investigar sua saúde cardiovascular. Tem histórico familiar de problemas cardíacos?',
-                        'Sou o Dr. Cardiologista. É importante monitorar esses sintomas cardíacos. Qual sua pressão arterial habitual? Faz exercícios regularmente?',
-                        'Como Dr. Cardiologista, pressão arterial, colesterol e ritmo cardíaco são fundamentais. Quando foi seu último eletrocardiograma?'
-                    ],
-                    'derma': [
-                        'Olá! Sou o Dr. Dermatologista. Problemas de pele podem ter várias causas. Pode descrever melhor a lesão: cor, tamanho, localização?',
-                        'Como Dr. Dermatologista com 10 anos de experiência, vou examinar essa questão. Quando começou a notar essas alterações na pele?',
-                        'Sou o Dr. Dermatologista. Para cuidados com a pele, preciso entender melhor. Há coceira, dor, descamação ou mudança de cor?',
-                        'Como Dr. Dermatologista, pele, cabelo e unhas são minha especialidade. Me conte sobre exposição solar e histórico dermatológico.'
-                    ]
-                };
-                
-                const responses = fallbackResponses[currentRoom] || fallbackResponses['geral'];
-                const fallbackResponse = responses[Math.floor(Math.random() * responses.length)];
-                
-                console.log(`🔄 Usando resposta fallback para ${currentRoom}: ${roomData[currentRoom]}`);
-                addRoomMessage(fallbackResponse, false, roomData[currentRoom]);
-            }
-        }
+        firebaseConnected = true;
+        return true;
+    } catch (error) {
+        console.error('Erro ao conectar com Firebase:', error);
+        return false;
+    }
+}
 
-        function addRoomMessage(text, isUser, sender) {
-            const messagesArea = document.getElementById('roomMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-purple-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
-            
-            const time = new Date().toLocaleTimeString('pt-BR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            messageDiv.innerHTML = `
-                <p class="text-sm">${text}</p>
-                <span class="text-xs text-gray-400">${sender} • ${time}</span>
-            `;
-            
-            messagesArea.appendChild(messageDiv);
-            messagesArea.scrollTop = messagesArea.scrollHeight;
-        }
+// Inicializa WebSocket / Firebase
+function initWebSocket() {
+    initializeFirebase();
+}
 
-        // Firebase and Chat Functions (keeping original functionality)
-        function initializeFirebase() {
-            if (firebaseConfig.apiKey === "SUA_API_KEY_AQUI") {
-                console.log('Firebase não configurado - usando modo demo');
-                return false;
-            }
+// Toggle auto chat
+function toggleAutoChat() {
+    const autoChatContainer = document.getElementById('autoChatContainer');
+    autoChatOpen = !autoChatOpen;
 
-            try {
-                firebase.initializeApp(firebaseConfig);
-                database = firebase.database();
-                messagesRef = database.ref('messages');
-                
-                messagesRef.on('child_added', (snapshot) => {
-                    const message = snapshot.val();
-                    if (message.userId !== userId) {
-                        displayMessage(message, false);
-                        playReceiveSound();
-                        
-                        // Show notification for new message
-                        const messagePreview = message.text ? 
-                            (message.text.length > 50 ? message.text.substring(0, 50) + '...' : message.text) :
-                            message.type === 'image' ? '📷 Imagem recebida' : 
-                            message.type === 'audio' ? '🎤 Áudio recebido' : 'Nova mensagem';
-                            
-                        showNotification('Nova mensagem!', `${message.userName}: ${messagePreview}`, 'message');
-                    }
-                });
+    if (autoChatOpen) {
+        autoChatContainer.classList.add('open');
+    } else {
+        autoChatContainer.classList.remove('open');
+    }
+}
 
-                firebaseConnected = true;
-                return true;
-            } catch (error) {
-                console.error('Erro ao conectar com Firebase:', error);
-                return false;
-            }
-        }
-
-        function initWebSocket() {
-            const connected = initializeFirebase();
-        }
-
-        // Auto Chat Functions
-        function toggleAutoChat() {
-            const autoChatContainer = document.getElementById('autoChatContainer');
-            autoChatOpen = !autoChatOpen;
-            
-            if (autoChatOpen) {
-                autoChatContainer.classList.add('open');
-            } else {
-                autoChatContainer.classList.remove('open');
-            }
-        }
 
         function sendAutoMessage() {
             const input = document.getElementById('autoMessageInput');
