@@ -1,56 +1,4 @@
-//netlify/functions/gemini-api.js
-exports.handler = async (event, context) => {
-  // Configurar CORS
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Content-Type': 'application/json'
-  };
-    // Responder a requisições OPTIONS (preflight)
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
-  }
-  // Verificar se é uma requisição de teste
-  if (event.httpMethod === 'POST') {
-    try {
-      const body = JSON.parse(event.body);
-      
-      // Requisição de teste
-      if (body.test) {
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ status: 'ok', message: 'Gemini Edge Function funcionando' })
-        };
-      }
-      // Obter API Key das variáveis de ambiente
-      const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-      
-      if (!GEMINI_API_KEY) {
-        return {
-          statusCode: 500,
-          headers,
-          body: JSON.stringify({ error: 'GEMINI_API_KEY não configurada no Netlify' })
-        };
-      }
-            // Construir prompt baseado no tipo de consulta
-      let prompt = body.prompt;
-      
-      if (body.type === 'symptom_analysis') {
-        prompt = body.prompt;
-      } else if (body.roomType) {
-        prompt = body.prompt;
-      } else if (body.type === 'nutrition_consultation' || body.type === 'nutrition_consultation_with_profile') {
-        prompt = body.prompt;
-      } else if (body.type === 'psychology_consultation' || body.type === 'psychology_consultation_with_profile') {
-        prompt = body.prompt;
-      }
-            // netlify/functions/gemini-api.js
+// netlify/functions/gemini-api.js
 exports.handler = async (event, context) => {
   // Configurar CORS
   const headers = {
@@ -160,3 +108,4 @@ exports.handler = async (event, context) => {
     body: JSON.stringify({ error: "Método não permitido" })
   };
 };
+                    
