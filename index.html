@@ -1318,49 +1318,44 @@
             };
         }
 
-        // Sistema de fallback para desenvolvimento local
-        const USE_FALLBACK = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname.includes('netlify');
-        
-        // Verificação de API Keys
-        function checkApiKeys() {
-            if (USE_FALLBACK) {
-                console.log('🔧 Modo desenvolvimento - usando respostas simuladas');
-                showNotification('Modo Demo!', 'Usando respostas simuladas para desenvolvimento', 'info');
-                return;
-            }
-            
-            console.log('🔍 Verificando conexão com Edge Functions...');
-            
-            // Testar conexão com Gemini API
-            fetch(GEMINI_API_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ test: true })
-            }).then(response => {
-                if (response.ok) {
-                    console.log('✅ Gemini API Edge Function disponível');
-                    showNotification('APIs Online!', 'Gemini API conectada com sucesso', 'success');
-                } else {
-                    console.warn('⚠️ Gemini API Edge Function indisponível');
-                    showNotification('API Offline!', 'Usando modo fallback', 'warning');
-                }
-            }).catch(error => {
-                console.warn('⚠️ Erro ao conectar com Gemini Edge Function:', error);
-                showNotification('Erro de Conexão!', 'Usando respostas simuladas', 'warning');
-            });
-            
-            // Testar conexão com YouTube API
-            fetch(YOUTUBE_API_ENDPOINT + '?test=true')
-            .then(response => {
-                if (response.ok) {
-                    console.log('✅ YouTube API Edge Function disponível');
-                } else {
-                    console.warn('⚠️ YouTube API Edge Function indisponível');
-                }
-            }).catch(error => {
-                console.warn('⚠️ Erro ao conectar com YouTube Edge Function:', error);
-            });
+        // Verificação de Edge Functions
+function checkApiKeys() {
+    console.log('🔍 Verificando conexão com Edge Functions...');
+
+    // Testar conexão com Gemini API
+    fetch('/.netlify/functions/gemini-api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}) // aqui você envia o prompt ou dados reais
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('✅ Gemini API Edge Function disponível');
+            showNotification('APIs Online!', 'Gemini API conectada com sucesso', 'success');
+        } else {
+            console.warn('⚠️ Gemini API Edge Function indisponível');
+            showNotification('API Offline!', 'Erro na Gemini API', 'warning');
         }
+    })
+    .catch(error => {
+        console.warn('⚠️ Erro ao conectar com Gemini Edge Function:', error);
+        showNotification('Erro de Conexão!', 'Falha ao acessar Gemini API', 'warning');
+    });
+
+    // Testar conexão com YouTube API
+    fetch('/.netlify/functions/youtube-search?q=test') // envia query real
+    .then(response => {
+        if (response.ok) {
+            console.log('✅ YouTube API Edge Function disponível');
+        } else {
+            console.warn('⚠️ YouTube API Edge Function indisponível');
+        }
+    })
+    .catch(error => {
+        console.warn('⚠️ Erro ao conectar com YouTube Edge Function:', error);
+    });
+}
+
 
         // AI Specialist Response System
         async function getAISpecialistResponse(patientMessage, roomType) {
