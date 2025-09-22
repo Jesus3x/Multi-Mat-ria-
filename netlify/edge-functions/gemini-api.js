@@ -1,49 +1,46 @@
 // netlify/functions/gemini-api.js
-exports.handler = async (event, context) => {
+        // netlify/edge-functions/gemini-api.js
+export default async function handler(request) {
   // Configurar CORS
   const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Content-Type": "application/json"
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
   };
 
-  // Preflight (OPTIONS)
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
+  // Responder requisições OPTIONS (preflight)
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers });
   }
 
-  if (event.httpMethod === "POST") {
+  if (request.method === 'POST') {
     try {
-      const body = JSON.parse(event.body);
+      const body = await request.json();
 
-      // Teste rápido
+      // Requisição de teste
       if (body.test) {
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ status: "ok", message: "Gemini Function funcionando" })
-        };
+        return new Response(
+          JSON.stringify({ status: 'ok', message: 'Gemini Edge Function funcionando' }),
+          { status: 200, headers }
+        );
       }
 
-      // API key
-      const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+      // Obter API Key do ambiente
+      const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
+
       if (!GEMINI_API_KEY) {
-        return {
-          statusCode: 500,
-          headers,
-          body: JSON.stringify({ error: "GEMINI_API_KEY não configurada no Netlify" })
-        };
+        return new Response(
+          JSON.stringify({ error: 'GEMINI_API_KEY não configurada no Netlify' }),
+          { status: 500, headers }
+        );
       }
 
-      // Prompt recebido
-      const prompt = body.prompt || "Digite uma mensagem";
+      // Construir prompt
+      const prompt = body.prompt;
 
-      // Corpo da requisição Gemini
       const requestBody = {
-        contents: [
-          { parts: [{ text: prompt }] }
-        ],
+        contents: [{ parts: [{ text: prompt }] }],
         generationConfig: body.generationConfig || {
           maxOutputTokens: 250,
           temperature: 0.3,
@@ -52,60 +49,56 @@ exports.handler = async (event, context) => {
         }
       };
 
-      // Chamada à Gemini API
+      // Chamar API Gemini
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(requestBody)
         }
       );
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Erro Gemini API:", errorData);
-        return {
-          statusCode: response.status,
-          headers,
-          body: JSON.stringify({
+        console.error('Erro Gemini API:', errorData);
+        return new Response(
+          JSON.stringify({
             error: `Erro Gemini API: ${response.status}`,
-            details: errorData.error?.message || "Erro desconhecido"
-          })
-        };
+            details: errorData.error?.message || 'Erro desconhecido'
+          }),
+          { status: response.status, headers }
+        );
       }
 
       const data = await response.json();
-      const aiResponse =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sem resposta da IA";
 
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          response: aiResponse,
-          type: body.type || "general",
-          specialist: body.specialist || "general"
-        })
-      };
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        return new Response(
+          JSON.stringify({ response: aiResponse, type: body.type || 'general', specialist: body.specialist || 'general' }),
+          { status: 200, headers }
+        );
+      } else {
+        return new Response(
+          JSON.stringify({ error: 'Resposta inválida da Gemini API' }),
+          { status: 500, headers }
+        );
+      }
     } catch (error) {
-      console.error("Erro na Function:", error);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({
-          error: "Erro interno da Function",
-          details: error.message
-        })
-      };
+      console.error('Erro na Edge Function Gemini:', error);
+      return new Response(
+        JSON.stringify({ error: 'Erro interno da Edge Function', details: error.message }),
+        { status: 500, headers }
+      );
     }
   }
 
-  // Método não permitido
-  return {
-    statusCode: 405,
-    headers,
-    body: JSON.stringify({ error: "Método não permitido" })
-  };
+  return new Response(JSON.stringify({ error: 'Método não permitido' }), { status: 405, headers });
+}
+
+// Configuração da Edge Function
+export const config = {
+  path: '/gemini-api'
 };
-                    
+        
