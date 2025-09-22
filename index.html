@@ -4150,62 +4150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
  </script>
     <script>
-async function callGeminiAPI(requestBody) {
-  try {
-    const response = await fetch("/gemini-api", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
-    });
 
-    if (!response.ok) {
-      throw new Error(`Erro da API Gemini: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("✅ Resposta Gemini:", data);
-    return data;
-  } catch (error) {
-    console.error("❌ Erro ao chamar Gemini API:", error);
-    return { error: error.message };
-  }
-}
-
-// Exemplo de uso
-const requestBody = { prompt: "Escreva um texto teste" };
-callGeminiAPI(requestBody).then(data => {
-  if (!data.error) {
-    // faça algo com a resposta, ex: mostrar na tela
-  }
-});
-    /////////
-        async function searchYouTube(query) {
-  try {
-    const response = await fetch("/youtube-api", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erro da API YouTube: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("✅ Resultados YouTube:", data);
-    return data;
-  } catch (error) {
-    console.error("❌ Erro ao buscar no YouTube:", error);
-    return { error: error.message };
-  }
-}
-
-// Exemplo de uso
-searchYouTube("gatinho fofo").then(data => {
-  if (!data.error) {
-    // ex: mostrar lista de vídeos na tela
-  }
-});
         
         
     if ('serviceWorker' in navigator) {
