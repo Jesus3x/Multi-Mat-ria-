@@ -1,90 +1,102 @@
-//netlify/functions/youtube-search.js
+// netlify/functions/youtube-search.js
 exports.handler = async (event, context) => {
   // Configurar CORS
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Content-Type': 'application/json'
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Content-Type": "application/json"
   };
-      // Responder a requisições OPTIONS (preflight)
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
+
+  // Preflight (OPTIONS)
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers, body: "" };
   }
 
-  if (event.httpMethod === 'GET') {
+  if (event.httpMethod === "GET") {
     try {
       const params = event.queryStringParameters || {};
-            // Requisição de teste
+
+      // Teste rápido
       if (params.test) {
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify({ status: 'ok', message: 'YouTube Edge Function funcionando' })
+          body: JSON.stringify({ status: "ok", message: "YouTube Function funcionando" })
         };
       }
-              // Obter API Key das variáveis de ambiente
+
+      // API key
       const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
-      
       if (!YOUTUBE_API_KEY) {
         return {
           statusCode: 500,
           headers,
-          body: JSON.stringify({ error: 'YOUTUBE_API_KEY não configurada no Netlify' })
+          body: JSON.stringify({ error: "YOUTUBE_API_KEY não configurada no Netlify" })
         };
-            }
-        const query = params.q || '';
-      const maxResults = params.maxResults || '3';
-      const regionCode = params.regionCode || 'BR';
-      const relevanceLanguage = params.relevanceLanguage || 'pt';
+      }
+
+      // Parâmetros
+      const query = params.q || "";
+      const maxResults = params.maxResults || "3";
+      const regionCode = params.regionCode || "BR";
+      const relevanceLanguage = params.relevanceLanguage || "pt";
 
       if (!query) {
         return {
           statusCode: 400,
           headers,
-            body: JSON.stringify({ error: 'Parâmetro q (query) é obrigatório' })
+          body: JSON.stringify({ error: "Parâmetro q (query) é obrigatório" })
         };
       }
 
-      // Fazer requisição para YouTube API
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${encodeURIComponent(query)}&type=video&regionCode=${regionCode}&relevanceLanguage=${relevanceLanguage}&key=${YOUTUBE_API_KEY}`;
-      
+      // Montar URL da API do YouTube
+      const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${encodeURIComponent(
+        query
+      )}&type=video&regionCode=${regionCode}&relevanceLanguage=${relevanceLanguage}&key=${YOUTUBE_API_KEY}`;
+
+      // Chamada à API
       const response = await fetch(youtubeUrl);
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Erro YouTube API:', errorData);
+        console.error("Erro YouTube API:", errorData);
         return {
-            statusCode: response.status,
+          statusCode: response.status,
           headers,
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             error: `Erro YouTube API: ${response.status}`,
-            details: errorData.error?.message || 'Erro desconhecido'
+            details: errorData.error?.message || "Erro desconhecido"
           })
         };
       }
 
       const data = await response.json();
-        return {
+      return {
         statusCode: 200,
         headers,
         body: JSON.stringify({
           items: data.items || [],
-          totalResults: data.pageInfo?.totalResults || 
-details: error.message 
+          totalResults: data.pageInfo?.totalResults || 0
+        })
+      };
+    } catch (error) {
+      console.error("Erro na YouTube Function:", error);
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          error: "Erro interno na YouTube Function",
+          details: error.message
         })
       };
     }
   }
-    return {
+
+  // Método não permitido
+  return {
     statusCode: 405,
     headers,
-    body: JSON.stringify({ error: 'Método não permitido' })
+    body: JSON.stringify({ error: "Método não permitido" })
   };
 };
-
-                                }
