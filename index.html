@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica digital2 Pro - Consultas Online</title>
+    <title>Clínica Digital Pro - Consultas Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
-    <link rel="manifest" href="manifest.json" />
-    <link rel="icon" type="image/png" href="icon-192x192.png" />
-    <link rel="apple-touch-icon" href="icon-192x192.png" />
-    <meta name="theme-color" content="#facc15" />
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -447,20 +442,7 @@
 <body class="bg-gray-900 text-white">
     <!-- Notification Container -->
     <div id="notificationContainer"></div>
-  <div class="bg-white text-center px-4 py-12">
-    <h1 class="text-5xl md:text-6xl font-bold text-blue-900 mb-6"
-        style="text-shadow: 
-            0 1px 1px rgba(0, 0, 0, 0.1), 
-            0 2px 4px rgba(0, 0, 0, 0.1);">
-        🏥 Clínica Digital Pro
-    </h1>
 
-    <p class="text-lg md:text-2xl max-w-3xl mx-auto text-teal-700"
-        style="text-shadow: 
-            0 1px 1px rgba(0, 0, 0, 0.05);">
-        Cuidando da sua saúde com tecnologia, segurança e conforto — diretamente do navegador.
-    </p>
-</div>
     <!-- Header -->
     <header class="bg-gradient-to-r from-blue-900 via-teal-800 to-green-800 py-4 px-4 shadow-2xl border-b-4 border-blue-300">
         <div class="max-w-7xl mx-auto">
@@ -588,7 +570,7 @@
     <section class="gradient-bg py-20 px-4">
         <div class="max-w-4xl mx-auto text-center hero-text">
             <h2 class="text-5xl font-bold mb-6">Cuidados Médicos Inteligentes</h2>
-            <p class="text-xl mb-8 opacity-90">Consultas online avançada e especialistas qualificados</p>
+            <p class="text-xl mb-8 opacity-90">Consultas online com IA avançada e especialistas qualificados</p>
             <button onclick="scrollToServices()" class="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105">
                 Explorar Serviços
             </button>
@@ -598,8 +580,8 @@
     <!-- AI Diagnosis Section -->
     <section class="py-20 px-4 bg-gray-800">
         <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-4xl font-bold mb-8"> Diagnóstico </h3>
-            <p class="text-xl mb-8 text-gray-300">Descreva seus sintomas e receba uma análise preliminar.</p>
+            <h3 class="text-4xl font-bold mb-8">🤖 Diagnóstico com IA</h3>
+            <p class="text-xl mb-8 text-gray-300">Descreva seus sintomas e receba uma análise preliminar com IA Gemini</p>
             
             <div class="bg-gray-900 rounded-2xl p-8 max-w-2xl mx-auto">
                 <div class="mb-6">
@@ -635,16 +617,94 @@
             <h3 class="text-4xl font-bold text-center mb-16">Nossos Serviços</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 services-grid">
                 <!-- Service 1 -->
-                
+                <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-4 flex items-center justify-center text-3xl">
+                        🩺
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Clínica Geral</h4>
+                    <p class="text-gray-300 mb-6">Consultas gerais, check-ups e acompanhamento médico completo</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-green-400">R$ 89,90</span>
+                        <div class="flex text-yellow-400">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <button onclick="bookConsultation('Clínica Geral', '89.90')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition">
+                        Agendar Consulta
+                    </button>
+                </div>
 
                 <!-- Service 2 -->
-                
+                <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                    <div class="w-20 h-20 bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl mb-4 flex items-center justify-center text-3xl">
+                        ❤️
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Cardiologia</h4>
+                    <p class="text-gray-300 mb-6">Especialista em coração, pressão arterial e doenças cardiovasculares</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-green-400">R$ 149,90</span>
+                        <div class="flex text-yellow-400">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <button onclick="bookConsultation('Cardiologia', '149.90')" class="w-full bg-gradient-to-r from-red-500 to-pink-600 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-pink-700 transition">
+                        Agendar Consulta
+                    </button>
+                </div>
 
                 <!-- Service 3 -->
-                
+                <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl mb-4 flex items-center justify-center text-3xl">
+                        🧴
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Dermatologia</h4>
+                    <p class="text-gray-300 mb-6">Cuidados com a pele, cabelo e tratamentos dermatológicos</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-green-400">R$ 129,90</span>
+                        <div class="flex text-yellow-400">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <button onclick="bookConsultation('Dermatologia', '129.90')" class="w-full bg-gradient-to-r from-blue-500 to-cyan-600 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-700 transition">
+                        Agendar Consulta
+                    </button>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl mb-4 flex items-center justify-center text-3xl">
+                        🧠
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Psicologia</h4>
+                    <p class="text-gray-300 mb-6">Terapia online, ansiedade, depressão e bem-estar mental</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-green-400">R$ 119,90</span>
+                        <div class="flex text-yellow-400">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <button onclick="bookConsultation('Psicologia', '119.90')" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition">
+                        Agendar Consulta
+                    </button>
+                </div>
+
                 <!-- Service 5 -->
                 <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
-                
+                    <div class="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-2xl mb-4 flex items-center justify-center text-3xl">
+                        👶
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Pediatria</h4>
+                    <p class="text-gray-300 mb-6">Cuidados especializados para bebês, crianças e adolescentes</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-green-400">R$ 109,90</span>
+                        <div class="flex text-yellow-400">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <button onclick="bookConsultation('Pediatria', '109.90')" class="w-full bg-gradient-to-r from-yellow-500 to-orange-600 py-3 rounded-xl font-semibold hover:from-yellow-600 hover:to-orange-700 transition">
+                        Agendar Consulta
+                    </button>
+                </div>
 
                 <!-- Service 6 -->
                 <div class="service-card bg-gray-800 rounded-2xl p-6 border border-gray-700">
@@ -834,8 +894,8 @@
                     🥗
                 </div>
                 <div>
-                    <h5 class="font-semibold">Dr - Nutricionista</h5>
-                    <p class="text-sm opacity-80">• Especialista em Nutrição</p>
+                    <h5 class="font-semibold">Dra. Ana - Nutricionista</h5>
+                    <p class="text-sm opacity-80">IA Gemini • Especialista em Nutrição</p>
                 </div>
             </div>
             <button onclick="closeNutritionChat()" class="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition">
@@ -847,7 +907,7 @@
         <div class="p-3 bg-green-900 bg-opacity-80 border-b border-gray-600">
             <p class="text-sm text-green-200 flex items-center">
                 <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                Nutricionista  online - 
+                Nutricionista IA online - Powered by Gemini
             </p>
         </div>
 
@@ -886,8 +946,8 @@
                     🧠
                 </div>
                 <div>
-                    <h5 class="font-semibold">Dr. - Psicólogo</h5>
-                    <p class="text-sm opacity-80">• Especialista em Vícios</p>
+                    <h5 class="font-semibold">Dr. Carlos - Psicólogo</h5>
+                    <p class="text-sm opacity-80">IA Gemini • Especialista em Vícios</p>
                 </div>
             </div>
             <button onclick="closePsychologyChat()" class="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition">
@@ -1057,18 +1117,27 @@
     </audio>
 
     <script>
-           
+        // API Configuration - Usando Edge Functions do Netlify
+        const GEMINI_API_ENDPOINT = '/.netlify/functions/gemini-api';
+        const YOUTUBE_API_ENDPOINT = '/.netlify/functions/youtube-search';
+        
+        // Verificação se as APIs estão disponíveis
+        const isGeminiConfigured = () => true; // Sempre disponível via Edge Function
+        const isYouTubeConfigured = () => true; // Sempre disponível via Edge Function
+        
+        // Debug mode para desenvolvimento
+        const DEBUG_MODE = true;
+        
         // Firebase Configuration - CONFIGURE SEU FIREBASE AQUI
         const firebaseConfig = {
-  apiKey: "AIzaSyDAYD7DhRovj0PYHUSpOq5YE1rQXIiOPkc",
-  authDomain: "chat-trader.firebaseapp.com",
-  databaseURL: "https://chat-trader-default-rtdb.firebaseio.com",
-  projectId: "chat-trader",
-  storageBucket: "chat-trader.firebasestorage.app",
-  messagingSenderId: "722204996123",
-  appId: "1:722204996123:web:6ab7fd6a6b5646c3e0bebe",
-  measurementId: "G-N36TE38K29"
-};
+            apiKey: "SUA_API_KEY_AQUI",
+            authDomain: "seu-projeto.firebaseapp.com",
+            databaseURL: "https://seu-projeto-default-rtdb.firebaseio.com/",
+            projectId: "seu-projeto",
+            storageBucket: "seu-projeto.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
 
         let database = null;
         let messagesRef = null;
@@ -1247,30 +1316,52 @@
             };
         }
 
+        // Sistema de fallback para desenvolvimento local
+        const USE_FALLBACK = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname.includes('netlify');
+        
         // Verificação de API Keys
         function checkApiKeys() {
-            console.log('🔍 Verificando configuração das APIs...');
-            
-            if (!isGeminiConfigured()) {
-                console.warn('⚠️ API não configurada');
-                showNotification('API não configurada!', 'Configure sua chave no código', 'warning');
-            } else {
-                console.log('✅ API configurada');
+            if (USE_FALLBACK) {
+                console.log('🔧 Modo desenvolvimento - usando respostas simuladas');
+                showNotification('Modo Demo!', 'Usando respostas simuladas para desenvolvimento', 'info');
+                return;
             }
             
-            if (!isYouTubeConfigured()) {
-                console.warn('⚠️ YouTube API não configurada');
-            } else {
-                console.log('✅ YouTube API configurada');
-            }
+            console.log('🔍 Verificando conexão com Edge Functions...');
+            
+            // Testar conexão com Gemini API
+            fetch(GEMINI_API_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ test: true })
+            }).then(response => {
+                if (response.ok) {
+                    console.log('✅ Gemini API Edge Function disponível');
+                    showNotification('APIs Online!', 'Gemini API conectada com sucesso', 'success');
+                } else {
+                    console.warn('⚠️ Gemini API Edge Function indisponível');
+                    showNotification('API Offline!', 'Usando modo fallback', 'warning');
+                }
+            }).catch(error => {
+                console.warn('⚠️ Erro ao conectar com Gemini Edge Function:', error);
+                showNotification('Erro de Conexão!', 'Usando respostas simuladas', 'warning');
+            });
+            
+            // Testar conexão com YouTube API
+            fetch(YOUTUBE_API_ENDPOINT + '?test=true')
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ YouTube API Edge Function disponível');
+                } else {
+                    console.warn('⚠️ YouTube API Edge Function indisponível');
+                }
+            }).catch(error => {
+                console.warn('⚠️ Erro ao conectar com YouTube Edge Function:', error);
+            });
         }
 
         // AI Specialist Response System
         async function getAISpecialistResponse(patientMessage, roomType) {
-            if (!isGeminiConfigured()) {
-                throw new Error('API não configurada');
-            }
-            
             // Validar se o roomType é válido
             if (!roomType || !['geral', 'cardio', 'derma'].includes(roomType)) {
                 console.error(`❌ Tipo de sala inválido: ${roomType}`);
@@ -1305,6 +1396,14 @@
                 throw new Error(`Especialista não encontrado para: ${roomType}`);
             }
             
+            console.log(`🩺 Consultando ${specialist.persona} para sala: ${roomType}...`);
+            
+            // Verificar se deve usar fallback
+            if (USE_FALLBACK) {
+                console.log('🔧 Usando resposta simulada para especialista');
+                return getSpecialistFallbackResponse(patientMessage, roomType, specialist);
+            }
+            
             const prompt = `Você é ${specialist.persona}.
 
 IMPORTANTE: Você DEVE responder APENAS como este especialista específico.
@@ -1328,63 +1427,121 @@ INSTRUÇÕES OBRIGATÓRIAS:
 PERGUNTA DO PACIENTE: "${patientMessage}"
 
 Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
-
-            console.log(`🩺 Consultando ${specialist.persona} para sala: ${roomType}...`);
             
             const requestBody = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }],
+                message: patientMessage,
+                roomType: roomType,
+                prompt: prompt,
+                specialist: specialist,
                 generationConfig: {
                     maxOutputTokens: 250,
-                    temperature: 0.3, // Reduzido para mais consistência
+                    temperature: 0.3,
                     topP: 0.8,
                     topK: 40
                 }
             };
             
             try {
-    const response = await fetch("/gemini-api", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
-    });
-
-    // Ler o JSON apenas uma vez
-    let data;
-    try {
-        data = await response.json();
-    } catch (e) {
-        console.error("❌ Erro ao interpretar JSON da resposta da API:", e);
-        throw new Error(`Erro da API: ${response.status} - resposta inválida`);
-    }
-
-    // Verifica se a resposta está ok
-    if (!response.ok) {
-        console.error('❌ Erro da API Gemini:', data);
-        throw new Error(`Erro da API: ${response.status} - ${data.error?.message || 'Erro desconhecido'}`);
-    }
-
-    // Processa a resposta válida
-    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        console.log(`✅ Resposta do ${specialist.persona} recebida para sala ${roomType}`);
-
-        // Valida se a resposta contém a identificação do especialista
-        if (!aiResponse.includes(specialist.greeting.split(',')[0])) {
-            console.warn(`⚠️ Resposta pode não estar correta para ${specialist.persona}`);
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    console.error('❌ Erro da Edge Function Gemini:', errorData);
+                    throw new Error(`Erro da API: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.response) {
+                    const aiResponse = data.response;
+                    console.log(`✅ Resposta do ${specialist.persona} recebida para sala ${roomType}`);
+                    
+                    // Validar se a resposta contém a identificação do especialista
+                    if (!aiResponse.includes(specialist.greeting.split(',')[0])) {
+                        console.warn(`⚠️ Resposta pode não estar correta para ${specialist.persona}`);
+                    }
+                    
+                    return aiResponse;
+                } else {
+                    console.error('❌ Estrutura de resposta inválida:', data);
+                    throw new Error('Resposta da Edge Function em formato inválido');
+                }
+            } catch (error) {
+                console.error('❌ Erro na API, usando fallback:', error);
+                return getSpecialistFallbackResponse(patientMessage, roomType, specialist);
+            }
         }
-
-        return aiResponse;
-    } else {
-        console.error('❌ Estrutura de resposta inválida:', data);
-        throw new Error('Resposta da API em formato inválido');
-    }
-
-} catch (error) {
-    console.error("❌ Erro no fetch da Gemini:", error);
-    throw error;
-}
+        
+        // Função de fallback para especialistas
+        function getSpecialistFallbackResponse(message, roomType, specialist) {
+            const messageLower = message.toLowerCase();
+            
+            const responses = {
+                'geral': {
+                    'dor': `${specialist.greeting} Entendo que está sentindo dor. Para dores gerais, recomendo: descanso, aplicação de gelo ou calor conforme o caso, e hidratação. Se a dor persistir ou for muito intensa, procure atendimento médico presencial para avaliação adequada.`,
+                    'febre': `${specialist.greeting} Febre pode indicar infecção. Mantenha-se hidratado, descanse e monitore a temperatura. Se passar de 38,5°C ou persistir por mais de 2 dias, procure atendimento médico. Esta orientação não substitui consulta presencial.`,
+                    'default': `${specialist.greeting} Como clínico geral, posso ajudar com diversos problemas de saúde. Baseado no que relatou, recomendo monitorar os sintomas e manter cuidados básicos de saúde. Para avaliação completa, agende consulta presencial.`
+                },
+                'cardio': {
+                    'coração': `${specialist.greeting} Questões cardíacas requerem atenção especial. Para saúde do coração, recomendo: exercícios regulares, dieta com pouco sal, controle do estresse. Se há dor no peito ou palpitações, procure atendimento imediato.`,
+                    'pressão': `${specialist.greeting} Para controle da pressão arterial: reduza sal, pratique exercícios, mantenha peso adequado, evite estresse. Monitore regularmente e tome medicação conforme prescrição médica. Consulta presencial é essencial.`,
+                    'default': `${specialist.greeting} Como cardiologista, foco em saúde cardiovascular. Baseado no que relatou, recomendo cuidados com coração: exercícios, alimentação saudável, controle de fatores de risco. Agende consulta para avaliação completa.`
+                },
+                'derma': {
+                    'pele': `${specialist.greeting} Para cuidados com a pele: use protetor solar diariamente, hidrate bem, evite produtos irritantes. Se há lesões, manchas ou coceira persistente, é importante avaliação presencial para diagnóstico correto.`,
+                    'acne': `${specialist.greeting} Para acne: mantenha pele limpa, use produtos adequados ao seu tipo de pele, evite espremer lesões. Tratamentos específicos devem ser prescritos após avaliação dermatológica presencial.`,
+                    'default': `${specialist.greeting} Como dermatologista, cuido da saúde da pele, cabelo e unhas. Baseado no que relatou, recomendo cuidados básicos e proteção solar. Para diagnóstico preciso, consulta presencial é fundamental.`
+                }
+            };
+            
+            const roomResponses = responses[roomType];
+            
+            // Buscar resposta específica baseada na mensagem
+            for (const [keyword, response] of Object.entries(roomResponses)) {
+                if (keyword !== 'default' && messageLower.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            // Retornar resposta padrão
+            return roomResponses.default;
+        }
+        
+        // Typing Indicator Functions
+        function addTypingIndicator() {
+            const messagesArea = document.getElementById('roomMessages');
+            const typingDiv = document.createElement('div');
+            const typingId = 'typing_' + Date.now();
+            
+            typingDiv.id = typingId;
+            typingDiv.className = 'message-bubble bg-gray-700 p-3 rounded-xl max-w-xs';
+            typingDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <span class="text-xs text-gray-400">Médico digitando...</span>
+                </div>
+            `;
+            
+            messagesArea.appendChild(typingDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+            
+            return typingId;
+        }
+        
+        function removeTypingIndicator(typingId) {
+            const typingElement = document.getElementById(typingId);
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
 
         // Gemini AI Integration
         async function analyzeSymptoms() {
@@ -1400,22 +1557,23 @@ Responda EXCLUSIVAMENTE como ${specialist.persona}:`;
                 return;
             }
             
-            if (!isGeminiConfigured()) {
-                showNotification('API não configurada!', 'Substitua SUA_CHAVE_AQUI pela sua chave real no código', 'error');
-                console.error('❌ API Key não configurada corretamente');
-                return;
-            }
-            
             analyzeBtn.disabled = true;
             analyzeBtn.innerHTML = '🔄 Analisando...';
             
             console.log('🚀 Iniciando análise médica...');
             
             try {
-                const requestBody = {
-                    contents: [{
-                        parts: [{
-                            text: `Você é um assistente médico virtual. Analise os sintomas descritos e forneça uma resposta em português brasileiro com no máximo 200 palavras.
+                let diagnosis;
+                
+                // Verificar se deve usar fallback
+                if (USE_FALLBACK) {
+                    console.log('🔧 Usando resposta simulada para análise de sintomas');
+                    diagnosis = getSymptomsFallbackResponse(symptoms);
+                } else {
+                    const requestBody = {
+                        symptoms: symptoms,
+                        type: 'symptom_analysis',
+                        prompt: `Você é um assistente médico virtual. Analise os sintomas descritos e forneça uma resposta em português brasileiro com no máximo 200 palavras.
 
 Inclua:
 1. Possíveis causas
@@ -1423,171 +1581,248 @@ Inclua:
 3. Quando procurar ajuda médica
 4. Disclaimer: "Esta é apenas uma análise preliminar e não substitui consulta médica profissional"
 
-Sintomas relatados: ${symptoms}`
-                        }]
-                    }],
-                    generationConfig: {
-                        maxOutputTokens: 300,
-                        temperature: 0.3,
-                        topP: 0.8,
-                        topK: 40
+Sintomas relatados: ${symptoms}`,
+                        generationConfig: {
+                            maxOutputTokens: 300,
+                            temperature: 0.3,
+                            topP: 0.8,
+                            topK: 40
+                        }
+                    };
+                    
+                    console.log('📤 Enviando requisição para Edge Function...');
+                    
+                    const response = await fetch(GEMINI_API_ENDPOINT, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+                    
+                    console.log('📥 Resposta recebida:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                        console.error('❌ Erro da Edge Function:', errorData);
+                        throw new Error(`Erro da API: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
                     }
-                };
+                    
+                    const data = await response.json();
+                    console.log('✅ Dados recebidos:', data);
+                    
+                    if (data.response) {
+                        diagnosis = data.response;
+                    } else {
+                        console.error('❌ Estrutura de resposta inválida:', data);
+                        throw new Error('Resposta da Edge Function em formato inválido');
+                    }
+                }
                 
-                console.log('📤 Enviando requisição para análise...');
+                diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
+                diagnosisResult.classList.remove('hidden');
+                
+                // Search for related videos
+                searchHealthVideos(symptoms);
+                
+                showNotification('Análise concluída!', 'Relatório médico gerado com sucesso', 'success');
+                console.log('✅ Análise concluída com sucesso');
+                
+            } catch (error) {
+                console.error('❌ Erro completo:', error);
+                
+                // Usar fallback em caso de erro
+                console.log('🔄 Usando resposta de fallback devido ao erro');
+                const fallbackDiagnosis = getSymptomsFallbackResponse(symptoms);
+                diagnosisText.innerHTML = fallbackDiagnosis.replace(/\n/g, '<br>');
+                diagnosisResult.classList.remove('hidden');
+                
+                showNotification('Análise (Demo)!', 'Usando resposta simulada devido a erro de conexão', 'warning');
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
+            }
+        }
+        
+        // Função de fallback para análise de sintomas
+        function getSymptomsFallbackResponse(symptoms) {
+            const symptomsLower = symptoms.toLowerCase();
+            
+            if (symptomsLower.includes('dor de cabeça') || symptomsLower.includes('cefaleia')) {
+                return `**Análise Preliminar - Dor de Cabeça**
 
-try {
-    const response = await fetch("/gemini-api", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
-    });
+**Possíveis causas:**
+- Tensão muscular
+- Desidratação
+- Estresse
+- Falta de sono
+- Problemas de visão
 
-    // Lê o JSON **uma única vez**
-    const data = await response.json();
-    console.log('📥 Resposta recebida:', response.status, data);
+**Cuidados recomendados:**
+- Hidrate-se adequadamente
+- Descanse em ambiente escuro
+- Aplique compressas frias na testa
+- Evite ruídos altos
 
-    if (!response.ok) {
-        console.error('❌ Erro da API:', data);
-        throw new Error(`Erro da API: ${response.status} - ${data.error?.message || 'Erro desconhecido'}`);
-    }
+**Procure ajuda médica se:**
+- Dor muito intensa ou súbita
+- Acompanhada de febre alta
+- Persistir por mais de 3 dias
+- Houver alterações na visão
 
-    if (data?.candidates?.[0]?.content) {
-        const diagnosis = data.candidates[0].content.parts[0].text;
-        diagnosisText.innerHTML = diagnosis.replace(/\n/g, '<br>');
-        diagnosisResult.classList.remove('hidden');
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            if (symptomsLower.includes('febre') || symptomsLower.includes('temperatura')) {
+                return `**Análise Preliminar - Febre**
 
-        // Search for related videos
-        searchHealthVideos(symptoms);
+**Possíveis causas:**
+- Infecção viral ou bacteriana
+- Reação inflamatória
+- Desidratação
+- Reação a medicamentos
 
-        showNotification('Análise concluída!', 'Relatório médico gerado com sucesso', 'success');
-        console.log('✅ Análise concluída com sucesso');
-    } else {
-        console.error('❌ Estrutura de resposta inválida:', data);
-        throw new Error('Resposta da API em formato inválido');
-    }
+**Cuidados recomendados:**
+- Mantenha-se hidratado
+- Descanse adequadamente
+- Use roupas leves
+- Monitore a temperatura
 
-} catch (error) {
-    console.error('❌ Erro completo:', error);
-    let errorMessage = 'Erro ao analisar sintomas: ';
+**Procure ajuda médica se:**
+- Febre acima de 39°C
+- Persistir por mais de 3 dias
+- Acompanhada de dificuldade respiratória
+- Houver sinais de desidratação
 
-    if (error.message.includes('API key')) {
-        errorMessage += 'Chave da API inválida';
-    } else if (error.message.includes('quota')) {
-        errorMessage += 'Limite de uso da API excedido';
-    } else if (error.message.includes('network')) {
-        errorMessage += 'Erro de conexão';
-    } else {
-        errorMessage += error.message;
-    }
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            if (symptomsLower.includes('tosse') || symptomsLower.includes('garganta')) {
+                return `**Análise Preliminar - Sintomas Respiratórios**
 
-    showNotification('Erro na análise!', errorMessage, 'error');
+**Possíveis causas:**
+- Infecção viral (resfriado)
+- Irritação das vias aéreas
+- Alergia respiratória
+- Refluxo gastroesofágico
 
-} finally {
-    analyzeBtn.disabled = false;
-    analyzeBtn.innerHTML = '🔍 Analisar Sintomas';
-}
+**Cuidados recomendados:**
+- Mantenha-se hidratado
+- Use umidificador de ar
+- Evite irritantes (fumaça, poeira)
+- Faça gargarejos com água morna e sal
 
+**Procure ajuda médica se:**
+- Dificuldade para respirar
+- Tosse com sangue
+- Febre alta persistente
+- Piora dos sintomas
 
-        // YouTube API Integrationconst isYouTubeConfigured = () => true; // ou remova essa linha e o if abaixo
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional.*`;
+            }
+            
+            // Resposta genérica
+            return `**Análise Preliminar dos Sintomas**
 
-// Busca vídeos relacionados à saúde
-async function searchHealthVideos(query) {
-    if (!isYouTubeConfigured()) {
-        console.log('📺 YouTube API não configurada - pulando busca de vídeos');
-        return;
-    }
+Com base nos sintomas relatados: "${symptoms}"
 
-    try {
-        console.log('🔍 Buscando vídeos relacionados...');
+**Recomendações gerais:**
+- Monitore a evolução dos sintomas
+- Mantenha-se hidratado
+- Descanse adequadamente
+- Evite automedicação
 
-        const response = await fetch("/youtube-api", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query })
-        });
+**Cuidados importantes:**
+- Anote quando os sintomas começaram
+- Observe se há piora ou melhora
+- Mantenha alimentação leve
+- Evite atividades físicas intensas
 
-        // Lê o JSON apenas uma vez
-        const data = await response.json();
-        console.log('📥 Resposta YouTube:', response.status, data);
+**Procure ajuda médica se:**
+- Os sintomas piorarem
+- Surgirem novos sintomas
+- Houver dor intensa
+- Persistir por mais de alguns dias
 
-        if (!response.ok) {
-            console.error('❌ Erro YouTube API:', data);
-            throw new Error(`Erro YouTube: ${response.status}`);
+*Esta é apenas uma análise preliminar e não substitui consulta médica profissional. Recomendamos consultar um médico para avaliação adequada.*`;
         }
 
-        const items = data.items || [];
-        console.log('📺 Vídeos encontrados:', items.length);
-
-        if (items.length > 0) {
-            displayHealthVideos(items);
-        } else {
-            console.log('📺 Nenhum vídeo encontrado para:', query);
+        // YouTube API Integration
+        async function searchHealthVideos(query) {
+            try {
+                console.log('🔍 Buscando vídeos relacionados...');
+                const searchQuery = `${query} saúde medicina tratamento cuidados`;
+                
+                const response = await fetch(`${YOUTUBE_API_ENDPOINT}?q=${encodeURIComponent(searchQuery)}&maxResults=3&regionCode=BR&relevanceLanguage=pt`);
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    console.error('❌ Erro YouTube Edge Function:', errorData);
+                    throw new Error(`Erro YouTube: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('📺 Vídeos encontrados:', data.items?.length || 0);
+                
+                if (data.items && data.items.length > 0) {
+                    displayHealthVideos(data.items);
+                } else {
+                    console.log('📺 Nenhum vídeo encontrado para:', query);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao buscar vídeos:', error);
+                // Não mostrar erro para o usuário, apenas log
+            }
         }
 
-    } catch (error) {
-        console.error('❌ Erro ao buscar vídeos:', error);
-    }
-}
+        function displayHealthVideos(videos) {
+            const videoSection = document.getElementById('videoSection');
+            
+            let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
+            
+            videos.forEach(video => {
+                videosHtml += `
+                    <div class="bg-gray-800 rounded-lg p-4 mb-3">
+                        <div class="flex items-start space-x-3">
+                            <img src="${video.snippet.thumbnails.default.url}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
+                            <div class="flex-1">
+                                <h6 class="font-semibold text-sm mb-2">${video.snippet.title}</h6>
+                                <p class="text-xs text-gray-400 mb-2">${video.snippet.channelTitle}</p>
+                                <button onclick="playVideo('${video.id.videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
+                                    ▶️ Assistir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            videoSection.innerHTML = videosHtml;
+        }
 
-// Exibe vídeos na seção dedicada
-function displayHealthVideos(videos) {
-    const videoSection = document.getElementById('videoSection');
-    if (!videoSection) return;
-
-    let videosHtml = '<h5 class="text-lg font-semibold mb-4 text-green-300">📺 Vídeos Educativos</h5>';
-
-    videos.forEach(video => {
-        const thumb = video.snippet?.thumbnails?.default?.url || '';
-        const title = video.snippet?.title || 'Sem título';
-        const channel = video.snippet?.channelTitle || 'Canal desconhecido';
-        const videoId = video.id?.videoId;
-
-        if (!videoId) return; // ignora vídeos sem id válido
-
-        videosHtml += `
-            <div class="bg-gray-800 rounded-lg p-4 mb-3">
-                <div class="flex items-start space-x-3">
-                    <img src="${thumb}" alt="Thumbnail" class="w-20 h-15 rounded object-cover">
-                    <div class="flex-1">
-                        <h6 class="font-semibold text-sm mb-2">${title}</h6>
-                        <p class="text-xs text-gray-400 mb-2">${channel}</p>
-                        <button onclick="playVideoModal('${videoId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition">
-                            ▶️ Assistir
-                        </button>
+        function playVideo(videoId) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-gray-900 rounded-xl p-6 max-w-4xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">📺 Vídeo Educativo</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white text-2xl">✕</button>
+                    </div>
+                    <div class="aspect-video">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            src="https://www.youtube.com/embed/${videoId}" 
+                            frameborder="0" 
+                            allowfullscreen
+                            class="rounded-lg"
+                        ></iframe>
                     </div>
                 </div>
-            </div>
-        `;
-    });
-
-    videoSection.innerHTML = videosHtml;
-}
-
-// Função para exibir modal com vídeo
-function playVideoModal(videoId) {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-    modal.innerHTML = `
-        <div class="bg-gray-900 rounded-xl p-6 max-w-4xl w-full mx-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">📺 Vídeo Educativo</h3>
-                <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white text-2xl">✕</button>
-            </div>
-            <div class="aspect-video">
-                <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/${videoId}" 
-                    frameborder="0" 
-                    allowfullscreen
-                    class="rounded-lg"
-                ></iframe>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
+            `;
+            document.body.appendChild(modal);
+        }
 
         // Consultation Rooms
         function toggleConsultation() {
@@ -1649,176 +1884,169 @@ function playVideoModal(videoId) {
             }
             
             console.log(`✅ Configurando sala: ${room.title} - ${room.aiPersona}`);
-// Variável global para controlar a sala atual
-let currentRoom = null;
+            
+            document.getElementById('roomIcon').textContent = room.icon;
+            document.getElementById('roomTitle').textContent = room.title;
+            document.getElementById('roomDoctor').textContent = room.doctor;
+            
+            document.getElementById('roomSelection').classList.add('hidden');
+            document.getElementById('roomChat').classList.remove('hidden');
+            
+            // Limpar mensagens anteriores
+            const messagesArea = document.getElementById('roomMessages');
+            messagesArea.innerHTML = '';
+            
+            // Add welcome message
+            addRoomMessage(room.welcome, false, room.aiPersona);
+            
+            showNotification('Consulta iniciada!', `Você entrou na ${room.title}`, 'success');
+            console.log(`🏥 Sala ${roomType} configurada com sucesso - Especialista: ${room.aiPersona}`);
+        }
 
-// Dados dos especialistas
-const roomData = {
-    'geral': { name: 'Dr. Clínico Geral', persona: 'Clínico Geral' },
-    'cardio': { name: 'Dr. Cardiologista', persona: 'Cardiologista' },
-    'derma': { name: 'Dr. Dermatologista', persona: 'Dermatologista' }
-};
-
-// Respostas fallback
-const fallbackResponses = {
-    'geral': [
-        'Olá! Sou o Dr. Clínico Geral. Pode me dar mais detalhes sobre os sintomas?',
-        'Como Dr. Clínico Geral, seria importante fazer uma avaliação mais detalhada. Há quanto tempo sente isso?',
-        'Vou anotar essas informações importantes. Tem histórico familiar de doenças?',
-        'Posso ajudar com diversos problemas de saúde. Me conte sobre seu histórico médico e sintomas atuais.'
-    ],
-    'cardio': [
-        'Olá! Sou o Dr. Cardiologista. Questões do coração requerem atenção especial. Me conte sobre dor no peito ou palpitações.',
-        'Vamos investigar sua saúde cardiovascular. Tem histórico familiar de problemas cardíacos?',
-        'É importante monitorar esses sintomas. Qual sua pressão arterial habitual?',
-        'Pressão arterial, colesterol e ritmo cardíaco são fundamentais. Quando foi seu último eletrocardiograma?'
-    ],
-    'derma': [
-        'Olá! Sou o Dr. Dermatologista. Problemas de pele podem ter várias causas. Pode descrever a lesão?',
-        'Quando começou a notar essas alterações na pele?',
-        'Para cuidados com a pele, preciso entender melhor. Há coceira, dor ou descamação?',
-        'Pele, cabelo e unhas são minha especialidade. Conte sobre exposição solar e histórico dermatológico.'
-    ]
-};
-
-// Entrar em uma sala
-function enterRoom(roomType) {
-    if (!roomData[roomType]) {
-        console.error('❌ Sala desconhecida:', roomType);
-        showNotification('Erro!', 'Sala desconhecida', 'error');
-        return;
-    }
-
-    currentRoom = roomType;
-
-    const room = roomData[roomType];
-
-    document.getElementById('roomIcon').textContent = room.icon || '🏥';
-    document.getElementById('roomTitle').textContent = room.name;
-    document.getElementById('roomDoctor').textContent = room.name;
-
-    document.getElementById('roomSelection').classList.add('hidden');
-    document.getElementById('roomChat').classList.remove('hidden');
-
-    const messagesArea = document.getElementById('roomMessages');
-    messagesArea.innerHTML = '';
-
-    addRoomMessage(`Bem-vindo à consulta do ${room.name}`, false, room.persona);
-
-    showNotification('Consulta iniciada!', `Você entrou na ${room.name}`, 'success');
-    console.log(`🏥 Sala ${roomType} configurada com sucesso`);
-}
-
-// Sair da sala
-function leaveRoom() {
-    if (currentRoom) {
-        showNotification('Consulta finalizada!', 'Você saiu da sala de consulta', 'info');
-        currentRoom = null;
-    }
-    showRoomSelection();
-}
-
-// Enviar mensagem para a sala
-async function sendRoomMessage() {
-    const input = document.getElementById('roomMessageInput');
-    const text = input.value.trim();
-
-    if (!text) return;
-
-    if (!currentRoom) {
-        showNotification('Erro!', 'Nenhuma sala selecionada', 'error');
-        return;
-    }
-
-    addRoomMessage(text, true, 'Você');
-    input.value = '';
-
-    // Show typing indicator
-    const typingId = addTypingIndicator();
-
-    const roomData = {
-        'geral': 'Dr. Clínico Geral',
-        'cardio': 'Dr. Cardiologista', 
-        'derma': 'Dr. Dermatologista'
-    };
-
-    console.log(`🏥 Enviando pergunta para sala: ${currentRoom} (${roomData[currentRoom]})`);
-
-    try {
-        // Chamada exclusiva à API, sem fallback
-        const response = await getAISpecialistResponse(text, currentRoom);
-
-        removeTypingIndicator(typingId);
-
-        console.log(`✅ Resposta recebida do ${roomData[currentRoom]}:`, response);
-        addRoomMessage(response, false, roomData[currentRoom]);
-
-    } catch (error) {
-        removeTypingIndicator(typingId);
-        console.error(`❌ Erro ao obter resposta para sala ${currentRoom}:`, error);
-
-        showNotification('Erro na consulta!', `Não foi possível obter resposta do especialista: ${error.message}`, 'error');
-    }
-}
-
-
-// Inicializa Firebase
-function initializeFirebase() {
-    if (firebaseConfig.apiKey === "SUA_API_KEY_AQUI") {
-        console.log('Firebase não configurado - usando modo demo');
-        return false;
-    }
-
-    try {
-        firebase.initializeApp(firebaseConfig);
-        database = firebase.database();
-        messagesRef = database.ref('messages');
-
-        messagesRef.on('child_added', (snapshot) => {
-            const message = snapshot.val();
-            if (message.userId !== userId) {
-                displayMessage(message, false);
-                playReceiveSound();
-
-                // Pré-visualização da mensagem
-                let messagePreview = 'Nova mensagem';
-                if (message.text) {
-                    messagePreview = message.text.length > 50 ? message.text.substring(0, 50) + '...' : message.text;
-                } else if (message.type === 'image') {
-                    messagePreview = '📷 Imagem recebida';
-                } else if (message.type === 'audio') {
-                    messagePreview = '🎤 Áudio recebido';
-                }
-
-                showNotification('Nova mensagem!', `${message.userName}: ${messagePreview}`, 'message');
+        function leaveRoom() {
+            if (currentRoom) {
+                showNotification('Consulta finalizada!', 'Você saiu da sala de consulta', 'info');
             }
-        });
+            showRoomSelection();
+        }
 
-        firebaseConnected = true;
-        return true;
-    } catch (error) {
-        console.error('Erro ao conectar com Firebase:', error);
-        return false;
-    }
-}
+        async function sendRoomMessage() {
+            const input = document.getElementById('roomMessageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+            
+            if (!currentRoom) {
+                showNotification('Erro!', 'Nenhuma sala selecionada', 'error');
+                return;
+            }
+            
+            addRoomMessage(text, true, 'Você');
+            input.value = '';
+            
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+            
+            // Dados dos especialistas por sala
+            const roomData = {
+                'geral': 'Dr. Clínico Geral',
+                'cardio': 'Dr. Cardiologista', 
+                'derma': 'Dr. Dermatologista'
+            };
+            
+            console.log(`🏥 Enviando pergunta para sala: ${currentRoom} (${roomData[currentRoom]})`);
+            
+            try {
+                const response = await getAISpecialistResponse(text, currentRoom);
+                removeTypingIndicator(typingId);
+                
+                console.log(`✅ Resposta recebida do ${roomData[currentRoom]}`);
+                addRoomMessage(response, false, roomData[currentRoom]);
+                
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                console.error(`❌ Erro ao obter resposta para sala ${currentRoom}:`, error);
+                
+                // Fallback responses específicos por especialidade
+                const fallbackResponses = {
+                    'geral': [
+                        'Olá! Sou o Dr. Clínico Geral. Entendo sua preocupação. Pode me dar mais detalhes sobre os sintomas, quando começaram e sua intensidade?',
+                        'Como Dr. Clínico Geral com 15 anos de experiência, baseado no que descreveu, seria importante fazer uma avaliação mais detalhada. Há quanto tempo sente isso?',
+                        'Sou o Dr. Clínico Geral. Vou anotar essas informações importantes. Tem histórico familiar de doenças? Toma algum medicamento?',
+                        'Como Dr. Clínico Geral, posso ajudar com diversos problemas de saúde. Me conte mais sobre seu histórico médico e sintomas atuais.'
+                    ],
+                    'cardio': [
+                        'Olá! Sou o Dr. Cardiologista. Questões do coração requerem atenção especial. Me conte mais sobre dor no peito, palpitações ou falta de ar.',
+                        'Como Dr. Cardiologista com 12 anos de experiência, vamos investigar sua saúde cardiovascular. Tem histórico familiar de problemas cardíacos?',
+                        'Sou o Dr. Cardiologista. É importante monitorar esses sintomas cardíacos. Qual sua pressão arterial habitual? Faz exercícios regularmente?',
+                        'Como Dr. Cardiologista, pressão arterial, colesterol e ritmo cardíaco são fundamentais. Quando foi seu último eletrocardiograma?'
+                    ],
+                    'derma': [
+                        'Olá! Sou o Dr. Dermatologista. Problemas de pele podem ter várias causas. Pode descrever melhor a lesão: cor, tamanho, localização?',
+                        'Como Dr. Dermatologista com 10 anos de experiência, vou examinar essa questão. Quando começou a notar essas alterações na pele?',
+                        'Sou o Dr. Dermatologista. Para cuidados com a pele, preciso entender melhor. Há coceira, dor, descamação ou mudança de cor?',
+                        'Como Dr. Dermatologista, pele, cabelo e unhas são minha especialidade. Me conte sobre exposição solar e histórico dermatológico.'
+                    ]
+                };
+                
+                const responses = fallbackResponses[currentRoom] || fallbackResponses['geral'];
+                const fallbackResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                console.log(`🔄 Usando resposta fallback para ${currentRoom}: ${roomData[currentRoom]}`);
+                addRoomMessage(fallbackResponse, false, roomData[currentRoom]);
+            }
+        }
 
-// Inicializa WebSocket / Firebase
-function initWebSocket() {
-    initializeFirebase();
-}
+        function addRoomMessage(text, isUser, sender) {
+            const messagesArea = document.getElementById('roomMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-bubble ${isUser ? 'ml-auto bg-purple-600' : 'bg-gray-700'} p-3 rounded-xl max-w-xs`;
+            
+            const time = new Date().toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <p class="text-sm">${text}</p>
+                <span class="text-xs text-gray-400">${sender} • ${time}</span>
+            `;
+            
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
 
-// Toggle auto chat
-function toggleAutoChat() {
-    const autoChatContainer = document.getElementById('autoChatContainer');
-    autoChatOpen = !autoChatOpen;
+        // Firebase and Chat Functions (keeping original functionality)
+        function initializeFirebase() {
+            if (firebaseConfig.apiKey === "SUA_API_KEY_AQUI") {
+                console.log('Firebase não configurado - usando modo demo');
+                return false;
+            }
 
-    if (autoChatOpen) {
-        autoChatContainer.classList.add('open');
-    } else {
-        autoChatContainer.classList.remove('open');
-    }
-}
+            try {
+                firebase.initializeApp(firebaseConfig);
+                database = firebase.database();
+                messagesRef = database.ref('messages');
+                
+                messagesRef.on('child_added', (snapshot) => {
+                    const message = snapshot.val();
+                    if (message.userId !== userId) {
+                        displayMessage(message, false);
+                        playReceiveSound();
+                        
+                        // Show notification for new message
+                        const messagePreview = message.text ? 
+                            (message.text.length > 50 ? message.text.substring(0, 50) + '...' : message.text) :
+                            message.type === 'image' ? '📷 Imagem recebida' : 
+                            message.type === 'audio' ? '🎤 Áudio recebido' : 'Nova mensagem';
+                            
+                        showNotification('Nova mensagem!', `${message.userName}: ${messagePreview}`, 'message');
+                    }
+                });
 
+                firebaseConnected = true;
+                return true;
+            } catch (error) {
+                console.error('Erro ao conectar com Firebase:', error);
+                return false;
+            }
+        }
+
+        function initWebSocket() {
+            const connected = initializeFirebase();
+        }
+
+        // Auto Chat Functions
+        function toggleAutoChat() {
+            const autoChatContainer = document.getElementById('autoChatContainer');
+            autoChatOpen = !autoChatOpen;
+            
+            if (autoChatOpen) {
+                autoChatContainer.classList.add('open');
+            } else {
+                autoChatContainer.classList.remove('open');
+            }
+        }
 
         function sendAutoMessage() {
             const input = document.getElementById('autoMessageInput');
@@ -3222,31 +3450,40 @@ function toggleAutoChat() {
         }
 
         async function getNutritionistAIResponse(message) {
-            if (!isGeminiConfigured()) {
-                throw new Error('API não configurada');
+            // Verificar se deve usar fallback
+            if (USE_FALLBACK) {
+                console.log('🔧 Usando resposta simulada para nutricionista');
+                return getNutritionFallbackResponse(message);
             }
+            
+            const prompt = `Você é o Dr. Nutricionista, especialista experiente com 15 anos de experiência em nutrição clínica.
 
-            const prompt = `Você é Dra. Ana, uma nutricionista experiente e empática com 15 anos de experiência.
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Nutricionista" e NUNCA usar outros nomes.
 
-INSTRUÇÕES:
-- Responda como uma nutricionista profissional
-- Use linguagem acessível e acolhedora
-- Forneça orientações nutricionais específicas e práticas
-- Inclua dicas de alimentação saudável
-- Sugira receitas quando apropriado
-- Seja encorajadora e motivacional
-- Limite sua resposta a 150 palavras
-- Use português brasileiro
-- Sempre inclua disclaimer sobre consulta presencial quando necessário
+PROTOCOLO DE ATENDIMENTO NUTRICIONAL OBRIGATÓRIO:
+1. SEMPRE inicie com: "Olá! Sou o Dr. Nutricionista"
+2. Mantenha identidade consistente como Dr. Nutricionista especialista
+3. Use linguagem nutricional técnica mas acessível e acolhedora
+4. Seja empático, motivacional e demonstre experiência clínica
+5. Forneça orientações nutricionais ESPECÍFICAS e práticas
+6. Inclua dicas de alimentação saudável e receitas quando apropriado
+7. Demonstre conhecimento em nutrição clínica, dietas, suplementação
+8. Seja encorajador, motivacional e ofereça esperança realista
+9. Ofereça planos alimentares personalizados com base científica
+10. SEMPRE inclua disclaimer: "Esta orientação não substitui consulta nutricional presencial."
+11. Limite resposta a 180 palavras máximo
+12. Use português brasileiro técnico nutricional
+13. Mantenha consistência de personalidade profissional experiente
 
 PERGUNTA DO PACIENTE: "${message}"
 
-Responda como Dra. Ana, nutricionista:`;
+Responda EXCLUSIVAMENTE como Dr. Nutricionista especialista:`;
 
             const requestBody = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }],
+                message: message,
+                type: 'nutrition_consultation',
+                prompt: prompt,
+                specialist: 'nutrition',
                 generationConfig: {
                     maxOutputTokens: 250,
                     temperature: 0.4,
@@ -3255,22 +3492,28 @@ Responda como Dra. Ana, nutricionista:`;
                 }
             };
 
-            const response = await fetch("/gemini-api", {
-        method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
-            });
+            try {
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
 
-            if (!response.ok) {
-                throw new Error(`Erro da API: ${response.status}`);
-            }
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                }
 
-            const data = await response.json();
-            
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Resposta inválida da API');
+                const data = await response.json();
+                
+                if (data.response) {
+                    return data.response;
+                } else {
+                    throw new Error('Resposta inválida da Edge Function');
+                }
+            } catch (error) {
+                console.error('❌ Erro na API Nutricionista, usando fallback:', error);
+                return getNutritionFallbackResponse(message);
             }
         }
 
@@ -3477,20 +3720,18 @@ Responda como Dra. Ana, nutricionista:`;
         }
 
         async function getNutritionistResponse(message, profile) {
-            if (!isGeminiConfigured()) {
-                throw new Error('API não configurada');
-            }
-
             const profileInfo = profile ? 
                 `Perfil do paciente: ${profile.age} anos, ${profile.weight}kg, objetivo: ${profile.goal}` : 
                 'Perfil não informado ainda';
 
-            const prompt = `Você é Dra. Ana, uma nutricionista experiente e empática.
+            const prompt = `Você é o Dr. Nutricionista, especialista experiente e empático.
 
 CONTEXTO: ${profileInfo}
 
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Nutricionista" e NUNCA usar outros nomes.
+
 INSTRUÇÕES:
-- Responda como uma nutricionista profissional
+- Responda como Dr. Nutricionista profissional
 - Use linguagem acessível e acolhedora
 - Forneça orientações nutricionais específicas
 - Inclua dicas práticas e receitas quando apropriado
@@ -3500,12 +3741,14 @@ INSTRUÇÕES:
 
 PERGUNTA DO PACIENTE: "${message}"
 
-Responda como Dra. Ana:`;
+Responda como Dr. Nutricionista:`;
 
             const requestBody = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }],
+                message: message,
+                profile: profile,
+                type: 'nutrition_consultation_with_profile',
+                prompt: prompt,
+                specialist: 'nutrition',
                 generationConfig: {
                     maxOutputTokens: 250,
                     temperature: 0.4,
@@ -3514,22 +3757,23 @@ Responda como Dra. Ana:`;
                 }
             };
 
-            const response = await fetch("/gemini-api", {
-       method: 'POST',
+            const response = await fetch(GEMINI_API_ENDPOINT, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
             });
 
             if (!response.ok) {
-                throw new Error(`Erro da API: ${response.status}`);
+                const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
             }
 
             const data = await response.json();
             
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
+            if (data.response) {
+                return data.response;
             } else {
-                throw new Error('Resposta inválida da API');
+                throw new Error('Resposta inválida da Edge Function');
             }
         }
 
@@ -3625,10 +3869,12 @@ Responda como Dra. Ana:`;
         }
 
         async function getPsychologistAIResponse(message) {
-            if (!isGeminiConfigured()) {
-                throw new Error('API não configurada');
+            // Verificar se deve usar fallback
+            if (USE_FALLBACK) {
+                console.log('🔧 Usando resposta simulada para psicólogo');
+                return getPsychologyFallbackResponse(message);
             }
-
+            
             const prompt = `Você é o Dr. Psicólogo, especialista experiente com 20 anos de experiência em psicologia clínica e tratamento de dependências.
 
 IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Psicólogo" e NUNCA usar outros nomes.
@@ -3653,9 +3899,10 @@ MENSAGEM DO PACIENTE: "${message}"
 Responda EXCLUSIVAMENTE como Dr. Psicólogo especialista:`;
 
             const requestBody = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }],
+                message: message,
+                type: 'psychology_consultation',
+                prompt: prompt,
+                specialist: 'psychology',
                 generationConfig: {
                     maxOutputTokens: 250,
                     temperature: 0.4,
@@ -3664,22 +3911,28 @@ Responda EXCLUSIVAMENTE como Dr. Psicólogo especialista:`;
                 }
             };
 
-            const response = await fetch("/gemini-api", {
-     method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
-            });
+            try {
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
 
-            if (!response.ok) {
-                throw new Error(`Erro da API: ${response.status}`);
-            }
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
+                }
 
-            const data = await response.json();
-            
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Resposta inválida da API');
+                const data = await response.json();
+                
+                if (data.response) {
+                    return data.response;
+                } else {
+                    throw new Error('Resposta inválida da Edge Function');
+                }
+            } catch (error) {
+                console.error('❌ Erro na API Psicólogo, usando fallback:', error);
+                return getPsychologyFallbackResponse(message);
             }
         }
 
@@ -3928,20 +4181,18 @@ Vamos trabalhar juntos para sua recuperação! 💪`;
         }
 
         async function getPsychologistResponse(message, profile) {
-            if (!isGeminiConfigured()) {
-                throw new Error('API não configurada');
-            }
-
             const profileInfo = profile ? 
                 `Perfil do paciente: dependência de ${profile.type}, nível ${profile.level}` : 
                 'Perfil não informado ainda';
 
-            const prompt = `Você é Dr. Carlos, um psicólogo especialista em dependências e saúde mental.
+            const prompt = `Você é o Dr. Psicólogo, especialista em dependências e saúde mental.
 
 CONTEXTO: ${profileInfo}
 
+IDENTIDADE OBRIGATÓRIA: Você DEVE se identificar SEMPRE como "Dr. Psicólogo" e NUNCA usar outros nomes.
+
 INSTRUÇÕES:
-- Responda como um psicólogo experiente e empático
+- Responda como Dr. Psicólogo experiente e empático
 - Use linguagem acolhedora e não julgadora
 - Forneça orientações psicológicas específicas para vícios
 - Inclua técnicas práticas de enfrentamento
@@ -3952,12 +4203,14 @@ INSTRUÇÕES:
 
 MENSAGEM DO PACIENTE: "${message}"
 
-Responda como Dr. Carlos:`;
+Responda como Dr. Psicólogo:`;
 
             const requestBody = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }],
+                message: message,
+                profile: profile,
+                type: 'psychology_consultation_with_profile',
+                prompt: prompt,
+                specialist: 'psychology',
                 generationConfig: {
                     maxOutputTokens: 250,
                     temperature: 0.4,
@@ -3966,22 +4219,23 @@ Responda como Dr. Carlos:`;
                 }
             };
 
-            const response = await fetch("/gemini-api", {
-   method: 'POST',
+            const response = await fetch(GEMINI_API_ENDPOINT, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
             });
 
             if (!response.ok) {
-                throw new Error(`Erro da API: ${response.status}`);
+                const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+                throw new Error(`Erro da Edge Function: ${response.status} - ${errorData.error || 'Erro desconhecido'}`);
             }
 
             const data = await response.json();
             
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
+            if (data.response) {
+                return data.response;
             } else {
-                throw new Error('Resposta inválida da API');
+                throw new Error('Resposta inválida da Edge Function');
             }
         }
 
@@ -4069,97 +4323,26 @@ Responda como Dr. Carlos:`;
             
             // Welcome notification
             setTimeout(() => {
-                showNotification('Bem-vindo!', 'Clínica Digital Pro - Cuidando da sua saúde com tecnologia', 'success');
+                if (USE_FALLBACK) {
+                    showNotification('Modo Demo!', 'Clínica Digital Pro - Usando respostas simuladas para desenvolvimento', 'info');
+                } else {
+                    showNotification('Bem-vindo!', 'Clínica Digital Pro - Cuidando da sua saúde com tecnologia', 'success');
+                }
             }, 1500);
             
             // Show chat buttons hint
             setTimeout(() => {
                 showNotification('Dica!', 'Use os botões do lado direito para acessar nossos serviços', 'info');
             }, 3000);
-        });
-
-        ///////////////
-        // script.js
-
-document.addEventListener("DOMContentLoaded", () => {
-  // 🔧 Cria os elementos dinamicamente
-  const container = document.createElement("div");
-  container.style.padding = "1rem";
-  container.innerHTML = `
-    <section>
-      <h2>🔍 Buscar no YouTube</h2>
-      <input type="text" id="youtubeTermo" placeholder="Digite um termo..." />
-      <button id="buscarYoutube">Buscar</button>
-      <pre id="youtubeResultado"></pre>
-    </section>
-    <hr />
-    <section>
-      <h2>💡 Prompt Generativo (Gemini)</h2>
-      <input type="text" id="geminiPrompt" placeholder="Digite um prompt..." />
-      <button id="enviarGemini">Enviar</button>
-      <pre id="geminiResultado"></pre>
-    </section>
-  `;
-
-  document.body.appendChild(container);
-
-  // 🔁 Função de busca no YouTube
-  const youtubeBtn = document.getElementById("buscarYoutube");
-  const youtubeTermo = document.getElementById("youtubeTermo");
-  const youtubeResultado = document.getElementById("youtubeResultado");
-
-  youtubeBtn.addEventListener("click", async () => {
-    const termo = youtubeTermo.value.trim();
-    if (!termo) return alert("Digite um termo para buscar no YouTube.");
-
-    try {
-      const res = await fetch(`/youtube-api?q=${encodeURIComponent(termo)}`);
-      const data = await res.json();
-      youtubeResultado.textContent = JSON.stringify(data, null, 2);
-    } catch (err) {
-      youtubeResultado.textContent = "Erro na busca do YouTube.";
-      console.error(err);
-    }
-  });
-
-  // 🔁 Função generativa (Gemini)
-  const geminiBtn = document.getElementById("enviarGemini");
-  const geminiPrompt = document.getElementById("geminiPrompt");
-  const geminiResultado = document.getElementById("geminiResultado");
-
-  geminiBtn.addEventListener("click", async () => {
-    const prompt = geminiPrompt.value.trim();
-    if (!prompt) return alert("Digite um prompt para o Gemini.");
-
-    try {
-      const res = await fetch("/gemini-api", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ prompt })
-      });
-
-      const data = await res.json();
-      geminiResultado.textContent = JSON.stringify(data, null, 2);
-    } catch (err) {
-      geminiResultado.textContent = "Erro na geração com o Gemini.";
-      console.error(err);
-    }
-  });
-});
- </script>
-    <script>
-
-        
-        
-    if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('✅ Service Worker registrado', reg))
-        .catch(err => console.error('❌ Erro ao registrar o SW:', err));
-    });
+            
+            // Adicionar indicador visual de modo demo
+            if (USE_FALLBACK) {
+                const demoIndicator = document.createElement('div');
+                demoIndicator.className = 'fixed top-4 left-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-50';
+                demoIndicator.innerHTML = '🔧 MODO DEMO';
+                document.body.appendChild(demoIndicator);
             }
+        });
     </script>
 </body>
 </html>
